@@ -16,6 +16,7 @@ import BentoSection from "@/components/home/BentoSection";
 import TimelineSection from "@/components/home/TimelineSection";
 import FeatureShowcase from "@/components/home/FeatureShowcase";
 import FinalCallToAction from "@/components/home/FinalCallToAction";
+import { CarouselDemo } from "@/components/ui/carousel-demo";
 import heroDemo from "@/assets/hero-demo.jpg";
 const Index = () => {
   const navigate = useNavigate();
@@ -157,6 +158,16 @@ const Index = () => {
               </div>
             </div>
           </ContainerScroll>
+        </div>
+      </section>
+
+      {/* Interactive Carousel Section */}
+      <section className="py-16 px-4 bg-background">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">
+            Explore Our Features
+          </h2>
+          <CarouselDemo />
         </div>
       </section>
 
