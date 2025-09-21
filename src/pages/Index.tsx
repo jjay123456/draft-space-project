@@ -123,9 +123,7 @@ const Index = () => {
       <section className="relative py-20 px-4 bg-background">
         <div className="container mx-auto">
           <ContainerScroll titleComponent={<div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-                  See iHear in Action
-                </h2>
+                
                 
               </div>}>
             <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/5 to-accent/3 max-w-6xl mx-auto">
