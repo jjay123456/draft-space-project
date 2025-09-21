@@ -6,6 +6,14 @@ interface SlideData {
   title: string;
   button: string;
   src: string;
+  description?: string;
+  features?: Array<{
+    icon: string;
+    title: string;
+    description: string;
+  }>;
+  highlights?: string[];
+  type?: 'simple' | 'features' | 'mission' | 'navigation';
 }
 
 interface SlideProps {
@@ -107,15 +115,49 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
         </div>
 
         <article
-          className={`relative p-[4vmin] transition-opacity duration-1000 ease-in-out ${
+          className={`relative p-[4vmin] transition-opacity duration-1000 ease-in-out max-h-full overflow-y-auto ${
             current === index ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
         >
-          <h2 className="text-lg md:text-2xl lg:text-4xl font-semibold  relative">
+          <h2 className="text-lg md:text-2xl lg:text-4xl font-semibold mb-4 relative">
             {title}
           </h2>
+          
+          {slide.description && (
+            <p className="text-sm md:text-base mb-6 text-white/90 leading-relaxed">
+              {slide.description}
+            </p>
+          )}
+
+          {slide.features && (
+            <div className="space-y-4 mb-6">
+              {slide.features.map((feature, idx) => (
+                <div key={idx} className="flex items-start gap-3 text-left">
+                  <span className="text-2xl flex-shrink-0 mt-1">{feature.icon}</span>
+                  <div>
+                    <h3 className="font-semibold text-white mb-1">{feature.title}</h3>
+                    <p className="text-sm text-white/80 leading-relaxed">{feature.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {slide.highlights && (
+            <div className="mb-6">
+              <ul className="space-y-2 text-left">
+                {slide.highlights.map((highlight, idx) => (
+                  <li key={idx} className="flex items-center gap-2 text-sm text-white/90">
+                    <span className="w-2 h-2 bg-white rounded-full flex-shrink-0"></span>
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           <div className="flex justify-center">
-            <button className="mt-6  px-4 py-2 w-fit mx-auto sm:text-sm text-black bg-white h-12 border border-transparent text-xs flex justify-center items-center rounded-2xl hover:shadow-lg transition duration-200 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+            <button className="mt-4 px-4 py-2 w-fit mx-auto sm:text-sm text-black bg-white h-12 border border-transparent text-xs flex justify-center items-center rounded-2xl hover:shadow-lg transition duration-200 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
               {button}
             </button>
           </div>
