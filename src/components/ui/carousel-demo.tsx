@@ -5,95 +5,63 @@ import { InteractiveCarousel } from "@/components/ui/interactive-carousel";
 export function CarouselDemo() {
   const slideData = [
     {
-      title: "Join Our Mission",
-      button: "Volunteer Now",
-      type: "simple" as const,
-      description: "Be part of something bigger. Help us bridge the communication gap for hearing-impaired students and create an inclusive learning environment where everyone can thrive.",
+      title: "Change Lives with English",
+      button: "Start Teaching",
+      type: "growth" as const,
+      description: "Make a difference in the lives of students with hearing loss around the world.",
       highlights: [
-        "Make a real difference in students' lives",
-        "Flexible volunteer opportunities", 
-        "Join a supportive community of educators",
-        "No teaching experience required - we provide training"
+        "Support students with hearing loss around the world",
+        "Help them gain confidence in speaking and listening",
+        "Break down communication barriers",
+        "Experience the joy of seeing progress first-hand"
       ]
     },
     {
-      title: "We're Looking For You",
-      button: "Apply Now",
-      type: "features" as const,
-      description: "We're seeking passionate individuals who want to make education accessible for everyone.",
-      features: [
-        {
-          title: "Passion for Teaching",
-          description: "A genuine desire to help others learn and grow, regardless of their hearing abilities."
-        },
-        {
-          title: "Inclusive Mindset",
-          description: "Understanding and empathy for the challenges faced by hearing-impaired students."
-        },
-        {
-          title: "Commitment",
-          description: "Dedication to providing consistent, reliable support to students who depend on you."
-        },
-        {
-          title: "Flexible Schedule", 
-          description: "Ability to volunteer regularly, even if it's just a few hours per week."
-        }
+      title: "Grow as a Leader",
+      button: "Build Your Future",
+      type: "opportunity" as const,
+      description: "Develop valuable skills while making an impact.",
+      highlights: [
+        "Earn SSL/community service hours",
+        "Strengthen leadership & communication skills",
+        "Gain real tutoring & mentoring experience",
+        "Stand out on college and scholarship applications"
       ]
     },
     {
-      title: "Our Mission",
+      title: "Support at Every Step",
+      button: "Get Training",
+      type: "support" as const,
+      description: "We provide everything you need to succeed as a tutor.",
+      highlights: [
+        "Orientation training before you start",
+        "Curriculum designed by speech-language pathologists",
+        "Ongoing mentorship & feedback",
+        "You'll never be left on your own"
+      ]
+    },
+    {
+      title: "Simple & Smart",
       button: "Learn More",
-      type: "mission" as const,
-      description: "Our three-pillar approach to transforming education for hearing-impaired students.",
-      features: [
-        {
-          title: "Empower",
-          description: "We give students the tools and confidence they need to succeed academically and personally, breaking down barriers that have held them back."
-        },
-        {
-          title: "Educate",
-          description: "Through accessible courses, live sessions, and personalized support, we ensure every student receives quality education tailored to their needs."
-        },
-        {
-          title: "Connect",
-          description: "We build bridges between hearing-impaired students, dedicated tutors, and supportive communities, fostering relationships that last a lifetime."
-        }
-      ]
-    },
-    {
-      title: "About iHEAR Initiative", 
-      button: "Discover More",
-      type: "features" as const,
-      description: "Everything you need to know about our initiative to transform education for hearing-impaired students.",
-      features: [
-        {
-          title: "Who We Are",
-          description: "A dedicated team of educators, developers, and advocates working to make education accessible for hearing-impaired students worldwide."
-        },
-        {
-          title: "What We Do", 
-          description: "We provide accessible online courses, live tutoring sessions, and a supportive community platform designed specifically for hearing-impaired learners."
-        },
-        {
-          title: "When We Started",
-          description: "Founded in 2024 with the vision of breaking down communication barriers in education and creating equal opportunities for all students."
-        },
-        {
-          title: "Why It Matters",
-          description: "Because every student deserves access to quality education, regardless of their hearing abilities. We're here to make that a reality."
-        }
-      ]
-    },
-    {
-      title: "Get Started Today",
-      button: "Apply as Tutor", 
-      type: "navigation" as const,
-      description: "Ready to make a difference? Join our team of dedicated volunteer tutors and help transform education for hearing-impaired students.",
+      type: "technology" as const,
+      description: "Teaching made easy with modern technology and support.",
       highlights: [
-        "Flexible scheduling that works with your availability",
-        "Comprehensive training and ongoing support provided",
-        "Make a meaningful impact on students' educational journey",
-        "Join a community of passionate educators and advocates"
+        "Sessions via Zoom/Google Meet, accessible anywhere",
+        "AI captions & visual tools for clarity",
+        "Easy scheduling (1-2 hrs/week)",
+        "Minimal prep — we provide resources"
+      ]
+    },
+    {
+      title: "Be Part of Something Bigger",
+      button: "Join Community",
+      type: "community" as const,
+      description: "Connect with passionate tutors making a global impact.",
+      highlights: [
+        "Connect with other compassionate tutors",
+        "Share tips, stories, and encouragement",
+        "See your student's world open up",
+        "Know your work creates ripple effects worldwide"
       ]
     },
   ];
