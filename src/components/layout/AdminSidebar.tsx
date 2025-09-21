@@ -14,11 +14,9 @@ import {
 
 const navigationItems = [
   { title: "Dashboard", url: "/admin", icon: BarChart3 },
-  { title: "Tutee Management", url: "/admin/tutees", icon: Users },
+  { title: "Student Management", url: "/admin/students", icon: Users },
   { title: "Tutor Directory", url: "/admin/tutors", icon: UserCheck },
-  { title: "Session Scheduling", url: "/admin/sessions", icon: Calendar },
-  { title: "Course Templates", url: "/admin/courses", icon: BookOpen },
-  { title: "Settings", url: "/admin/settings", icon: Settings },
+  { title: "Course Templates", url: "/admin/courses/create", icon: BookOpen },
 ];
 
 export const AdminSidebar = () => {

@@ -1,53 +1,65 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Users, UserCheck, Calendar, BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Users, UserCheck, BookOpen, Plus, Eye } from "lucide-react";
+
+const tutorStudentPairs = [
+  {
+    id: "1",
+    tutorName: "Sarah Johnson",
+    studentName: "Mike Roberts",
+    level: "Beginner",
+    currentModule: "Grammar Basics",
+    nextSession: "Today, 2:00 PM",
+    status: "active"
+  },
+  {
+    id: "2", 
+    tutorName: "Emma Lewis",
+    studentName: "Lisa Kim",
+    level: "Advanced",
+    currentModule: "Business English",
+    nextSession: "Tomorrow, 10:00 AM",
+    status: "active"
+  },
+  {
+    id: "3",
+    tutorName: "John Thompson", 
+    studentName: "Sarah Martinez",
+    level: "Intermediate",
+    currentModule: "Conversation Practice",
+    nextSession: "Wed, 3:00 PM",
+    status: "scheduled"
+  }
+];
 
 export const AdminDashboard = () => {
   return (
     <div className="container mx-auto p-6 space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
-        <p className="text-muted-foreground">
-          Manage tutees, tutors, sessions, and course templates
-        </p>
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">iHear Admin Dashboard</h1>
+          <p className="text-muted-foreground">
+            Oversee 1-on-1 English learning sessions and course management
+          </p>
+        </div>
+        <Button>
+          <Plus className="h-4 w-4 mr-2" />
+          Create Course Template
+        </Button>
       </div>
 
-      {/* Stats Overview */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      {/* Key Metrics */}
+      <div className="grid gap-4 md:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Tutees</CardTitle>
+            <CardTitle className="text-sm font-medium">Active Tutor-Student Pairs</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">24</div>
+            <div className="text-2xl font-bold">{tutorStudentPairs.length}</div>
             <p className="text-xs text-muted-foreground">
-              +2 from last month
-            </p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Tutors</CardTitle>
-            <UserCheck className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">12</div>
-            <p className="text-xs text-muted-foreground">
-              +1 from last month
-            </p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Sessions This Week</CardTitle>
-            <Calendar className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">48</div>
-            <p className="text-xs text-muted-foreground">
-              +12% from last week
+              1-on-1 English Learning Sessions
             </p>
           </CardContent>
         </Card>
@@ -58,86 +70,92 @@ export const AdminDashboard = () => {
             <BookOpen className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
+            <div className="text-2xl font-bold">12</div>
+            <p className="text-xs text-muted-foreground">
+              English learning modules
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Active Tutors</CardTitle>
+            <UserCheck className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
             <div className="text-2xl font-bold">8</div>
             <p className="text-xs text-muted-foreground">
-              +1 new template
+              Qualified English tutors
             </p>
           </CardContent>
         </Card>
       </div>
 
-      {/* Quick Actions */}
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Sessions</CardTitle>
-            <CardDescription>Latest tutor-tutee sessions</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-4">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Sarah M. with John T.</p>
-                  <p className="text-xs text-muted-foreground">English Conversation - Completed</p>
+      {/* Tutor-Student Pairs Management */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Active Tutor-Student Pairs</CardTitle>
+          <CardDescription>Monitor 1-on-1 English learning sessions</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {tutorStudentPairs.map((pair) => (
+              <div key={pair.id} className="flex items-center justify-between p-4 border rounded-lg">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm font-medium">{pair.tutorName}</p>
+                    <span className="text-muted-foreground">→</span>
+                    <p className="text-sm font-medium">{pair.studentName}</p>
+                  </div>
+                  <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                    <Badge variant="outline" className="text-xs">
+                      {pair.level}
+                    </Badge>
+                    <span>{pair.currentModule}</span>
+                    <span>{pair.nextSession}</span>
+                  </div>
                 </div>
-                <p className="text-xs text-muted-foreground">2h ago</p>
-              </div>
-              <div className="flex items-center space-x-4">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Mike R. with Emma L.</p>
-                  <p className="text-xs text-muted-foreground">Grammar Basics - In Progress</p>
+                <div className="flex items-center gap-2">
+                  <Badge variant={pair.status === 'active' ? 'default' : 'secondary'}>
+                    {pair.status}
+                  </Badge>
+                  <Button variant="ghost" size="sm">
+                    <Eye className="h-4 w-4" />
+                  </Button>
                 </div>
-                <p className="text-xs text-muted-foreground">Now</p>
               </div>
-              <div className="flex items-center space-x-4">
-                <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Lisa K. with David M.</p>
-                  <p className="text-xs text-muted-foreground">Vocabulary Building - Scheduled</p>
-                </div>
-                <p className="text-xs text-muted-foreground">In 1h</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>System Alerts</CardTitle>
-            <CardDescription>Important notifications and updates</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="p-3 bg-blue-50 dark:bg-blue-950 rounded-lg">
-                <p className="text-sm font-medium text-blue-800 dark:text-blue-200">
-                  New Tutor Application
-                </p>
-                <p className="text-xs text-blue-600 dark:text-blue-300">
-                  Review application from Maria Santos
-                </p>
-              </div>
-              <div className="p-3 bg-yellow-50 dark:bg-yellow-950 rounded-lg">
-                <p className="text-sm font-medium text-yellow-800 dark:text-yellow-200">
-                  Session Conflict
-                </p>
-                <p className="text-xs text-yellow-600 dark:text-yellow-300">
-                  Double booking detected for tomorrow 3 PM
-                </p>
-              </div>
-              <div className="p-3 bg-green-50 dark:bg-green-950 rounded-lg">
-                <p className="text-sm font-medium text-green-800 dark:text-green-200">
-                  System Update
-                </p>
-                <p className="text-xs text-green-600 dark:text-green-300">
-                  Zoom integration updated successfully
-                </p>
-              </div>
+      {/* Course Template Management */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Course Template Management</CardTitle>
+          <CardDescription>Create and manage English learning modules</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="text-center py-8">
+            <BookOpen className="h-12 w-12 text-primary mx-auto mb-4" />
+            <h3 className="text-lg font-medium mb-2">English Course Templates</h3>
+            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+              Create structured English learning modules for different difficulty levels. 
+              Templates can be assigned to tutor-student pairs.
+            </p>
+            <div className="flex gap-4 justify-center">
+              <Button>
+                <Plus className="h-4 w-4 mr-2" />
+                New Template
+              </Button>
+              <Button variant="outline">
+                <BookOpen className="h-4 w-4 mr-2" />
+                Manage Templates
+              </Button>
             </div>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

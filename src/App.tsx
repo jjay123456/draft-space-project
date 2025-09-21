@@ -5,10 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { AdminRoute } from "@/components/AdminRoute";
 import { AppLayout } from "./components/layout/AppLayout";
-// Temporarily commenting out admin imports to fix the build
-// import { AdminRoute } from "@/components/AdminRoute";
-// import { AdminLayout } from "./components/layout/AdminLayout";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
@@ -20,12 +18,13 @@ import UserProfile from "./pages/UserProfile";
 import UserSettings from "./pages/UserSettings";
 import LiveSessions from "./pages/LiveSessions";
 import LiveSessionViewer from "./pages/LiveSessionViewer";
-// Re-enabling admin components one by one
-import { AdminDashboard } from "./pages/admin/AdminDashboard";
-// import { TuteeManagement } from "./pages/admin/TuteeManagement";
-// import { TutorDirectory } from "./pages/admin/TutorDirectory";
-// import { SessionScheduling } from "./pages/admin/SessionScheduling";
-// import { CourseTemplates } from "./pages/admin/CourseTemplates";
+import { TuteeManagement } from "./pages/admin/TuteeManagement";
+import { TutorDirectory } from "./pages/admin/TutorDirectory";
+import { CourseTemplateCreator } from "./pages/admin/CourseTemplateCreator";
+import Team from "./pages/Team";
+import HowItWorks from "./pages/HowItWorks";
+import Testimonials from "./pages/Testimonials";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +38,10 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/dashboard" element={
               <ProtectedRoute>
                 <AppLayout><Dashboard /></AppLayout>
@@ -87,34 +90,25 @@ const App = () => (
             
             {/* Admin Routes */}
             <Route path="/admin" element={
-              <ProtectedRoute>
-                <AppLayout>
-                  <AdminDashboard />
-                </AppLayout>
-              </ProtectedRoute>
-            } />
-            {/* Temporarily commenting out other admin routes
-            <Route path="/admin/tutees" element={
               <AdminRoute>
-                <AdminLayout><TuteeManagement /></AdminLayout>
+                <AppLayout><Dashboard /></AppLayout>
+              </AdminRoute>
+            } />
+            <Route path="/admin/students" element={
+              <AdminRoute>
+                <AppLayout><TuteeManagement /></AppLayout>
               </AdminRoute>
             } />
             <Route path="/admin/tutors" element={
               <AdminRoute>
-                <AdminLayout><TutorDirectory /></AdminLayout>
+                <AppLayout><TutorDirectory /></AppLayout>
               </AdminRoute>
             } />
-            <Route path="/admin/sessions" element={
+            <Route path="/admin/courses/create" element={
               <AdminRoute>
-                <AdminLayout><SessionScheduling /></AdminLayout>
+                <AppLayout><CourseTemplateCreator /></AppLayout>
               </AdminRoute>
             } />
-            <Route path="/admin/courses" element={
-              <AdminRoute>
-                <AdminLayout><CourseTemplates /></AdminLayout>
-              </AdminRoute>
-            } />
-            */}
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

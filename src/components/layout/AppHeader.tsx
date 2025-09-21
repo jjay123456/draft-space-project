@@ -1,4 +1,4 @@
-import { Search, Bell, User, Volume2, LogOut, Globe, UserCircle, HelpCircle } from "lucide-react";
+import { Search, Bell, User, LogOut, Globe, UserCircle, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SidebarTrigger } from "@/components/ui/sidebar";
@@ -45,9 +45,12 @@ export const AppHeader = () => {
     <header className="h-16 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 flex items-center px-4 gap-4">
       <div className="flex items-center gap-3">
         <SidebarTrigger />
-        <div className="flex items-center gap-2">
-          <Volume2 className="h-6 w-6 text-primary" />
-          <span className="font-bold text-xl text-foreground">iHear</span>
+        <div className="flex items-center">
+          <img 
+            src="/lovable-uploads/4d60d879-18d8-4416-91cf-c8a7734a9d03.png" 
+            alt="iHear Logo" 
+            className="h-8 w-auto object-contain"
+          />
         </div>
       </div>
 

@@ -1,330 +1,214 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Volume2, Users, BookOpen, Accessibility, ArrowRight, Star } from "lucide-react";
+import { motion } from "framer-motion";
+import { Users, BookOpen, Accessibility, ArrowRight, Star, Volume2, VolumeX, Maximize, Minimize } from "lucide-react";
+import { Heart, Target, Zap, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { RainbowButton } from "@/components/ui/rainbow-button";
+import PublicNavbar from "@/components/layout/PublicNavbar";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import ShaderShowcase from "@/components/ui/hero";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
+import BentoSection from "@/components/home/BentoSection";
+import TimelineSection from "@/components/home/TimelineSection";
+import FeatureShowcase from "@/components/home/FeatureShowcase";
+import FinalCallToAction from "@/components/home/FinalCallToAction";
 import heroDemo from "@/assets/hero-demo.jpg";
-
 const Index = () => {
   const navigate = useNavigate();
-  const { user, loading } = useAuth();
+  const {
+    user,
+    loading
+  } = useAuth();
+  const [isMuted, setIsMuted] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+      setIsMuted(!isMuted);
+    }
+  };
+  const toggleFullscreen = async () => {
+    if (!videoRef.current) return;
+    try {
+      if (!document.fullscreenElement) {
+        // Try different browser-specific methods
+        const video = videoRef.current;
+        if (video.requestFullscreen) {
+          await video.requestFullscreen();
+        } else if ((video as any).webkitRequestFullscreen) {
+          await (video as any).webkitRequestFullscreen();
+        } else if ((video as any).mozRequestFullScreen) {
+          await (video as any).mozRequestFullScreen();
+        } else if ((video as any).msRequestFullscreen) {
+          await (video as any).msRequestFullscreen();
+        }
+        setIsFullscreen(true);
+      } else {
+        // Try different browser-specific exit methods
+        if (document.exitFullscreen) {
+          await document.exitFullscreen();
+        } else if ((document as any).webkitExitFullscreen) {
+          await (document as any).webkitExitFullscreen();
+        } else if ((document as any).mozCancelFullScreen) {
+          await (document as any).mozCancelFullScreen();
+        } else if ((document as any).msExitFullscreen) {
+          await (document as any).msExitFullscreen();
+        }
+        setIsFullscreen(false);
+      }
+    } catch (error) {
+      console.error('Fullscreen toggle failed:', error);
+    }
+  };
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      const isCurrentlyFullscreen = !!(document.fullscreenElement || (document as any).webkitFullscreenElement || (document as any).mozFullScreenElement || (document as any).msFullscreenElement);
+      setIsFullscreen(isCurrentlyFullscreen);
+    };
 
+    // Listen to all browser-specific fullscreen change events
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+      document.removeEventListener('mozfullscreenchange', handleFullscreenChange);
+      document.removeEventListener('MSFullscreenChange', handleFullscreenChange);
+    };
+  }, []);
   useEffect(() => {
     if (!loading && user) {
       navigate("/dashboard");
     }
   }, [user, loading, navigate]);
-
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
+    return <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-      </div>
-    );
+      </div>;
   }
-  return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="relative border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Volume2 className="h-6 w-6 text-primary" />
-            <span className="font-bold text-xl">iHear</span>
-          </div>
-          <nav className="hidden md:flex items-center justify-center flex-1 mx-8">
-            <div className="flex items-center gap-8">
-              <Link to="/courses" className="text-foreground hover:text-primary transition-colors font-medium">Courses</Link>
-              <Link to="#about" className="text-foreground hover:text-primary transition-colors font-medium">About</Link>
-              <Link to="#accessibility" className="text-foreground hover:text-primary transition-colors font-medium">Accessibility</Link>
-              <Link to="#help" className="text-foreground hover:text-primary transition-colors font-medium">Help</Link>
-            </div>
-          </nav>
-          <div className="flex items-center gap-3">
-            <Button variant="outline" asChild>
-              <Link to="/auth">Log In</Link>
-            </Button>
-            <Button asChild>
-              <Link to="/auth">Sign Up</Link>
-            </Button>
-          </div>
+  return <div className="min-h-screen bg-background">
+      <PublicNavbar />
+      
+      {/* Hero Section with Shader Background */}
+      <section className="relative">
+        <ShaderShowcase />
+        
+        {/* Floating Particles Transition */}
+        <div className="absolute -bottom-1 left-0 w-full h-20 z-30 overflow-hidden">
+          {[...Array(12)].map((_, i) => <motion.div key={i} className="absolute w-1 h-1 bg-cyan-400/60 rounded-full" style={{
+          left: `${i * 8 + 4}%`,
+          top: `${Math.random() * 60 + 20}%`
+        }} animate={{
+          y: [-5, -15, -5],
+          x: [0, Math.random() * 10 - 5, 0],
+          opacity: [0.3, 0.8, 0.3],
+          scale: [0.5, 1, 0.5]
+        }} transition={{
+          duration: 3 + Math.random() * 2,
+          repeat: Number.POSITIVE_INFINITY,
+          delay: i * 0.1,
+          ease: "easeInOut"
+        }} />)}
         </div>
-      </header>
+      </section>
 
-      {/* Hero Section with Cool Background */}
-      <section className="relative min-h-screen overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-background">
-          {/* Floating Orbs */}
-          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-xl animate-pulse"></div>
-          <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-r from-accent/15 to-success/15 rounded-full blur-lg animate-pulse delay-1000"></div>
-          <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full blur-2xl animate-pulse delay-2000"></div>
-          <div className="absolute top-1/3 right-1/3 w-20 h-20 bg-gradient-to-r from-success/20 to-primary/20 rounded-full blur-md animate-pulse delay-500"></div>
-          
-          {/* Grid Pattern */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="h-full w-full bg-[linear-gradient(to_right,hsl(var(--primary))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--primary))_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
-          </div>
-          
-          {/* Gradient Overlays */}
-          <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent"></div>
-          <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent"></div>
-        </div>
+      {/* Video Demo Section */}
+      <section className="relative py-20 px-4 bg-background">
+        <div className="container mx-auto">
+          <ContainerScroll
+            titleComponent={
+              <div className="text-center mb-16">
+                <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+                  See iHear in Action
+                </h2>
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                  Experience our accessible learning platform designed specifically for hearing-impaired students
+                </p>
+              </div>
+            }
+          >
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/5 to-accent/3 max-w-6xl mx-auto">
+              <div className="relative overflow-hidden rounded-3xl">
+                <video ref={videoRef} autoPlay muted={isMuted} loop playsInline controls={false} disablePictureInPicture preload="metadata" poster={heroDemo} className="w-full h-full object-cover transition-all duration-700 ease-in-out" aria-label="iHear accessible learning platform demo video" onError={e => {
+                console.error('Video failed to load:', e);
+                console.error('Video error details:', e.currentTarget.error);
+                if (e.currentTarget.error) {
+                  console.error('Error code:', e.currentTarget.error.code);
+                  console.error('Error message:', e.currentTarget.error.message);
+                }
+              }} onLoadStart={() => console.log('Video loading started')} onLoadedData={() => console.log('Video loaded successfully')} onCanPlay={() => console.log('Video can play')} onLoadedMetadata={() => console.log('Video metadata loaded')}>
+                  <source src="/ihear-demo-video.mp4" type="video/mp4" />
+                  <source src="/ihear-demo-video.webm" type="video/webm" />
+                  <img src={heroDemo} alt="iHear accessible learning platform interface with captions and educational features" className="w-full h-full object-cover rounded-xl" />
+                  Your browser does not support the video tag.
+                </video>
+                
+                {/* Video Controls */}
+                <div className="absolute bottom-6 right-6 flex gap-2">
+                  {/* Mute/Unmute Button */}
+                  <Button variant="secondary" size="sm" onClick={toggleMute} className="bg-black/50 hover:bg-black/70 text-white border-white/20 backdrop-blur-sm transition-all duration-300" aria-label={isMuted ? "Unmute video" : "Mute video"}>
+                    {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+                  </Button>
 
-        {/* Container Scroll Content */}
-        <ContainerScroll
-          titleComponent={
-            <div className="text-center relative z-0">
-              <Badge variant="secondary" className="mb-6 animate-fade-in bg-primary/10 border-primary/20">
-                <Accessibility className="h-3 w-3 mr-1" />
-                WCAG 2.2 AA Compliant
-              </Badge>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 animate-fade-in bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
-                Accessible Learning for Everyone
-              </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-in leading-relaxed max-w-4xl mx-auto">
-                iHear is a completely free accessible learning platform designed specifically for hearing-impaired students. 
-                Every course includes captions, transcripts, and adaptive learning features - all at no cost.
-              </p>
-              <div className="flex justify-center animate-fade-in">
-                <Button size="lg" className="px-12 py-4 text-lg hover-scale" asChild>
-                  <Link to="/auth">
-                    <span className="flex items-center">
-                      Start Learning Free 
-                      <ArrowRight className="h-5 w-5 ml-2 transition-transform group-hover:translate-x-1" />
-                    </span>
-                  </Link>
-                </Button>
+                  {/* Fullscreen Button */}
+                  <Button variant="secondary" size="sm" onClick={toggleFullscreen} className="bg-black/50 hover:bg-black/70 text-white border-white/20 backdrop-blur-sm transition-all duration-300" aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}>
+                    {isFullscreen ? <Minimize className="h-4 w-4" /> : <Maximize className="h-4 w-4" />}
+                  </Button>
+                </div>
               </div>
             </div>
-          }
-        >
-          <img
-            src={heroDemo}
-            alt="iHear accessible learning platform interface with captions and educational features"
-            className="mx-auto rounded-2xl object-cover h-full w-full shadow-2xl"
-            draggable={false}
-          />
-        </ContainerScroll>
-        
-        {/* Smooth Transition Gradient */}
-        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background via-background/80 to-transparent z-20"></div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="relative py-24 px-4 bg-gradient-to-b from-background via-secondary/10 to-background">
-        {/* Professional Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-10 right-10 w-64 h-64 bg-gradient-to-br from-primary/5 to-accent/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 left-10 w-48 h-48 bg-gradient-to-tr from-accent/5 to-success/5 rounded-full blur-2xl"></div>
-        </div>
-        
-        <div className="container mx-auto relative z-10">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-foreground mb-4">Sample Testimonials</h2>
-              <p className="text-lg text-muted-foreground">Demo feedback from our platform (placeholder content)</p>
-            </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="course-card">
-              <CardContent className="p-6">
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-warning text-warning" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  "Sample testimonial text about the platform's accessibility features. 
-                  This is placeholder content for demonstration purposes."
-                </p>
-                <div className="font-medium">Sample Student Name</div>
-                <div className="text-sm text-muted-foreground">Demo Course Field</div>
-              </CardContent>
-            </Card>
-
-            <Card className="course-card">
-              <CardContent className="p-6">
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-warning text-warning" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  "Sample testimonial about live session features and accessibility. 
-                  This is demonstration content only."
-                </p>
-                <div className="font-medium">Example User Name</div>
-                <div className="text-sm text-muted-foreground">Sample Subject Area</div>
-              </CardContent>
-            </Card>
-
-            <Card className="course-card">
-              <CardContent className="p-6">
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-warning text-warning" />
-                  ))}
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  "Sample educator feedback about platform accessibility features. 
-                  This is placeholder testimonial content."
-                </p>
-                <div className="font-medium">Sample Instructor Name</div>
-                <div className="text-sm text-muted-foreground">Demo Course Instructor</div>
-              </CardContent>
-            </Card>
-          </div>
+          </ContainerScroll>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="py-16 px-4 bg-gradient-to-r from-secondary/20 via-primary-subtle/10 to-accent-subtle/20">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">Built for Accessibility</h2>
-            <p className="text-lg text-muted-foreground">Every feature is designed with hearing-impaired learners in mind</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="course-card group">
-              <CardContent className="p-6 text-center">
-                <Volume2 className="h-12 w-12 text-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="text-xl font-semibold mb-2">Always-On Captions</h3>
-                <p className="text-muted-foreground">
-                  Every video includes professional captions with customizable styling for optimal readability.
-                </p>
-                <Button variant="ghost" className="mt-4 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                  Learn More
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="course-card group">
-              <CardContent className="p-6 text-center">
-                <BookOpen className="h-12 w-12 text-accent mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="text-xl font-semibold mb-2">Full Transcripts</h3>
-                <p className="text-muted-foreground">
-                  Complete lesson transcripts with searchable content and downloadable formats.
-                </p>
-                <Button variant="ghost" className="mt-4 group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-                  Learn More
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="course-card group">
-              <CardContent className="p-6 text-center">
-                <Users className="h-12 w-12 text-success mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="text-xl font-semibold mb-2">Live Sessions</h3>
-                <p className="text-muted-foreground">
-                  Interactive Zoom sessions with real-time captions and collaborative learning.
-                </p>
-                <Button variant="ghost" className="mt-4 group-hover:bg-success group-hover:text-success-foreground transition-colors">
-                  Learn More
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+      {/* iHEAR Initiative – Volunteers Needed */}
+      <section className="py-16 px-4 bg-gradient-to-r from-primary/8 via-secondary/8 to-accent/8 relative overflow-hidden">
+        {/* Enhanced gradient backdrop */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-primary/15 to-accent/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-tl from-accent/12 to-success/8 rounded-full blur-2xl"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-success/10 to-primary/12 rounded-full blur-xl"></div>
         </div>
-      </section>
-
-      {/* Call to Action Banner */}
-      <section className="py-16 px-4 bg-gradient-to-r from-primary to-accent">
-        <div className="container mx-auto text-center">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
-              Ready to Start Your Free Learning Journey?
+        <div className="container mx-auto text-center relative z-10">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              iHEAR Initiative – Volunteers Needed
             </h2>
-            <p className="text-xl text-primary-foreground/90 mb-8">
-              Join students in our accessible learning platform with full support features - completely free.
+            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+              Join our mission to bridge communication gaps through inclusive education and empower students with hearing impairments through personalized language tutoring.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="hover-scale" asChild>
-                <Link to="/auth">Start Learning Now</Link>
-              </Button>
-              <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary hover-scale" asChild>
-                <Link to="/auth">Explore Free Courses</Link>
-              </Button>
-            </div>
+          <div className="flex justify-center animate-fade-in">
+            <RainbowButton className="px-12 py-4 text-lg font-semibold hover:scale-105 transition-transform duration-300" asChild>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSe77zVB0lEabj5X4RMu4h40teNzhMHomjXObz9oShkMcpNRYQ/viewform" target="_blank" rel="noopener noreferrer">
+                <span className="flex items-center justify-center group">
+                  Register as a Tutor
+                  <ArrowRight className="h-4 w-4 ml-2 transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:scale-125" />
+                </span>
+              </a>
+            </RainbowButton>
+          </div>
           </div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-3xl font-bold text-primary mb-2">X,XXX+</div>
-              <div className="text-muted-foreground">Sample: Active Students</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-accent mb-2">XXX+</div>
-              <div className="text-muted-foreground">Sample: Free Courses</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-success mb-2">XX%</div>
-              <div className="text-muted-foreground">Sample: Satisfaction Rate</div>
-            </div>
-            <div>
-              <div className="flex items-center justify-center gap-1 mb-2">
-                <span className="text-3xl font-bold text-warning">X.X</span>
-                <Star className="h-6 w-6 fill-warning text-warning" />
-              </div>
-              <div className="text-muted-foreground">Sample: Average Rating</div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Volunteer Callout - Now using Bento Grid */}
+      <BentoSection />
 
-      {/* Footer */}
-      <footer className="border-t py-12 px-4 bg-secondary/20">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Volume2 className="h-5 w-5 text-primary" />
-                <span className="font-bold">iHear</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Making learning accessible for everyone, everywhere.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-medium mb-3">Platform</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="/courses" className="hover:text-foreground transition-colors">Courses</Link></li>
-                <li><Link to="/dashboard" className="hover:text-foreground transition-colors">Dashboard</Link></li>
-                <li><Link to="#" className="hover:text-foreground transition-colors">Live Sessions</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-medium mb-3">Support</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="#" className="hover:text-foreground transition-colors">Help Center</Link></li>
-                <li><Link to="#" className="hover:text-foreground transition-colors">Accessibility Guide</Link></li>
-                <li><Link to="#" className="hover:text-foreground transition-colors">Contact Us</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-medium mb-3">Legal</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link to="#" className="hover:text-foreground transition-colors">Privacy Policy</Link></li>
-                <li><Link to="#" className="hover:text-foreground transition-colors">Terms of Service</Link></li>
-                <li><Link to="#" className="hover:text-foreground transition-colors">Accessibility Statement</Link></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 iHear. All rights reserved. Built with accessibility in mind.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
+      {/* Mission Statement - Now using Timeline */}
+      <TimelineSection />
+
+      {/* About iHEAR Initiative - Now using Feature Showcase */}
+      <FeatureShowcase />
+
+      {/* Final organized section */}
+      <FinalCallToAction />
+    </div>;
 };
-
 export default Index;

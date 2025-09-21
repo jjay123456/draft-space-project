@@ -4,9 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Volume2, Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
 
@@ -111,9 +110,12 @@ export default function Auth() {
       </Button>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Volume2 className="h-8 w-8 text-primary" />
-            <span className="font-bold text-2xl text-foreground">iHear</span>
+          <div className="flex items-center justify-center mb-4">
+            <img 
+              src="/lovable-uploads/4d60d879-18d8-4416-91cf-c8a7734a9d03.png" 
+              alt="iHear Logo" 
+              className="h-12 w-auto object-contain"
+            />
           </div>
           <CardTitle>Welcome</CardTitle>
           <CardDescription>
