@@ -161,57 +161,30 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Interactive Carousel Section */}
-      <section className="py-16 px-4 bg-background">
+      {/* iHEAR Initiative Carousel Section */}
+      <section className="py-20 px-4 bg-background">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-8">
-            Explore Our Features
-          </h2>
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold text-foreground mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Discover iHEAR Initiative
+          </motion.h2>
+          <motion.p 
+            className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            Explore our mission, team, and how you can make a difference in accessible education
+          </motion.p>
           <CarouselDemo />
         </div>
       </section>
-
-      {/* iHEAR Initiative – Volunteers Needed */}
-      <section className="py-16 px-4 bg-gradient-to-r from-primary/8 via-secondary/8 to-accent/8 relative overflow-hidden">
-        {/* Enhanced gradient backdrop */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-primary/15 to-accent/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-tl from-accent/12 to-success/8 rounded-full blur-2xl"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-success/10 to-primary/12 rounded-full blur-xl"></div>
-        </div>
-        <div className="container mx-auto text-center relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              iHEAR Initiative – Volunteers Needed
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              Join our mission to bridge communication gaps through inclusive education and empower students with hearing impairments through personalized language tutoring.
-            </p>
-          <div className="flex justify-center animate-fade-in">
-            <RainbowButton className="px-12 py-4 text-lg font-semibold hover:scale-105 transition-transform duration-300" asChild>
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSe77zVB0lEabj5X4RMu4h40teNzhMHomjXObz9oShkMcpNRYQ/viewform" target="_blank" rel="noopener noreferrer">
-                <span className="flex items-center justify-center group">
-                  Register as a Tutor
-                  <ArrowRight className="h-4 w-4 ml-2 transition-all duration-500 ease-out group-hover:translate-x-2 group-hover:scale-125" />
-                </span>
-              </a>
-            </RainbowButton>
-          </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Volunteer Callout - Now using Bento Grid */}
-      <BentoSection />
-
-      {/* Mission Statement - Now using Timeline */}
-      <TimelineSection />
-
-      {/* About iHEAR Initiative - Now using Feature Showcase */}
-      <FeatureShowcase />
-
-      {/* Final organized section */}
-      <FinalCallToAction />
     </div>;
 };
 export default Index;
