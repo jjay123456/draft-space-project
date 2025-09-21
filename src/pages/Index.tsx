@@ -122,18 +122,12 @@ const Index = () => {
       {/* Video Demo Section */}
       <section className="relative py-20 px-4 bg-background">
         <div className="container mx-auto">
-          <ContainerScroll
-            titleComponent={
-              <div className="text-center mb-16">
+          <ContainerScroll titleComponent={<div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
                   See iHear in Action
                 </h2>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                  Experience our accessible learning platform designed specifically for hearing-impaired students
-                </p>
-              </div>
-            }
-          >
+                
+              </div>}>
             <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/5 to-accent/3 max-w-6xl mx-auto">
               <div className="relative overflow-hidden rounded-3xl">
                 <video ref={videoRef} autoPlay muted={isMuted} loop playsInline controls={false} disablePictureInPicture preload="metadata" poster={heroDemo} className="w-full h-full object-cover transition-all duration-700 ease-in-out" aria-label="iHear accessible learning platform demo video" onError={e => {
