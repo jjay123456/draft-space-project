@@ -5,10 +5,8 @@ import { useState, useRef, useId, useEffect } from "react";
 interface SlideData {
   title: string;
   button: string;
-  src: string;
   description?: string;
   features?: Array<{
-    icon: string;
     title: string;
     description: string;
   }>;
@@ -22,6 +20,42 @@ interface SlideProps {
   current: number;
   handleSlideClick: (index: number) => void;
 }
+
+const getCardBackground = (type: string) => {
+  switch (type) {
+    case 'features':
+      return 'bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800';
+    case 'mission':
+      return 'bg-gradient-to-br from-purple-600 via-purple-700 to-violet-800';
+    case 'navigation':
+      return 'bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800';
+    default:
+      return 'bg-gradient-to-br from-slate-700 via-slate-800 to-slate-900';
+  }
+};
+
+const getHeaderDecoration = (type: string) => {
+  switch (type) {
+    case 'features':
+      return 'border-l-4 border-blue-300 pl-4';
+    case 'mission':
+      return 'border-l-4 border-purple-300 pl-4';
+    case 'navigation':
+      return 'border-l-4 border-emerald-300 pl-4';
+    default:
+      return 'border-l-4 border-slate-300 pl-4';
+  }
+};
+
+const getFeatureBackground = (index: number) => {
+  const backgrounds = [
+    'bg-white/10',
+    'bg-white/15',
+    'bg-white/10',
+    'bg-white/15'
+  ];
+  return backgrounds[index % backgrounds.length];
+};
 
 const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
   const slideRef = useRef<HTMLLIElement>(null);
@@ -66,11 +100,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
     yRef.current = 0;
   };
 
-  const imageLoaded = (event: React.SyntheticEvent<HTMLImageElement>) => {
-    event.currentTarget.style.opacity = "1";
-  };
-
-  const { src, button, title } = slide;
+  const { button, title } = slide;
 
   return (
     <div className="[perspective:1200px] [transform-style:preserve-3d]">
@@ -90,7 +120,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
         }}
       >
         <div
-          className="absolute top-0 left-0 w-full h-full bg-[#1D1F2F] rounded-[1%] overflow-hidden transition-all duration-150 ease-out"
+          className={`absolute top-0 left-0 w-full h-full rounded-[1%] overflow-hidden transition-all duration-300 ease-out ${getCardBackground(slide.type || 'simple')}`}
           style={{
             transform:
               current === index
@@ -98,19 +128,8 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
                 : "none",
           }}
         >
-          <img
-            className="absolute inset-0 w-[120%] h-[120%] object-cover opacity-100 transition-opacity duration-600 ease-in-out"
-            style={{
-              opacity: current === index ? 1 : 0.5,
-            }}
-            alt={title}
-            src={src}
-            onLoad={imageLoaded}
-            loading="eager"
-            decoding="sync"
-          />
           {current === index && (
-            <div className="absolute inset-0 bg-black/30 transition-all duration-1000" />
+            <div className="absolute inset-0 bg-gradient-to-br from-black/10 to-transparent transition-all duration-1000" />
           )}
         </div>
 
@@ -119,24 +138,29 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
             current === index ? "opacity-100 visible" : "opacity-0 invisible"
           }`}
         >
-          <h2 className="text-lg md:text-2xl lg:text-4xl font-semibold mb-4 relative">
-            {title}
-          </h2>
-          
-          {slide.description && (
-            <p className="text-sm md:text-base mb-6 text-white/90 leading-relaxed">
-              {slide.description}
-            </p>
-          )}
+          <div className={`mb-6 ${getHeaderDecoration(slide.type || 'simple')}`}>
+            <h2 className="text-lg md:text-2xl lg:text-4xl font-bold mb-2 text-white">
+              {title}
+            </h2>
+            {slide.description && (
+              <p className="text-sm md:text-base text-white/90 leading-relaxed font-medium">
+                {slide.description}
+              </p>
+            )}
+          </div>
 
           {slide.features && (
             <div className="space-y-4 mb-6">
               {slide.features.map((feature, idx) => (
-                <div key={idx} className="flex items-start gap-3 text-left">
-                  <span className="text-2xl flex-shrink-0 mt-1">{feature.icon}</span>
-                  <div>
-                    <h3 className="font-semibold text-white mb-1">{feature.title}</h3>
-                    <p className="text-sm text-white/80 leading-relaxed">{feature.description}</p>
+                <div key={idx} className={`p-4 rounded-lg ${getFeatureBackground(idx)} backdrop-blur-sm border border-white/10`}>
+                  <div className="flex items-start gap-3 text-left">
+                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0 mt-1">
+                      <div className="w-3 h-3 bg-white rounded-full"></div>
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-white mb-2 text-lg">{feature.title}</h3>
+                      <p className="text-sm text-white/85 leading-relaxed">{feature.description}</p>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -145,19 +169,21 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
 
           {slide.highlights && (
             <div className="mb-6">
-              <ul className="space-y-2 text-left">
+              <div className="grid gap-3 text-left">
                 {slide.highlights.map((highlight, idx) => (
-                  <li key={idx} className="flex items-center gap-2 text-sm text-white/90">
-                    <span className="w-2 h-2 bg-white rounded-full flex-shrink-0"></span>
-                    {highlight}
-                  </li>
+                  <div key={idx} className="flex items-start gap-3 p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10">
+                    <div className="w-2 h-2 bg-white rounded-full flex-shrink-0 mt-2"></div>
+                    <span className="text-sm text-white/90 leading-relaxed font-medium">
+                      {highlight}
+                    </span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           )}
 
-          <div className="flex justify-center">
-            <button className="mt-4 px-4 py-2 w-fit mx-auto sm:text-sm text-black bg-white h-12 border border-transparent text-xs flex justify-center items-center rounded-2xl hover:shadow-lg transition duration-200 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
+          <div className="flex justify-center mt-8">
+            <button className="px-8 py-3 bg-white text-black font-semibold rounded-xl hover:bg-white/90 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
               {button}
             </button>
           </div>
