@@ -35,21 +35,23 @@ const OrbitTestimonials = () => {
     
     setIsSwapping(true);
 
-    // Swap the indices
+    // Instantly swap the indices without animation
     const newCenterIndex = currentOrbitIndex;
-    const newOrbitIndex = (currentCenterIndex + 1) % testimonials.length;
+    const newOrbitIndex = currentCenterIndex;
     
+    setCurrentCenterIndex(newCenterIndex);
+    setCurrentOrbitIndex(newOrbitIndex);
+    
+    // Brief visual feedback period
     setTimeout(() => {
-      setCurrentCenterIndex(newCenterIndex);
-      setCurrentOrbitIndex(newOrbitIndex);
       setIsSwapping(false);
-    }, 1000);
+    }, 100);
   };
 
-  // Continuous orbit rotation
+  // Continuous orbit rotation - never stopping
   useEffect(() => {
     const controls = animate(orbitRotation, orbitRotation.get() + 360, {
-      duration: 50,
+      duration: 30, // Faster rotation
       ease: "linear",
       repeat: Infinity,
     });
@@ -194,15 +196,12 @@ const OrbitTestimonials = () => {
         {/* Center (Active) Card */}
         <motion.div
           key={`center-${currentCenterIndex}`}
+          initial={false}
           animate={{ 
-            scale: isSwapping ? 0.7 : 1,
+            scale: 1,
             opacity: 1,
-            x: isSwapping ? orbitCardX : 0,
-            y: isSwapping ? orbitCardY : 0
-          }}
-          transition={{ 
-            duration: 0, // Instant teleport
-            ease: "easeInOut"
+            x: 0,
+            y: 0
           }}
           className="relative z-10 w-80 md:w-96 bg-card border border-border rounded-xl p-6 shadow-lg overflow-hidden"
         >
@@ -245,21 +244,17 @@ const OrbitTestimonials = () => {
             marginTop: '-310px'
           }}
         >
-          {/* Orbiting Card */}
+          {/* Orbiting Card - Counter-rotating to stay upright */}
           <motion.div
             key={`orbit-${currentOrbitIndex}`}
-            animate={{ 
-              x: isSwapping ? -orbitCardX + 136 : orbitCardX - 136,
-              y: isSwapping ? -orbitCardY + 150 : orbitCardY - 150,
-              scale: 0.7, // Always stay small
-              opacity: isSwapping ? 1 : 0.8,
-              rotate: 0 // Always stay straight
+            className="absolute w-64 md:w-72 bg-card/90 border border-border rounded-xl p-5 shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200"
+            style={{
+              x: orbitCardX - 136,
+              y: orbitCardY - 150,
+              scale: 0.7,
+              rotate: orbitRotation.get() * -1, // Counter-rotate to stay upright
+              transformOrigin: 'center'
             }}
-            transition={{ 
-              duration: 0, // Instant teleport
-              ease: "easeInOut"
-            }}
-            className="w-64 md:w-72 bg-card/90 border border-border rounded-xl p-5 shadow-md overflow-hidden cursor-pointer hover:shadow-xl"
             onClick={handleSwapClick}
           >
             <div className="mb-3">
@@ -277,15 +272,10 @@ const OrbitTestimonials = () => {
               {/* Gradient fade overlay */}
               <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card/90 to-transparent pointer-events-none" />
               
-              {/* See All button appears during swap */}
-              <motion.button
-                animate={{ opacity: isSwapping ? 1 : 0 }}
-                transition={{ duration: 0.3 }}
-                onClick={handleSeeAllClick}
-                className="absolute bottom-3 right-3 px-3 py-1.5 text-xs bg-primary/30 hover:bg-primary/40 text-primary rounded-full border border-primary/40 transition-all duration-300 backdrop-blur-sm hover:scale-105 font-medium"
-              >
-                See All
-              </motion.button>
+              {/* Click to swap indicator */}
+              <div className="absolute bottom-3 right-3 px-3 py-1.5 text-xs bg-primary/20 text-primary rounded-full border border-primary/30 font-medium opacity-70">
+                Click to swap
+              </div>
             </div>
           </motion.div>
         </motion.div>
