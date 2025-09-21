@@ -121,7 +121,7 @@ const Index = () => {
       </section>
 
       {/* Video Demo Section */}
-      <section className="relative -mt-32 pt-16 pb-8 px-4 bg-background z-10">
+      <section className="relative py-8 px-4 bg-background">
         <div className="container mx-auto">
           <ContainerScroll titleComponent={<div className="text-center mb-8">
                 
