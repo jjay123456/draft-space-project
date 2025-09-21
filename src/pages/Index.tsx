@@ -120,43 +120,38 @@ const Index = () => {
       </section>
 
       {/* Video Demo Section */}
-      <section className="relative py-20 px-4 bg-background">
-        <div className="container mx-auto">
-          <ContainerScroll titleComponent={<div className="text-center mb-16">
-                
-                
-              </div>}>
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/5 to-accent/3 max-w-6xl mx-auto">
-              <div className="relative overflow-hidden rounded-3xl">
-                <video ref={videoRef} autoPlay muted={isMuted} loop playsInline controls={false} disablePictureInPicture preload="metadata" poster={heroDemo} className="w-full h-full object-cover transition-all duration-700 ease-in-out" aria-label="iHear accessible learning platform demo video" onError={e => {
-                console.error('Video failed to load:', e);
-                console.error('Video error details:', e.currentTarget.error);
-                if (e.currentTarget.error) {
-                  console.error('Error code:', e.currentTarget.error.code);
-                  console.error('Error message:', e.currentTarget.error.message);
-                }
-              }} onLoadStart={() => console.log('Video loading started')} onLoadedData={() => console.log('Video loaded successfully')} onCanPlay={() => console.log('Video can play')} onLoadedMetadata={() => console.log('Video metadata loaded')}>
-                  <source src="/ihear-demo-video.mp4" type="video/mp4" />
-                  <source src="/ihear-demo-video.webm" type="video/webm" />
-                  <img src={heroDemo} alt="iHear accessible learning platform interface with captions and educational features" className="w-full h-full object-cover rounded-xl" />
-                  Your browser does not support the video tag.
-                </video>
-                
-                {/* Video Controls */}
-                <div className="absolute bottom-6 right-6 flex gap-2">
-                  {/* Mute/Unmute Button */}
-                  <Button variant="secondary" size="sm" onClick={toggleMute} className="bg-black/50 hover:bg-black/70 text-white border-white/20 backdrop-blur-sm transition-all duration-300" aria-label={isMuted ? "Unmute video" : "Mute video"}>
-                    {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-                  </Button>
+      <section className="relative py-8 px-4 bg-background">
+        <div className="container mx-auto max-w-6xl">
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/5 to-accent/3">
+            <div className="relative overflow-hidden rounded-3xl">
+              <video ref={videoRef} autoPlay muted={isMuted} loop playsInline controls={false} disablePictureInPicture preload="metadata" poster={heroDemo} className="w-full h-full object-cover transition-all duration-700 ease-in-out" aria-label="iHear accessible learning platform demo video" onError={e => {
+              console.error('Video failed to load:', e);
+              console.error('Video error details:', e.currentTarget.error);
+              if (e.currentTarget.error) {
+                console.error('Error code:', e.currentTarget.error.code);
+                console.error('Error message:', e.currentTarget.error.message);
+              }
+            }} onLoadStart={() => console.log('Video loading started')} onLoadedData={() => console.log('Video loaded successfully')} onCanPlay={() => console.log('Video can play')} onLoadedMetadata={() => console.log('Video metadata loaded')}>
+                <source src="/ihear-demo-video.mp4" type="video/mp4" />
+                <source src="/ihear-demo-video.webm" type="video/webm" />
+                <img src={heroDemo} alt="iHear accessible learning platform interface with captions and educational features" className="w-full h-full object-cover rounded-xl" />
+                Your browser does not support the video tag.
+              </video>
+              
+              {/* Video Controls */}
+              <div className="absolute bottom-6 right-6 flex gap-2">
+                {/* Mute/Unmute Button */}
+                <Button variant="secondary" size="sm" onClick={toggleMute} className="bg-black/50 hover:bg-black/70 text-white border-white/20 backdrop-blur-sm transition-all duration-300" aria-label={isMuted ? "Unmute video" : "Mute video"}>
+                  {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+                </Button>
 
-                  {/* Fullscreen Button */}
-                  <Button variant="secondary" size="sm" onClick={toggleFullscreen} className="bg-black/50 hover:bg-black/70 text-white border-white/20 backdrop-blur-sm transition-all duration-300" aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}>
-                    {isFullscreen ? <Minimize className="h-4 w-4" /> : <Maximize className="h-4 w-4" />}
-                  </Button>
-                </div>
+                {/* Fullscreen Button */}
+                <Button variant="secondary" size="sm" onClick={toggleFullscreen} className="bg-black/50 hover:bg-black/70 text-white border-white/20 backdrop-blur-sm transition-all duration-300" aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}>
+                  {isFullscreen ? <Minimize className="h-4 w-4" /> : <Maximize className="h-4 w-4" />}
+                </Button>
               </div>
             </div>
-          </ContainerScroll>
+          </div>
         </div>
       </section>
 
