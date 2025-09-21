@@ -86,14 +86,14 @@ export function CarouselDemo() {
     },
     {
       title: "Get Started Today",
-      button: "Join Now", 
+      button: "Apply as Tutor", 
       type: "navigation" as const,
-      description: "Ready to be part of the change? Choose how you'd like to get involved with the iHEAR Initiative.",
+      description: "Ready to make a difference? Join our team of dedicated volunteer tutors and help transform education for hearing-impaired students.",
       highlights: [
-        "Student? Browse our accessible courses and join live sessions",
-        "Educator? Apply to become a volunteer tutor", 
-        "Supporter? Learn how you can help our mission",
-        "Questions? Contact us for more information"
+        "Flexible scheduling that works with your availability",
+        "Comprehensive training and ongoing support provided",
+        "Make a meaningful impact on students' educational journey",
+        "Join a community of passionate educators and advocates"
       ]
     },
   ];
