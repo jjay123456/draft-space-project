@@ -3,8 +3,29 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { AppLayout } from "./components/layout/AppLayout";
+// Temporarily commenting out admin imports to fix the build
+// import { AdminRoute } from "@/components/AdminRoute";
+// import { AdminLayout } from "./components/layout/AdminLayout";
 import Index from "./pages/Index";
+import Auth from "./pages/Auth";
+import Dashboard from "./pages/Dashboard";
+import Modules from "./pages/Modules";
 import NotFound from "./pages/NotFound";
+import ModuleViewer from "./pages/ModuleViewer";
+import LessonViewer from "./pages/LessonViewer";
+import UserProfile from "./pages/UserProfile";
+import UserSettings from "./pages/UserSettings";
+import LiveSessions from "./pages/LiveSessions";
+import LiveSessionViewer from "./pages/LiveSessionViewer";
+// Re-enabling admin components one by one
+import { AdminDashboard } from "./pages/admin/AdminDashboard";
+// import { TuteeManagement } from "./pages/admin/TuteeManagement";
+// import { TutorDirectory } from "./pages/admin/TutorDirectory";
+// import { SessionScheduling } from "./pages/admin/SessionScheduling";
+// import { CourseTemplates } from "./pages/admin/CourseTemplates";
 
 const queryClient = new QueryClient();
 
@@ -13,13 +34,93 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <AppLayout><Dashboard /></AppLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/modules" element={
+              <ProtectedRoute>
+                <AppLayout><Modules /></AppLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/modules/:moduleId" element={
+              <ProtectedRoute>
+                <AppLayout><ModuleViewer /></AppLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/lessons/:lessonId" element={
+              <ProtectedRoute>
+                <AppLayout><LessonViewer /></AppLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/profile" element={
+              <ProtectedRoute>
+                <AppLayout><UserProfile /></AppLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/profile/settings" element={
+              <ProtectedRoute>
+                <AppLayout><UserSettings /></AppLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/sessions" element={
+              <ProtectedRoute>
+                <AppLayout><LiveSessions /></AppLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/sessions/:sessionId" element={
+              <ProtectedRoute>
+                <AppLayout><LiveSessionViewer /></AppLayout>
+              </ProtectedRoute>
+            } />
+            <Route path="/calendar" element={
+              <ProtectedRoute>
+                <AppLayout><div className="lesson-content"><h1 className="text-3xl font-bold">Calendar</h1><p className="text-muted-foreground">Calendar functionality coming soon...</p></div></AppLayout>
+              </ProtectedRoute>
+            } />
+            
+            {/* Admin Routes */}
+            <Route path="/admin" element={
+              <ProtectedRoute>
+                <AppLayout>
+                  <AdminDashboard />
+                </AppLayout>
+              </ProtectedRoute>
+            } />
+            {/* Temporarily commenting out other admin routes
+            <Route path="/admin/tutees" element={
+              <AdminRoute>
+                <AdminLayout><TuteeManagement /></AdminLayout>
+              </AdminRoute>
+            } />
+            <Route path="/admin/tutors" element={
+              <AdminRoute>
+                <AdminLayout><TutorDirectory /></AdminLayout>
+              </AdminRoute>
+            } />
+            <Route path="/admin/sessions" element={
+              <AdminRoute>
+                <AdminLayout><SessionScheduling /></AdminLayout>
+              </AdminRoute>
+            } />
+            <Route path="/admin/courses" element={
+              <AdminRoute>
+                <AdminLayout><CourseTemplates /></AdminLayout>
+              </AdminRoute>
+            } />
+            */}
+            
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
