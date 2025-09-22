@@ -23,7 +23,13 @@ const OrbitTestimonials = () => {
   const [currentOrbitIndex, setCurrentOrbitIndex] = useState(1);
   const [isSwapping, setIsSwapping] = useState(false);
   const [centerPosition, setCenterPosition] = useState({ x: 0, y: 0, scale: 1 });
-  const [orbitPosition, setOrbitPosition] = useState({ x: 0, y: 0, scale: 0.7 });
+  const [orbitPosition, setOrbitPosition] = useState(() => {
+    const orbitRadius = 280;
+    const orbitAngle = Math.PI / 2;
+    const orbitCardX = Math.cos(orbitAngle) * orbitRadius;
+    const orbitCardY = Math.sin(orbitAngle) * orbitRadius;
+    return { x: orbitCardX - 144, y: orbitCardY - 120, scale: 0.7 };
+  });
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const orbitRotation = useMotionValue(0);
@@ -41,16 +47,16 @@ const OrbitTestimonials = () => {
     
     setIsSwapping(true);
 
-    // Calculate orbit position
+    // Calculate orbit position for perfect centering
     const orbitRadius = 280;
     const orbitAngle = Math.PI / 2;
     const orbitCardX = Math.cos(orbitAngle) * orbitRadius;
     const orbitCardY = Math.sin(orbitAngle) * orbitRadius;
 
-    // Instantly swap positions and sizes
+    // Instantly swap positions and sizes - center card perfectly on circle
     const newCenterPosition = { 
-      x: orbitCardX - 136, 
-      y: orbitCardY - 150, 
+      x: orbitCardX - 144, // Adjusted for perfect centering (half of card width ~288px)
+      y: orbitCardY - 120, // Adjusted for perfect centering (half of card height ~240px)
       scale: 0.7 
     };
     const newOrbitPosition = { 
@@ -68,10 +74,10 @@ const OrbitTestimonials = () => {
     setCenterPosition(newOrbitPosition);
     setOrbitPosition(newCenterPosition);
     
-    // Reset positions after brief delay
+    // Reset positions after brief delay - perfect centering
     setTimeout(() => {
       setCenterPosition({ x: 0, y: 0, scale: 1 });
-      setOrbitPosition({ x: orbitCardX - 136, y: orbitCardY - 150, scale: 0.7 });
+      setOrbitPosition({ x: orbitCardX - 144, y: orbitCardY - 120, scale: 0.7 });
       setIsSwapping(false);
     }, 150);
   };
@@ -101,8 +107,8 @@ const OrbitTestimonials = () => {
   const centerTestimonial = testimonials[currentCenterIndex];
   const orbitTestimonial = testimonials[currentOrbitIndex];
 
-  // Calculate orbit position for the orbiting card (positioned ON the circle)
-  const orbitRadius = 280; // Distance from center to card center
+  // Calculate orbit position for perfect centering on circle
+  const orbitRadius = 280; // Distance from center to card center  
   const orbitAngle = Math.PI / 2; // Start at bottom of circle (90 degrees)
   const orbitCardX = Math.cos(orbitAngle) * orbitRadius;
   const orbitCardY = Math.sin(orbitAngle) * orbitRadius;
@@ -157,7 +163,7 @@ const OrbitTestimonials = () => {
               className="transition-opacity duration-500"
             />
             
-            {/* Multiple floating orbs around the circle */}
+            {/* Multiple floating orbs around the circle - synced with card rotation */}
             <g>
               <animateTransform
                 attributeName="transform"
@@ -165,7 +171,7 @@ const OrbitTestimonials = () => {
                 type="rotate"
                 from="0 310 310"
                 to="360 310 310"
-                dur="60s"
+                dur="30s"
                 repeatCount="indefinite"
               />
               {/* Main orbit orbs */}
@@ -187,7 +193,7 @@ const OrbitTestimonials = () => {
                 type="rotate"
                 from="0 310 310"
                 to="360 310 310"
-                dur="80s"
+                dur="30s"
                 repeatCount="indefinite"
               />
               <circle cx="370" cy="65" r="2.5" fill="url(#orbitGradient)" filter="url(#orbitGlow)" opacity="0.5" />
@@ -206,7 +212,7 @@ const OrbitTestimonials = () => {
                 type="rotate"
                 from="0 310 310"
                 to="360 310 310"
-                dur="35s"
+                dur="30s"
                 repeatCount="indefinite"
               />
               <circle cx="420" cy="90" r="1.5" fill="url(#orbitGradient)" filter="url(#orbitGlow)" opacity="0.6" />
