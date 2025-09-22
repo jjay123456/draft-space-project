@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useMotionValue, animate } from 'framer-motion';
+import { motion, useMotionValue, animate, useTransform } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const testimonials = [
@@ -21,13 +22,18 @@ const OrbitTestimonials = () => {
   const [currentCenterIndex, setCurrentCenterIndex] = useState(0);
   const [currentOrbitIndex, setCurrentOrbitIndex] = useState(1);
   const [isSwapping, setIsSwapping] = useState(false);
+  const [centerPosition, setCenterPosition] = useState({ x: 0, y: 0, scale: 1 });
+  const [orbitPosition, setOrbitPosition] = useState({ x: 0, y: 0, scale: 0.7 });
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
   const orbitRotation = useMotionValue(0);
+  
+  // Reactive counter-rotation to keep orbit card upright
+  const cardRotation = useTransform(orbitRotation, (value) => -value);
 
   const handleSeeAllClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    // Navigate to full testimonials page or open modal
-    window.location.href = '/testimonials-full'; // or use router navigation
+    navigate('/testimonials');
   };
 
   const handleSwapClick = () => {
@@ -35,17 +41,39 @@ const OrbitTestimonials = () => {
     
     setIsSwapping(true);
 
-    // Instantly swap the indices without animation
+    // Calculate orbit position
+    const orbitRadius = 280;
+    const orbitAngle = Math.PI / 2;
+    const orbitCardX = Math.cos(orbitAngle) * orbitRadius;
+    const orbitCardY = Math.sin(orbitAngle) * orbitRadius;
+
+    // Instantly swap positions and sizes
+    const newCenterPosition = { 
+      x: orbitCardX - 136, 
+      y: orbitCardY - 150, 
+      scale: 0.7 
+    };
+    const newOrbitPosition = { 
+      x: 0, 
+      y: 0, 
+      scale: 1 
+    };
+
+    // Swap the indices and positions simultaneously
     const newCenterIndex = currentOrbitIndex;
     const newOrbitIndex = currentCenterIndex;
     
     setCurrentCenterIndex(newCenterIndex);
     setCurrentOrbitIndex(newOrbitIndex);
+    setCenterPosition(newOrbitPosition);
+    setOrbitPosition(newCenterPosition);
     
-    // Brief visual feedback period
+    // Reset positions after brief delay
     setTimeout(() => {
+      setCenterPosition({ x: 0, y: 0, scale: 1 });
+      setOrbitPosition({ x: orbitCardX - 136, y: orbitCardY - 150, scale: 0.7 });
       setIsSwapping(false);
-    }, 100);
+    }, 150);
   };
 
   // Continuous orbit rotation - never stopping
@@ -198,11 +226,12 @@ const OrbitTestimonials = () => {
           key={`center-${currentCenterIndex}`}
           initial={false}
           animate={{ 
-            scale: 1,
+            scale: centerPosition.scale,
             opacity: 1,
-            x: 0,
-            y: 0
+            x: centerPosition.x,
+            y: centerPosition.y
           }}
+          transition={{ duration: 0 }}
           className="relative z-10 w-80 md:w-96 bg-card border border-border rounded-xl p-6 shadow-lg overflow-hidden"
         >
           <div className="mb-4">
@@ -248,11 +277,14 @@ const OrbitTestimonials = () => {
           <motion.div
             key={`orbit-${currentOrbitIndex}`}
             className="absolute w-64 md:w-72 bg-card/90 border border-border rounded-xl p-5 shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200"
+            animate={{
+              x: orbitPosition.x,
+              y: orbitPosition.y,
+              scale: orbitPosition.scale,
+            }}
+            transition={{ duration: 0 }}
             style={{
-              x: orbitCardX - 136,
-              y: orbitCardY - 150,
-              scale: 0.7,
-              rotate: orbitRotation.get() * -1, // Counter-rotate to stay upright
+              rotate: cardRotation,
               transformOrigin: 'center'
             }}
             onClick={handleSwapClick}
