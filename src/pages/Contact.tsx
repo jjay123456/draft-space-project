@@ -29,9 +29,13 @@ const Contact = () => {
                 Ready to start your English learning journey? Register now through our existing portal.
               </p>
               <Button asChild className="bg-[#146EF5] hover:bg-[#146EF5]/90 text-white">
-                <Link to="/auth">
+                <a 
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSe77zVB0lEabj5X4RMu4h40teNzhMHomjXObz9oShkMcpNRYQ/viewform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Go to Registration
-                </Link>
+                </a>
               </Button>
             </CardContent>
           </Card>
