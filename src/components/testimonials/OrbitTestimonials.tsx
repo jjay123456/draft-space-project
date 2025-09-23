@@ -244,12 +244,12 @@ const OrbitTestimonials = () => {
             {/* Gradient fade overlay */}
             <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-card to-transparent pointer-events-none" />
             
-            {/* See All button - only on center card */}
+            {/* See All button - Glass bubble effect */}
             <motion.button
               animate={{ opacity: isSwapping ? 0 : 1 }}
               transition={{ duration: 0.3 }}
               onClick={handleSeeAllClick}
-              className="absolute bottom-4 right-4 px-4 py-2 text-sm bg-primary/30 hover:bg-primary/40 text-primary rounded-full border border-primary/40 transition-all duration-300 backdrop-blur-sm hover:scale-105 font-medium"
+              className="absolute bottom-4 right-4 px-4 py-2 text-sm bg-white/10 hover:bg-white/20 text-foreground backdrop-blur-md rounded-full border border-white/20 hover:border-white/30 transition-all duration-300 hover:scale-105 font-medium shadow-lg"
             >
               See All
             </motion.button>
@@ -299,8 +299,8 @@ const OrbitTestimonials = () => {
               {/* Gradient fade overlay */}
               <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card/90 to-transparent pointer-events-none" />
               
-              {/* Click to swap indicator */}
-              <div className="absolute bottom-3 right-3 px-3 py-1.5 text-xs bg-primary/20 text-primary rounded-full border border-primary/30 font-medium opacity-70">
+              {/* Click to swap indicator - Glass bubble effect */}
+              <div className="absolute bottom-3 right-3 px-3 py-1.5 text-xs bg-white/10 text-foreground backdrop-blur-md rounded-full border border-white/20 font-medium shadow-lg">
                 Click to swap
               </div>
             </div>
@@ -334,10 +334,10 @@ const OrbitTestimonials = () => {
             {/* Gradient fade overlay */}
             <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-card to-transparent pointer-events-none" />
             
-            {/* See All button */}
+            {/* See All button - Glass bubble effect */}
             <button
               onClick={handleSeeAllClick}
-              className="absolute bottom-4 right-4 px-3 py-1.5 text-xs bg-primary/30 hover:bg-primary/40 text-primary rounded-full border border-primary/40 transition-colors backdrop-blur-sm font-medium"
+              className="absolute bottom-4 right-4 px-3 py-1.5 text-xs bg-white/10 hover:bg-white/20 text-foreground backdrop-blur-md rounded-full border border-white/20 hover:border-white/30 transition-all duration-300 font-medium shadow-lg"
             >
               See All
             </button>
