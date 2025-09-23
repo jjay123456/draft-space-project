@@ -68,21 +68,7 @@ export default function ShaderShowcase() {
       <MeshGradient className="absolute inset-0 w-full h-full" colors={["#000000", "#06b6d4", "#0891b2", "#164e63", "#f97316"]} speed={0.3} />
       <MeshGradient className="absolute inset-0 w-full h-full opacity-60" colors={["#000000", "#ffffff", "#06b6d4", "#f97316"]} speed={0.2} />
 
-      {/* Welcome Badge */}
-      <header className="relative z-20 flex justify-center pt-12">
-        <motion.div 
-          className="px-6 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/20"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <span className="text-white/90 text-sm font-medium flex items-center gap-2">
-            ✨ WELCOME TO iHEAR INITIATIVE
-          </span>
-        </motion.div>
-      </header>
-
-      <main className="absolute inset-0 z-20 flex items-center justify-center">
+      <main className="absolute inset-0 z-20 flex items-center justify-center pt-12">
         <div className="text-center max-w-4xl px-8">
           
 
