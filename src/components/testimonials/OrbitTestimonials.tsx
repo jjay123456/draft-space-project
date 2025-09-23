@@ -116,7 +116,7 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
     <div className="relative w-full min-h-[600px] flex flex-col items-center justify-center px-6">
       {/* Section Title */}
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-4">
+        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4">
           Student Testimonials
         </h2>
         <p className="text-muted-foreground/80 text-lg max-w-2xl mx-auto font-light tracking-wide">
