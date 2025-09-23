@@ -95,7 +95,7 @@ export default function ShaderShowcase() {
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.6, delay: 0.6 }}
            >
-             Sign-aware. Voice-enabled. Built to include.
+             Empowering voices. Breaking barriers. Transforming futures.
            </motion.p>
 
           <motion.div className="flex justify-center items-center gap-6 flex-wrap" initial={{
