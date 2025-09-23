@@ -82,27 +82,16 @@ const OrbitTestimonials = () => {
     }, 150);
   };
 
-  // Continuous orbit rotation - never stopping
+  // Continuous orbit rotation - visual effect only
   useEffect(() => {
     const controls = animate(orbitRotation, orbitRotation.get() + 360, {
-      duration: 30, // Faster rotation
+      duration: 30,
       ease: "linear",
       repeat: Infinity,
     });
 
     return () => controls.stop();
   }, [orbitRotation]);
-
-  // Auto-rotation effect
-  useEffect(() => {
-    if (isSwapping) return;
-
-    const interval = setInterval(() => {
-      handleSwapClick();
-    }, 8000);
-
-    return () => clearInterval(interval);
-  }, [isSwapping, currentCenterIndex, currentOrbitIndex]);
 
   const centerTestimonial = testimonials[currentCenterIndex];
   const orbitTestimonial = testimonials[currentOrbitIndex];
