@@ -109,16 +109,14 @@ export default function ShaderShowcase() {
           delay: 1.0
         }}>
             
-             <motion.a 
-               href="https://docs.google.com/forms/d/e/1FAIpQLSe77zVB0lEabj5X4RMu4h40teNzhMHomjXObz9oShkMcpNRYQ/viewform" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               className="inline-block px-12 py-4 rounded-full bg-white text-black font-semibold text-lg transition-all duration-300 hover:bg-white/90 cursor-pointer shadow-2xl hover:shadow-xl hover:scale-105"
-               whileHover={{ scale: 1.05 }}
-               whileTap={{ scale: 0.95 }}
-             >
-               Register as a Tutor
-             </motion.a>
+              <motion.button 
+                onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSe77zVB0lEabj5X4RMu4h40teNzhMHomjXObz9oShkMcpNRYQ/viewform', '_blank')}
+                className="inline-block px-12 py-4 rounded-full bg-white text-black font-semibold text-lg transition-all duration-300 hover:bg-white/90 cursor-pointer shadow-2xl hover:shadow-xl hover:scale-105"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Register as a Tutor
+              </motion.button>
           </motion.div>
         </div>
       </main>
