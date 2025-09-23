@@ -16,7 +16,7 @@ const PublicNavbar = () => {
       <NavBar items={navItems} />
       <button 
         onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSe77zVB0lEabj5X4RMu4h40teNzhMHomjXObz9oShkMcpNRYQ/viewform', '_blank')}
-        className="fixed top-6 left-[calc(50%+200px)] z-50 cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors bg-background/5 border border-border backdrop-blur-lg shadow-lg text-foreground/80 hover:text-primary whitespace-nowrap"
+        className="fixed top-6 right-6 z-50 cursor-pointer text-sm font-semibold px-6 py-2 rounded-full transition-colors bg-background/80 border border-border backdrop-blur-lg shadow-lg text-foreground/80 hover:text-primary whitespace-nowrap"
       >
         Register
       </button>
