@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, animate, useTransform } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
+import TestimonialsModal from './TestimonialsModal';
 
 const testimonials = [
   {
@@ -26,6 +27,7 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
   const [currentCenterIndex, setCurrentCenterIndex] = useState(0);
   const [currentOrbitIndex, setCurrentOrbitIndex] = useState(1);
   const [isSwapping, setIsSwapping] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [centerPosition, setCenterPosition] = useState({ x: 0, y: 0, scale: 1 });
   const [orbitPosition, setOrbitPosition] = useState(() => {
     const orbitRadius = 280;
@@ -46,7 +48,7 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
     if (onSeeAllClick) {
       onSeeAllClick();
     } else {
-      navigate('/testimonials');
+      setIsModalOpen(true);
     }
   };
 
@@ -357,6 +359,13 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
           </div>
         </motion.div>
       </div>
+      
+      {/* Testimonials Modal */}
+      <TestimonialsModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        testimonials={testimonials}
+      />
     </div>
   );
 };
