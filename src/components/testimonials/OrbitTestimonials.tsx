@@ -18,7 +18,11 @@ const testimonials = [
   }
 ];
 
-const OrbitTestimonials = () => {
+interface OrbitTestimonialsProps {
+  onSeeAllClick?: () => void;
+}
+
+const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
   const [currentCenterIndex, setCurrentCenterIndex] = useState(0);
   const [currentOrbitIndex, setCurrentOrbitIndex] = useState(1);
   const [isSwapping, setIsSwapping] = useState(false);
@@ -39,7 +43,11 @@ const OrbitTestimonials = () => {
 
   const handleSeeAllClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    navigate('/testimonials');
+    if (onSeeAllClick) {
+      onSeeAllClick();
+    } else {
+      navigate('/testimonials');
+    }
   };
 
   const handleSwapClick = () => {
