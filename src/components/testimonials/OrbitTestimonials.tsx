@@ -116,11 +116,11 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
     <div className="relative w-full min-h-[600px] flex flex-col items-center justify-center px-6">
       {/* Section Title */}
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-          Student Testimonials
+        <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-4">
+          Voices in Orbit
         </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          Real stories from students whose growth has flourished through our accessible English learning platform.
+        <p className="text-muted-foreground/80 text-lg max-w-2xl mx-auto font-light tracking-wide">
+          Student stories orbiting around transformative English learning experiences
         </p>
       </div>
 
