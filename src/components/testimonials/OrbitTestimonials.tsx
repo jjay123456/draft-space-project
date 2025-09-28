@@ -262,18 +262,19 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
             <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-card to-transparent pointer-events-none" />
             
             {/* See All button - Glass bubble effect */}
-            <motion.button
-              animate={{ opacity: isSwapping ? 0 : 1 }}
-              transition={{ duration: 0.3 }}
+            <button
               onClick={(e) => {
                 console.log('Desktop See All button clicked!');
                 handleSeeAllClick(e);
               }}
-              className="absolute bottom-4 right-4 px-4 py-2 text-sm bg-white/10 hover:bg-white/20 text-foreground backdrop-blur-md rounded-full border border-white/20 hover:border-white/30 transition-all duration-300 hover:scale-105 font-medium shadow-lg z-20 cursor-pointer"
-              style={{ pointerEvents: 'auto' }}
+              className="absolute bottom-4 right-4 px-4 py-2 text-sm bg-white/10 hover:bg-white/20 text-foreground backdrop-blur-md rounded-full border border-white/20 hover:border-white/30 transition-all duration-300 hover:scale-105 font-medium shadow-lg z-50 cursor-pointer"
+              style={{ 
+                pointerEvents: 'auto',
+                zIndex: 50
+              }}
             >
               See All
-            </motion.button>
+            </button>
           </div>
         </motion.div>
 
@@ -290,19 +291,14 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
           }}
         >
           {/* Orbiting Card - Counter-rotating to stay upright */}
-          <motion.div
+          <div
             key={`orbit-${currentOrbitIndex}`}
-            className="absolute w-64 md:w-72 bg-card/90 border border-border rounded-xl p-5 shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200"
-            animate={{
-              x: orbitPosition.x,
-              y: orbitPosition.y,
-              scale: orbitPosition.scale,
-            }}
-            transition={{ duration: 0 }}
+            className="absolute w-64 md:w-72 bg-card/90 border border-border rounded-xl p-5 shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200 z-40"
             style={{
-              rotate: cardRotation,
+              transform: `translate(${orbitPosition.x}px, ${orbitPosition.y}px) scale(${orbitPosition.scale}) rotate(${cardRotation.get()}deg)`,
               transformOrigin: 'center',
-              pointerEvents: 'auto'
+              pointerEvents: 'auto',
+              zIndex: 40
             }}
             onClick={(e) => {
               console.log('Orbit card clicked!');
@@ -331,7 +327,7 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
                 Click to swap
               </div>
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </div>
 
