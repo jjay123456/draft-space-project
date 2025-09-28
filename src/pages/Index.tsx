@@ -243,6 +243,11 @@ const Index = () => {
             </div>
           </div>
 
+          {/* Connecting line to iHEAR Initiative */}
+          <div className="flex justify-center relative">
+            <div className="w-1 h-20 bg-gradient-to-b from-primary/60 via-accent/40 to-transparent"></div>
+          </div>
+
           {/* iHEAR Initiative Carousel Section */}
           <section className="py-20 px-4 relative">
             <div className="container mx-auto text-center">
