@@ -56,48 +56,22 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
     }
   };
 
-  const handleSwapClick = (e?: React.MouseEvent) => {
-    console.log('Swap button clicked!');
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    if (isSwapping) {
-      console.log('Already swapping, ignoring click');
-      return;
-    }
+  const handleSwapClick = () => {
+    if (isSwapping) return;
     
-    console.log('Starting swap animation');
     setIsSwapping(true);
-
-    // Calculate orbit position for perfect centering
-    const orbitRadius = 280;
-    const orbitAngle = Math.PI / 2;
-    const orbitCardX = Math.cos(orbitAngle) * orbitRadius;
-    const orbitCardY = Math.sin(orbitAngle) * orbitRadius;
-
-    // Swap the indices and positions simultaneously
+    
+    // Simply swap the indices
     const newCenterIndex = currentOrbitIndex;
     const newOrbitIndex = currentCenterIndex;
     
-    console.log(`Swapping: center ${currentCenterIndex} -> ${newCenterIndex}, orbit ${currentOrbitIndex} -> ${newOrbitIndex}`);
-    
-    // Create new positions for the swap
-    const newCenterPosition = { x: 0, y: 0, scale: 1 };
-    const newOrbitPosition = { x: orbitCardX - 144, y: orbitCardY - 120, scale: 0.7 };
-    
     setCurrentCenterIndex(newCenterIndex);
     setCurrentOrbitIndex(newOrbitIndex);
-    setCenterPosition(newOrbitPosition);
-    setOrbitPosition(newCenterPosition);
     
-    // Reset positions after animation
+    // Reset swapping state
     setTimeout(() => {
-      console.log('Swap animation complete');
-      setCenterPosition({ x: 0, y: 0, scale: 1 });
-      setOrbitPosition({ x: orbitCardX - 144, y: orbitCardY - 120, scale: 0.7 });
       setIsSwapping(false);
-    }, 800);
+    }, 600);
   };
 
   // Continuous orbit rotation - visual effect only with optimized performance
@@ -239,12 +213,10 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
           key={`center-${currentCenterIndex}`}
           initial={false}
           animate={{ 
-            scale: centerPosition.scale,
-            opacity: 1,
-            x: centerPosition.x,
-            y: centerPosition.y
+            scale: 1,
+            opacity: 1
           }}
-          transition={{ duration: 0 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
           className="relative z-10 w-80 md:w-96 bg-card border border-border rounded-xl p-6 shadow-lg overflow-hidden"
         >
           <div className="mb-4">
@@ -263,23 +235,12 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
             <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-card to-transparent pointer-events-none" />
             
             {/* See All button - Glass bubble effect */}
-            <motion.button
-              animate={{ opacity: isSwapping ? 0 : 1 }}
-              transition={{ duration: 0.3 }}
-              onClick={(e) => {
-                console.log('Desktop See All button clicked!');
-                e.preventDefault();
-                e.stopPropagation();
-                handleSeeAllClick(e);
-              }}
+            <button
+              onClick={handleSeeAllClick}
               className="absolute bottom-4 right-4 px-4 py-2 text-sm bg-white/10 hover:bg-white/20 text-foreground backdrop-blur-md rounded-full border border-white/20 hover:border-white/30 transition-all duration-300 hover:scale-105 font-medium shadow-lg z-50 cursor-pointer"
-              style={{ 
-                pointerEvents: 'auto',
-                zIndex: 50
-              }}
             >
               See All
-            </motion.button>
+            </button>
           </div>
         </motion.div>
 
@@ -301,22 +262,17 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
             key={`orbit-${currentOrbitIndex}`}
             className="absolute w-64 md:w-72 bg-card/90 border border-border rounded-xl p-5 shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200 z-40 pointer-events-auto"
             animate={{
-              x: orbitPosition.x,
-              y: orbitPosition.y,
-              scale: orbitPosition.scale,
+              scale: 0.7,
             }}
-            transition={{ duration: 0 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
             style={{
               rotate: cardRotation,
               transformOrigin: 'center',
+              left: orbitCardX - 144,
+              top: orbitCardY - 120,
               willChange: 'transform'
             }}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              handleSwapClick();
-            }}
-            onTouchStart={(e) => e.stopPropagation()}
+            onClick={handleSwapClick}
           >
             <div className="mb-3">
               <h3 className="font-bold text-base text-card-foreground">
