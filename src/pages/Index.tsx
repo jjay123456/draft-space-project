@@ -106,15 +106,15 @@ const Index = () => {
             {/* Flow Lines */}
             <div className="absolute inset-0 opacity-30">
               <svg className="w-full h-full" viewBox="0 0 1200 128" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="hsl(var(--primary) / 0.2)" />
+                    <stop offset="50%" stopColor="hsl(var(--accent) / 0.2)" />
+                    <stop offset="100%" stopColor="hsl(var(--primary) / 0.2)" />
+                  </linearGradient>
+                </defs>
                 <path d="M0,96L48,90.7C96,85,192,75,288,69.3C384,64,480,64,576,74.7C672,85,768,107,864,112C960,117,1056,107,1152,96L1200,85.3V128H1152C1056,128,960,128,864,128C768,128,672,128,576,128C480,128,384,128,288,128C192,128,96,128,48,128H0V96Z" fill="url(#gradient1)"/>
               </svg>
-              <defs>
-                <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="hsl(var(--primary) / 0.2)" />
-                  <stop offset="50%" stopColor="hsl(var(--accent) / 0.2)" />
-                  <stop offset="100%" stopColor="hsl(var(--primary) / 0.2)" />
-                </linearGradient>
-              </defs>
             </div>
             
             {/* Enhanced Particles */}
@@ -200,15 +200,15 @@ const Index = () => {
               <div className="w-full max-w-6xl mx-auto relative">
                 {/* Connecting flow line */}
                 <svg className="w-full h-24 opacity-20" viewBox="0 0 1200 96" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="hsl(var(--primary) / 0.1)" />
+                      <stop offset="50%" stopColor="hsl(var(--accent) / 0.1)" />
+                      <stop offset="100%" stopColor="hsl(var(--primary) / 0.1)" />
+                    </linearGradient>
+                  </defs>
                   <path d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,58.7C672,53,768,43,864,42.7C960,43,1056,53,1152,58.7L1200,64V96H1152C1056,96,960,96,864,96C768,96,672,96,576,96C480,96,384,96,288,96C192,96,96,96,48,96H0V32Z" fill="url(#flowGradient)"/>
                 </svg>
-                <defs>
-                  <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="hsl(var(--primary) / 0.1)" />
-                    <stop offset="50%" stopColor="hsl(var(--accent) / 0.1)" />
-                    <stop offset="100%" stopColor="hsl(var(--primary) / 0.1)" />
-                  </linearGradient>
-                </defs>
               </div>
             </div>
             

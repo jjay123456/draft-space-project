@@ -200,7 +200,14 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
 
           <div className="flex justify-center mt-6">
             <button 
-              onClick={() => slide.buttonLink && navigate(slide.buttonLink)}
+              onClick={() => {
+                console.log('Button clicked!', slide.buttonLink);
+                if (slide.buttonLink) {
+                  navigate(slide.buttonLink);
+                } else {
+                  console.log('No buttonLink found');
+                }
+              }}
               className="px-8 py-4 bg-white/95 text-gray-900 font-bold rounded-2xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-base md:text-lg border border-white/20 cursor-pointer"
             >
               {button}
