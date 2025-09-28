@@ -13,7 +13,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import ShaderShowcase from "@/components/ui/hero";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 
-import FinalCallToAction from "@/components/home/FinalCallToAction";
+
 import { CarouselDemo } from "@/components/ui/carousel-demo";
 import heroDemo from "@/assets/hero-demo.jpg";
 const Index = () => {
@@ -272,8 +272,6 @@ const Index = () => {
               <CarouselDemo />
             </div>
           </section>
-
-          <FinalCallToAction />
         </div>
       </div>
     </div>;
