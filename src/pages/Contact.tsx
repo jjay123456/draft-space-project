@@ -33,6 +33,7 @@ const Contact = () => {
                   href="https://docs.google.com/forms/d/e/1FAIpQLSe77zVB0lEabj5X4RMu4h40teNzhMHomjXObz9oShkMcpNRYQ/viewform"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => console.log('Registration button clicked!')}
                 >
                   Go to Registration
                 </a>
@@ -52,7 +53,12 @@ const Contact = () => {
                 Have specific questions about our program? Submit your inquiries through our dedicated question form.
               </p>
               <Button asChild className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdo38sWaoRYfd6JUnOfG098T_kmqfwa206rQheDd9ffXcsC7A/viewform" target="_blank" rel="noopener noreferrer">
+                <a 
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdo38sWaoRYfd6JUnOfG098T_kmqfwa206rQheDd9ffXcsC7A/viewform" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => console.log('Question form button clicked!')}
+                >
                   Submit Questions
                 </a>
               </Button>
@@ -74,7 +80,12 @@ const Contact = () => {
                 Connect with fellow students, tutors, and volunteers in our vibrant Discord community. Get real-time support, participate in group discussions, and stay updated with the latest program announcements and events.
               </p>
               <Button asChild className="bg-[#5865F2] hover:bg-[#5865F2]/90 text-white px-8 py-3">
-                <a href="https://discord.gg/QbJa3zmXfE" target="_blank" rel="noopener noreferrer">
+                <a 
+                  href="https://discord.gg/QbJa3zmXfE" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={() => console.log('Discord button clicked!')}
+                >
                   <MessageCircle className="w-5 h-5 mr-2" />
                   Join Discord Server
                 </a>
