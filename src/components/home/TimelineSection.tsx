@@ -36,26 +36,17 @@ const TimelineSection = () => {
           <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-primary/40 to-transparent"></div>
           
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-foreground mb-4"
+            className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
             Our Mission
           </motion.h2>
-          <motion.p 
-            className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            The iHEAR Initiative is dedicated to creating an inclusive educational environment where communication barriers don't limit potential.
-          </motion.p>
         </div>
         
-        {/* Professional Grid Layout */}
+        {/* Enhanced Interactive Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {steps.map((step, index) => (
             <motion.div
@@ -64,24 +55,75 @@ const TimelineSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true }}
+              whileHover={{ 
+                scale: 1.05,
+                rotateY: 5,
+                z: 50
+              }}
+              className="perspective-1000"
             >
-              <Card className="h-full group hover:shadow-xl transition-all duration-500 border-0 bg-gradient-to-br from-background via-card to-background/50 backdrop-blur-sm">
-                <CardContent className="p-8 text-center h-full flex flex-col">
-                  {/* Icon */}
+              <Card className="h-full group hover:shadow-2xl transition-all duration-700 border-0 bg-gradient-to-br from-background via-card to-background/50 backdrop-blur-sm overflow-hidden relative cursor-pointer">
+                {/* Animated gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                {/* Shimmer effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+                
+                <CardContent className="p-8 text-center h-full flex flex-col relative z-10">
+                  {/* Enhanced Icon with multiple gradients */}
                   <motion.div
-                    className={`w-16 h-16 bg-gradient-to-br ${step.color} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:${step.shadowColor} transition-all duration-300`}
-                    whileHover={{ scale: 1.05 }}
+                    className={`w-20 h-20 bg-gradient-to-br ${step.color} rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-xl relative overflow-hidden`}
+                    whileHover={{ 
+                      scale: 1.1,
+                      rotate: 5,
+                      boxShadow: "0 20px 40px rgba(0,0,0,0.2)"
+                    }}
+                    transition={{ duration: 0.3 }}
                   >
-                    <step.icon className="h-8 w-8 text-white drop-shadow-sm" />
+                    {/* Icon background glow */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    <step.icon className="h-10 w-10 text-white drop-shadow-lg relative z-10" />
+                    
+                    {/* Pulsing ring effect */}
+                    <motion.div 
+                      className="absolute inset-0 border-2 border-white/30 rounded-3xl"
+                      animate={{
+                        scale: [1, 1.2, 1],
+                        opacity: [0.5, 0, 0.5]
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Number.POSITIVE_INFINITY,
+                        ease: "easeInOut"
+                      }}
+                    />
                   </motion.div>
 
-                  {/* Content */}
+                  {/* Enhanced Content */}
                   <div className="flex-1 flex flex-col">
-                    <h3 className="text-2xl font-semibold mb-4 text-foreground">{step.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed flex-1">
+                    <motion.h3 
+                      className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent"
+                      whileHover={{ scale: 1.05 }}
+                    >
+                      {step.title}
+                    </motion.h3>
+                    <motion.p 
+                      className="text-muted-foreground leading-relaxed flex-1 text-lg"
+                      whileHover={{ color: "hsl(var(--foreground))" }}
+                      transition={{ duration: 0.3 }}
+                    >
                       {step.description}
-                    </p>
+                    </motion.p>
                   </div>
+
+                  {/* Interactive bottom accent */}
+                  <motion.div 
+                    className={`h-1 bg-gradient-to-r ${step.color} rounded-full mt-6 mx-4 opacity-0 group-hover:opacity-100`}
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    transition={{ duration: 0.8, delay: index * 0.2 + 0.5 }}
+                  />
                 </CardContent>
               </Card>
             </motion.div>
