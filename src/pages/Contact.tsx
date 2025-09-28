@@ -28,12 +28,22 @@ const Contact = () => {
               <p className="text-base text-[#0B1220]/80 mb-6 leading-relaxed">
                 Ready to start your English learning journey? Register now through our existing portal.
               </p>
-              <Button asChild className="bg-[#146EF5] hover:bg-[#146EF5]/90 text-white">
+              <Button 
+                asChild 
+                className="bg-[#146EF5] hover:bg-[#146EF5]/90 text-white"
+                onClick={(e) => {
+                  console.log('Registration button clicked!');
+                  e.stopPropagation();
+                }}
+              >
                 <a 
                   href="https://docs.google.com/forms/d/e/1FAIpQLSe77zVB0lEabj5X4RMu4h40teNzhMHomjXObz9oShkMcpNRYQ/viewform"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => console.log('Registration button clicked!')}
+                  onClick={(e) => {
+                    console.log('Registration link clicked!');
+                    // Let the navigation happen
+                  }}
                 >
                   Go to Registration
                 </a>
@@ -52,12 +62,22 @@ const Contact = () => {
               <p className="text-base text-[#0B1220]/80 mb-6 leading-relaxed">
                 Have specific questions about our program? Submit your inquiries through our dedicated question form.
               </p>
-              <Button asChild className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white">
+              <Button 
+                asChild 
+                className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white"
+                onClick={(e) => {
+                  console.log('Question button clicked!');
+                  e.stopPropagation();
+                }}
+              >
                 <a 
                   href="https://docs.google.com/forms/d/e/1FAIpQLSdo38sWaoRYfd6JUnOfG098T_kmqfwa206rQheDd9ffXcsC7A/viewform" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  onClick={() => console.log('Question form button clicked!')}
+                  onClick={(e) => {
+                    console.log('Question link clicked!');
+                    // Let the navigation happen
+                  }}
                 >
                   Submit Questions
                 </a>
@@ -79,12 +99,22 @@ const Contact = () => {
               <p className="text-base text-[#0B1220]/80 mb-6 leading-relaxed max-w-2xl mx-auto">
                 Connect with fellow students, tutors, and volunteers in our vibrant Discord community. Get real-time support, participate in group discussions, and stay updated with the latest program announcements and events.
               </p>
-              <Button asChild className="bg-[#5865F2] hover:bg-[#5865F2]/90 text-white px-8 py-3">
+              <Button 
+                asChild 
+                className="bg-[#5865F2] hover:bg-[#5865F2]/90 text-white px-8 py-3"
+                onClick={(e) => {
+                  console.log('Discord button clicked!');
+                  e.stopPropagation();
+                }}
+              >
                 <a 
                   href="https://discord.gg/QbJa3zmXfE" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  onClick={() => console.log('Discord button clicked!')}
+                  onClick={(e) => {
+                    console.log('Discord link clicked!');
+                    // Let the navigation happen
+                  }}
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
                   Join Discord Server

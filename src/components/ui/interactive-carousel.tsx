@@ -236,7 +236,12 @@ const CarouselControl = ({
         type === "previous" ? "rotate-180" : ""
       }`}
       title={title}
-      onClick={handleClick}
+      onClick={(e) => {
+        console.log('Carousel control clicked:', type);
+        e.preventDefault();
+        e.stopPropagation();
+        handleClick();
+      }}
     >
       <IconArrowNarrowRight className="text-neutral-600 dark:text-neutral-200" />
     </button>
@@ -251,11 +256,13 @@ export function InteractiveCarousel({ slides }: InteractiveCarouselProps) {
   const [current, setCurrent] = useState(0);
 
   const handlePreviousClick = () => {
+    console.log('Previous button clicked!');
     const previous = current - 1;
     setCurrent(previous < 0 ? slides.length - 1 : previous);
   };
 
   const handleNextClick = () => {
+    console.log('Next button clicked!');
     const next = current + 1;
     setCurrent(next === slides.length ? 0 : next);
   };
