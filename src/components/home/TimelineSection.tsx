@@ -29,13 +29,30 @@ const TimelineSection = () => {
   ];
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-b from-background via-secondary/10 to-background">
+    <section className="py-20 px-4 relative">
       <div className="container mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Mission</h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+        <div className="text-center mb-16 relative">
+          {/* Section connector */}
+          <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-primary/40 to-transparent"></div>
+          
+          <motion.h2 
+            className="text-3xl md:text-4xl font-bold text-foreground mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Our Mission
+          </motion.h2>
+          <motion.p 
+            className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
             The iHEAR Initiative is dedicated to creating an inclusive educational environment where communication barriers don't limit potential.
-          </p>
+          </motion.p>
         </div>
         
         {/* Professional Grid Layout */}
