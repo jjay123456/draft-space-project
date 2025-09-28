@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import ShaderShowcase from "@/components/ui/hero";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
-import TimelineSection from "@/components/home/TimelineSection";
+
 import FinalCallToAction from "@/components/home/FinalCallToAction";
 import { CarouselDemo } from "@/components/ui/carousel-demo";
 import heroDemo from "@/assets/hero-demo.jpg";
@@ -242,9 +242,6 @@ const Index = () => {
               </motion.div>
             </div>
           </div>
-
-          {/* Main Content Sections */}
-          <TimelineSection />
 
           {/* iHEAR Initiative Carousel Section */}
           <section className="py-20 px-4 relative">

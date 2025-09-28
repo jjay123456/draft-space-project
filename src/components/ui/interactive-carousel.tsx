@@ -1,6 +1,7 @@
 "use client";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { useState, useRef, useId, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface SlideData {
   title: string;
@@ -12,6 +13,7 @@ interface SlideData {
   }>;
   highlights?: string[];
   type?: 'growth' | 'opportunity' | 'support' | 'technology' | 'community';
+  buttonLink?: string;
 }
 
 interface SlideProps {
@@ -66,6 +68,7 @@ const getFeatureBackground = (index: number) => {
 };
 
 const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
+  const navigate = useNavigate();
   const slideRef = useRef<HTMLLIElement>(null);
 
   const xRef = useRef(0);
@@ -196,7 +199,10 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
           </div>
 
           <div className="flex justify-center mt-6">
-            <button className="px-8 py-4 bg-white/95 text-gray-900 font-bold rounded-2xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-base md:text-lg border border-white/20">
+            <button 
+              onClick={() => slide.buttonLink && navigate(slide.buttonLink)}
+              className="px-8 py-4 bg-white/95 text-gray-900 font-bold rounded-2xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-base md:text-lg border border-white/20 cursor-pointer"
+            >
               {button}
             </button>
           </div>
