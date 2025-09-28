@@ -48,8 +48,10 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
     e.preventDefault();
     e.stopPropagation();
     if (onSeeAllClick) {
+      console.log('Calling onSeeAllClick prop');
       onSeeAllClick();
     } else {
+      console.log('Opening modal');
       setIsModalOpen(true);
     }
   };
@@ -60,8 +62,12 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
       e.preventDefault();
       e.stopPropagation();
     }
-    if (isSwapping) return;
+    if (isSwapping) {
+      console.log('Already swapping, ignoring click');
+      return;
+    }
     
+    console.log('Starting swap animation');
     setIsSwapping(true);
 
     // Calculate orbit position for perfect centering
@@ -70,33 +76,20 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
     const orbitCardX = Math.cos(orbitAngle) * orbitRadius;
     const orbitCardY = Math.sin(orbitAngle) * orbitRadius;
 
-    // Instantly swap positions and sizes - center card perfectly on circle
-    const newCenterPosition = { 
-      x: orbitCardX - 144, // Adjusted for perfect centering (half of card width ~288px)
-      y: orbitCardY - 120, // Adjusted for perfect centering (half of card height ~240px)
-      scale: 0.7 
-    };
-    const newOrbitPosition = { 
-      x: 0, 
-      y: 0, 
-      scale: 1 
-    };
-
     // Swap the indices and positions simultaneously
     const newCenterIndex = currentOrbitIndex;
     const newOrbitIndex = currentCenterIndex;
     
+    console.log(`Swapping: center ${currentCenterIndex} -> ${newCenterIndex}, orbit ${currentOrbitIndex} -> ${newOrbitIndex}`);
+    
     setCurrentCenterIndex(newCenterIndex);
     setCurrentOrbitIndex(newOrbitIndex);
-    setCenterPosition(newOrbitPosition);
-    setOrbitPosition(newCenterPosition);
     
-    // Reset positions after brief delay - perfect centering
+    // Reset positions after brief delay
     setTimeout(() => {
-      setCenterPosition({ x: 0, y: 0, scale: 1 });
-      setOrbitPosition({ x: orbitCardX - 144, y: orbitCardY - 120, scale: 0.7 });
+      console.log('Swap animation complete');
       setIsSwapping(false);
-    }, 150);
+    }, 800);
   };
 
   // Continuous orbit rotation - visual effect only
