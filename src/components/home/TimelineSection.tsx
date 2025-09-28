@@ -36,12 +36,7 @@ const TimelineSection = () => {
           <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-primary/40 to-transparent"></div>
           
           <motion.h2 
-            className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-primary via-accent to-success bg-clip-text text-transparent animate-gradient-flow glow-text"
-            style={{
-              backgroundSize: '300% 300%',
-              animation: 'gradient-flow 8s ease-in-out infinite',
-              textShadow: '0 0 20px hsl(var(--primary) / 0.5), 0 0 40px hsl(var(--accent) / 0.3), 0 0 60px hsl(var(--success) / 0.2)'
-            }}
+            className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
