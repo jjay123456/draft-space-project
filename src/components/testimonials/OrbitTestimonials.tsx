@@ -262,9 +262,13 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
             <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-card to-transparent pointer-events-none" />
             
             {/* See All button - Glass bubble effect */}
-            <button
+            <motion.button
+              animate={{ opacity: isSwapping ? 0 : 1 }}
+              transition={{ duration: 0.3 }}
               onClick={(e) => {
                 console.log('Desktop See All button clicked!');
+                e.preventDefault();
+                e.stopPropagation();
                 handleSeeAllClick(e);
               }}
               className="absolute bottom-4 right-4 px-4 py-2 text-sm bg-white/10 hover:bg-white/20 text-foreground backdrop-blur-md rounded-full border border-white/20 hover:border-white/30 transition-all duration-300 hover:scale-105 font-medium shadow-lg z-50 cursor-pointer"
@@ -274,7 +278,7 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
               }}
             >
               See All
-            </button>
+            </motion.button>
           </div>
         </motion.div>
 
@@ -308,6 +312,8 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
             }}
             onClick={(e) => {
               console.log('Orbit card clicked!');
+              e.preventDefault();
+              e.stopPropagation();
               handleSwapClick(e);
             }}
             onMouseDown={(e) => console.log('Orbit card mouse down')}
