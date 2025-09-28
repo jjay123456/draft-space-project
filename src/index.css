@@ -485,6 +485,62 @@ All colors are HSL and meet WCAG 2.2 AA contrast requirements
   }
 }
 
+/* Water-like flowing gradient animation */
+@keyframes gradient-flow {
+  0% {
+    background: linear-gradient(45deg, 
+      hsl(var(--primary)), 
+      hsl(var(--accent)), 
+      hsl(var(--success)), 
+      hsl(var(--neon-blue))
+    );
+    background-position: 0% 50%;
+  }
+  25% {
+    background: linear-gradient(45deg, 
+      hsl(var(--accent)), 
+      hsl(var(--success)), 
+      hsl(var(--neon-blue)), 
+      hsl(var(--primary))
+    );
+    background-position: 100% 50%;
+  }
+  50% {
+    background: linear-gradient(45deg, 
+      hsl(var(--success)), 
+      hsl(var(--neon-blue)), 
+      hsl(var(--primary)), 
+      hsl(var(--accent))
+    );
+    background-position: 100% 100%;
+  }
+  75% {
+    background: linear-gradient(45deg, 
+      hsl(var(--neon-blue)), 
+      hsl(var(--primary)), 
+      hsl(var(--accent)), 
+      hsl(var(--success))
+    );
+    background-position: 0% 100%;
+  }
+  100% {
+    background: linear-gradient(45deg, 
+      hsl(var(--primary)), 
+      hsl(var(--accent)), 
+      hsl(var(--success)), 
+      hsl(var(--neon-blue))
+    );
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-flow {
+  background-size: 400% 400% !important;
+  animation: gradient-flow 4s ease-in-out infinite !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
 /* Professional background animations */
 @keyframes cloud-near {
   0% {
