@@ -31,18 +31,13 @@ const Contact = () => {
               <Button 
                 asChild 
                 className="bg-[#146EF5] hover:bg-[#146EF5]/90 text-white"
-                onClick={(e) => {
-                  console.log('Registration button clicked!');
-                  e.stopPropagation();
-                }}
               >
                 <a 
                   href="https://docs.google.com/forms/d/e/1FAIpQLSe77zVB0lEabj5X4RMu4h40teNzhMHomjXObz9oShkMcpNRYQ/viewform"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={(e) => {
+                  onClick={() => {
                     console.log('Registration link clicked!');
-                    // Let the navigation happen
                   }}
                 >
                   Go to Registration
@@ -65,18 +60,13 @@ const Contact = () => {
               <Button 
                 asChild 
                 className="bg-[#7C3AED] hover:bg-[#7C3AED]/90 text-white"
-                onClick={(e) => {
-                  console.log('Question button clicked!');
-                  e.stopPropagation();
-                }}
               >
                 <a 
                   href="https://docs.google.com/forms/d/e/1FAIpQLSdo38sWaoRYfd6JUnOfG098T_kmqfwa206rQheDd9ffXcsC7A/viewform" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  onClick={(e) => {
+                  onClick={() => {
                     console.log('Question link clicked!');
-                    // Let the navigation happen
                   }}
                 >
                   Submit Questions
@@ -102,18 +92,13 @@ const Contact = () => {
               <Button 
                 asChild 
                 className="bg-[#5865F2] hover:bg-[#5865F2]/90 text-white px-8 py-3"
-                onClick={(e) => {
-                  console.log('Discord button clicked!');
-                  e.stopPropagation();
-                }}
               >
                 <a 
                   href="https://discord.gg/QbJa3zmXfE" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  onClick={(e) => {
+                  onClick={() => {
                     console.log('Discord link clicked!');
-                    // Let the navigation happen
                   }}
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
