@@ -100,7 +100,7 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
     }, 800);
   };
 
-  // Continuous orbit rotation - visual effect only
+  // Continuous orbit rotation - visual effect only with optimized performance
   useEffect(() => {
     const controls = animate(orbitRotation, orbitRotation.get() + 360, {
       duration: 30,
@@ -285,20 +285,21 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
 
         {/* Orbiting Card Container - Continuous rotation */}
         <motion.div
-          className="absolute"
+          className="absolute pointer-events-none"
           style={{
             rotate: orbitRotation,
             transformOrigin: '310px 310px',
             left: '50%',
             top: '50%',
             marginLeft: '-310px',
-            marginTop: '-310px'
+            marginTop: '-310px',
+            willChange: 'transform'
           }}
         >
           {/* Orbiting Card - Counter-rotating to stay upright */}
           <motion.div
             key={`orbit-${currentOrbitIndex}`}
-            className="absolute w-64 md:w-72 bg-card/90 border border-border rounded-xl p-5 shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200 z-40"
+            className="absolute w-64 md:w-72 bg-card/90 border border-border rounded-xl p-5 shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200 z-40 pointer-events-auto"
             animate={{
               x: orbitPosition.x,
               y: orbitPosition.y,
@@ -308,11 +309,14 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
             style={{
               rotate: cardRotation,
               transformOrigin: 'center',
-              pointerEvents: 'auto',
-              zIndex: 40
+              willChange: 'transform'
             }}
-            onClick={handleSwapClick}
-            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleSwapClick();
+            }}
+            onTouchStart={(e) => e.stopPropagation()}
           >
             <div className="mb-3">
               <h3 className="font-bold text-base text-card-foreground">
