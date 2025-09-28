@@ -291,11 +291,17 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
           }}
         >
           {/* Orbiting Card - Counter-rotating to stay upright */}
-          <div
+          <motion.div
             key={`orbit-${currentOrbitIndex}`}
             className="absolute w-64 md:w-72 bg-card/90 border border-border rounded-xl p-5 shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200 z-40"
+            animate={{
+              x: orbitPosition.x,
+              y: orbitPosition.y,
+              scale: orbitPosition.scale,
+            }}
+            transition={{ duration: 0 }}
             style={{
-              transform: `translate(${orbitPosition.x}px, ${orbitPosition.y}px) scale(${orbitPosition.scale}) rotate(${cardRotation.get()}deg)`,
+              rotate: cardRotation,
               transformOrigin: 'center',
               pointerEvents: 'auto',
               zIndex: 40
@@ -327,11 +333,9 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
                 Click to swap
               </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
-
-      {/* Mobile Responsive: Single Card Layout */}
       <div className="md:hidden w-full max-w-sm mx-auto mt-8">
         <motion.div
           key={`mobile-${currentCenterIndex}`}
