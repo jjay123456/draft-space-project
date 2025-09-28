@@ -536,7 +536,7 @@ All colors are HSL and meet WCAG 2.2 AA contrast requirements
 
 .animate-gradient-flow {
   background-size: 400% 400% !important;
-  animation: gradient-flow 4s ease-in-out infinite !important;
+  animation: gradient-flow 8s ease-in-out infinite !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
 }
