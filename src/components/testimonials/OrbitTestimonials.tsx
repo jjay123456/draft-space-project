@@ -82,12 +82,20 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
     
     console.log(`Swapping: center ${currentCenterIndex} -> ${newCenterIndex}, orbit ${currentOrbitIndex} -> ${newOrbitIndex}`);
     
+    // Create new positions for the swap
+    const newCenterPosition = { x: 0, y: 0, scale: 1 };
+    const newOrbitPosition = { x: orbitCardX - 144, y: orbitCardY - 120, scale: 0.7 };
+    
     setCurrentCenterIndex(newCenterIndex);
     setCurrentOrbitIndex(newOrbitIndex);
+    setCenterPosition(newOrbitPosition);
+    setOrbitPosition(newCenterPosition);
     
-    // Reset positions after brief delay
+    // Reset positions after animation
     setTimeout(() => {
       console.log('Swap animation complete');
+      setCenterPosition({ x: 0, y: 0, scale: 1 });
+      setOrbitPosition({ x: orbitCardX - 144, y: orbitCardY - 120, scale: 0.7 });
       setIsSwapping(false);
     }, 800);
   };
@@ -303,14 +311,8 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
               pointerEvents: 'auto',
               zIndex: 40
             }}
-            onClick={(e) => {
-              console.log('Orbit card clicked!');
-              e.preventDefault();
-              e.stopPropagation();
-              handleSwapClick(e);
-            }}
-            onMouseDown={(e) => console.log('Orbit card mouse down')}
-            onMouseUp={(e) => console.log('Orbit card mouse up')}
+            onClick={handleSwapClick}
+            onPointerDown={(e) => e.stopPropagation()}
           >
             <div className="mb-3">
               <h3 className="font-bold text-base text-card-foreground">
