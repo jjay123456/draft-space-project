@@ -9,7 +9,7 @@ const Contact = () => {
   return (
     <GridBackground className="min-h-screen bg-gradient-to-br from-primary/5 via-accent/5 to-background">
       <PublicNavbar />
-      <div className="max-w-[1140px] mx-auto px-6 py-20 md:py-24 relative z-10">
+      <div className="max-w-[1140px] mx-auto px-6 py-20 md:py-24 relative z-20">
         <div className="text-center mb-16">
           <h1 className="text-3xl md:text-4xl font-bold text-[#0B1220] mb-4">
             Registration and Contact Us
@@ -17,7 +17,7 @@ const Contact = () => {
         </div>
 
         <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 mb-8">
-          <Card className="bg-white border-0 shadow-lg rounded-[18px]">
+          <Card className="bg-white border-0 shadow-lg rounded-[18px] relative z-30">
             <CardHeader className="text-center">
               <CardTitle className="text-xl font-bold text-[#146EF5] flex items-center justify-center gap-2">
                 <ExternalLink className="w-5 h-5" />
@@ -46,7 +46,7 @@ const Contact = () => {
             </CardContent>
           </Card>
 
-          <Card className="bg-white border-0 shadow-lg rounded-[18px]">
+          <Card className="bg-white border-0 shadow-lg rounded-[18px] relative z-30">
             <CardHeader className="text-center">
               <CardTitle className="text-xl font-bold text-[#7C3AED] flex items-center justify-center gap-2">
                 <MessageCircle className="w-5 h-5" />
@@ -78,7 +78,7 @@ const Contact = () => {
 
         {/* Discord Community Card - Full Width */}
         <div className="max-w-4xl mx-auto">
-          <Card className="bg-white border-0 shadow-lg rounded-[18px]">
+          <Card className="bg-white border-0 shadow-lg rounded-[18px] relative z-30">
             <CardHeader className="text-center">
               <CardTitle className="text-xl font-bold text-[#5865F2] flex items-center justify-center gap-2">
                 <MessageCircle className="w-5 h-5" />
