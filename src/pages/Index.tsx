@@ -129,7 +129,7 @@ const Index = () => {
               </div>}>
             <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/5 to-accent/3 max-w-6xl mx-auto">
               <div className="relative overflow-hidden rounded-3xl">
-                <video ref={videoRef} autoPlay muted={isMuted} loop playsInline controls={false} disablePictureInPicture preload="metadata" poster={heroDemo} className="w-full h-full object-contain transition-all duration-700 ease-in-out" aria-label="iHear accessible learning platform demo video" onError={e => {
+                <video ref={videoRef} autoPlay muted={isMuted} loop playsInline controls={false} disablePictureInPicture preload="metadata" poster={heroDemo} className="w-full h-full object-cover transition-all duration-700 ease-in-out" aria-label="iHear accessible learning platform demo video" onError={e => {
                 console.error('Video failed to load:', e);
                 console.error('Video error details:', e.currentTarget.error);
                 if (e.currentTarget.error) {
