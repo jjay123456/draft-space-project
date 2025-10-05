@@ -5,30 +5,13 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const BentoSection = () => {
   return (
-    <section className="py-20 px-4 relative">
+    <section className="py-16 px-4">
       <div className="container mx-auto">
-        <div className="text-center mb-16 relative">
-          {/* Section connector */}
-          <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-1 h-12 bg-gradient-to-b from-success/40 to-transparent"></div>
-          
-          <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-foreground mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            We're Looking For
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-muted-foreground max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">We're Looking For</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Passionate individuals ready to make a difference in accessibility education
-          </motion.p>
+          </p>
         </div>
         
         {/* Bento Grid Layout */}

@@ -14,8 +14,7 @@ export function CarouselDemo() {
         "Help them gain confidence in speaking and listening",
         "Break down communication barriers",
         "Experience the joy of seeing progress first-hand"
-      ],
-      buttonLink: "/auth"
+      ]
     },
     {
       title: "Grow as a Leader",
@@ -27,8 +26,7 @@ export function CarouselDemo() {
         "Strengthen leadership & communication skills",
         "Gain real tutoring & mentoring experience",
         "Stand out on college and scholarship applications"
-      ],
-      buttonLink: "/auth"
+      ]
     },
     {
       title: "Support at Every Step",
@@ -40,8 +38,7 @@ export function CarouselDemo() {
         "Curriculum designed by speech-language pathologists",
         "Ongoing mentorship & feedback",
         "You'll never be left on your own"
-      ],
-      buttonLink: "/how-it-works"
+      ]
     },
     {
       title: "Simple & Smart",
@@ -53,8 +50,7 @@ export function CarouselDemo() {
         "AI captions & visual tools for clarity",
         "Easy scheduling (1-2 hrs/week)",
         "Minimal prep — we provide resources"
-      ],
-      buttonLink: "/how-it-works"
+      ]
     },
     {
       title: "Be Part of Something Bigger",
@@ -66,8 +62,7 @@ export function CarouselDemo() {
         "Share tips, stories, and encouragement",
         "See your student's world open up",
         "Know your work creates ripple effects worldwide"
-      ],
-      buttonLink: "/team"
+      ]
     },
   ];
   return (

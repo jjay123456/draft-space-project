@@ -1,7 +1,6 @@
 "use client";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 import { useState, useRef, useId, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 interface SlideData {
   title: string;
@@ -13,7 +12,6 @@ interface SlideData {
   }>;
   highlights?: string[];
   type?: 'growth' | 'opportunity' | 'support' | 'technology' | 'community';
-  buttonLink?: string;
 }
 
 interface SlideProps {
@@ -68,7 +66,6 @@ const getFeatureBackground = (index: number) => {
 };
 
 const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
-  const navigate = useNavigate();
   const slideRef = useRef<HTMLLIElement>(null);
 
   const xRef = useRef(0);
@@ -199,17 +196,7 @@ const Slide = ({ slide, index, current, handleSlideClick }: SlideProps) => {
           </div>
 
           <div className="flex justify-center mt-6">
-            <button 
-              onClick={() => {
-                console.log('Button clicked!', slide.buttonLink);
-                if (slide.buttonLink) {
-                  navigate(slide.buttonLink);
-                } else {
-                  console.log('No buttonLink found');
-                }
-              }}
-              className="px-8 py-4 bg-white/95 text-gray-900 font-bold rounded-2xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-base md:text-lg border border-white/20 cursor-pointer"
-            >
+            <button className="px-8 py-4 bg-white/95 text-gray-900 font-bold rounded-2xl hover:bg-white hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl text-base md:text-lg border border-white/20">
               {button}
             </button>
           </div>
@@ -236,12 +223,7 @@ const CarouselControl = ({
         type === "previous" ? "rotate-180" : ""
       }`}
       title={title}
-      onClick={(e) => {
-        console.log('Carousel control clicked:', type);
-        e.preventDefault();
-        e.stopPropagation();
-        handleClick();
-      }}
+      onClick={handleClick}
     >
       <IconArrowNarrowRight className="text-neutral-600 dark:text-neutral-200" />
     </button>
@@ -256,13 +238,11 @@ export function InteractiveCarousel({ slides }: InteractiveCarouselProps) {
   const [current, setCurrent] = useState(0);
 
   const handlePreviousClick = () => {
-    console.log('Previous button clicked!');
     const previous = current - 1;
     setCurrent(previous < 0 ? slides.length - 1 : previous);
   };
 
   const handleNextClick = () => {
-    console.log('Next button clicked!');
     const next = current + 1;
     setCurrent(next === slides.length ? 0 : next);
   };

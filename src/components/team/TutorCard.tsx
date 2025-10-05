@@ -17,15 +17,8 @@ const TutorCard = ({ tutor }: TutorCardProps) => {
   return (
     <div 
       className="group perspective-1000 h-64 cursor-pointer"
-      onMouseEnter={() => {
-        console.log('Tutor card hover enter');
-        setIsFlipped(true);
-      }}
-      onMouseLeave={() => {
-        console.log('Tutor card hover leave');
-        setIsFlipped(false);
-      }}
-      onClick={() => console.log('Tutor card clicked')}
+      onMouseEnter={() => setIsFlipped(true)}
+      onMouseLeave={() => setIsFlipped(false)}
     >
       <div 
         className={`
