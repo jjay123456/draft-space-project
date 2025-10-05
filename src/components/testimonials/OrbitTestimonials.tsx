@@ -35,7 +35,7 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
   // Reactive counter-rotation to keep orbit card upright
   const cardRotation = useTransform(orbitRotation, (value) => -value);
 
-  const handleSeeAllClick = (e: React.MouseEvent) => {
+  const handleSeeAllClick = (e: React.MouseEvent | React.TouchEvent) => {
     console.log('See All button clicked!');
     e.preventDefault();
     e.stopPropagation();
