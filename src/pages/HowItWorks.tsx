@@ -51,7 +51,7 @@ const HowItWorks = () => {
       
       {/* Hero Section */}
       <GridBackground className="bg-gradient-to-br from-primary/5 via-accent/5 to-background">
-        <section className="pt-32 pb-20 px-4 relative">
+        <section className="pt-32 pb-12 px-4 relative">
           <div className="max-w-6xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -67,7 +67,7 @@ const HowItWorks = () => {
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-6 tracking-tight">
                 How iHear Works
               </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground/80 max-w-4xl mx-auto leading-relaxed font-light tracking-wide">
+              <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
                 iHear is an English learning program made for students with hearing differences and anyone who wants a more customized, science-based way to learn.
               </p>
             </motion.div>
@@ -76,7 +76,7 @@ const HowItWorks = () => {
       </GridBackground>
 
       {/* Section 1: Program Features */}
-      <section className="py-20 px-4 relative">
+      <section className="py-16 px-4 relative">
         <GridBackground className="bg-gradient-to-br from-primary/5 via-accent/5 to-background">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -89,7 +89,7 @@ const HowItWorks = () => {
               <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4">
                 Program Features
               </h2>
-              <p className="text-muted-foreground/80 text-lg max-w-2xl mx-auto font-light tracking-wide">
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Balanced excellence across all dimensions of language learning
               </p>
             </motion.div>
@@ -117,9 +117,9 @@ const HowItWorks = () => {
                           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0">
                             <feature.icon className="w-6 h-6 text-primary" />
                           </div>
-                          <div>
+                          <div className="flex-1 min-w-0">
                             <h3 className="text-lg font-semibold mb-2 text-foreground">{feature.title}</h3>
-                            <p className="text-sm text-muted-foreground/80 leading-relaxed">{feature.desc}</p>
+                            <p className="text-sm text-muted-foreground leading-relaxed break-words">{feature.desc}</p>
                           </div>
                         </div>
                       </CardContent>
@@ -145,7 +145,7 @@ const HowItWorks = () => {
                     <Radar name="Strength" dataKey="value" stroke="hsl(var(--primary))" fill="hsl(var(--primary) / 0.3)" strokeWidth={2} />
                   </RadarChart>
                 </ResponsiveContainer>
-                <p className="text-sm text-muted-foreground/70 text-center mt-4 italic">
+                <p className="text-sm text-muted-foreground text-center mt-4 italic">
                   The balanced shape shows iHear excels equally across all areas — combining technology, science, and caring teachers.
                 </p>
               </motion.div>
@@ -155,7 +155,7 @@ const HowItWorks = () => {
       </section>
 
       {/* Section 2: Program Highlights */}
-      <section className="py-20 px-4">
+      <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -167,7 +167,7 @@ const HowItWorks = () => {
             <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4">
               Program Highlights
             </h2>
-            <p className="text-muted-foreground/80 text-lg max-w-2xl mx-auto font-light tracking-wide">
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Comprehensive support at every stage of your learning journey
             </p>
           </motion.div>
@@ -193,7 +193,7 @@ const HowItWorks = () => {
                       <highlight.icon className="w-8 h-8 text-primary" />
                     </div>
                     <h3 className="text-lg font-semibold mb-3 text-foreground">{highlight.title}</h3>
-                    <p className="text-sm text-muted-foreground/80 leading-relaxed">{highlight.desc}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{highlight.desc}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -203,7 +203,7 @@ const HowItWorks = () => {
       </section>
 
       {/* Section 3: Target Participants */}
-      <section className="py-20 px-4 relative">
+      <section className="py-16 px-4 relative">
         <GridBackground className="bg-gradient-to-br from-primary/5 via-accent/5 to-background">
           <div className="max-w-7xl mx-auto">
             <motion.div
@@ -216,7 +216,7 @@ const HowItWorks = () => {
               <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4">
                 Target Participants
               </h2>
-              <p className="text-muted-foreground/80 text-lg max-w-2xl mx-auto font-light tracking-wide">
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Designed for diverse learners across all ages and backgrounds
               </p>
             </motion.div>
@@ -246,7 +246,7 @@ const HowItWorks = () => {
                     <Bar dataKey="students" fill="hsl(var(--primary))" radius={[8, 8, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
-                <p className="text-sm text-muted-foreground/70 text-center mt-4 italic">
+                <p className="text-sm text-muted-foreground text-center mt-4 italic">
                   Most learners are 13-15 years old, but iHear works well for all ages — kids, teens, and adults.
                 </p>
               </motion.div>
@@ -272,9 +272,9 @@ const HowItWorks = () => {
                           <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0">
                             <participant.icon className="w-6 h-6 text-primary" />
                           </div>
-                          <div>
+                          <div className="flex-1 min-w-0">
                             <h3 className="text-lg font-semibold mb-2 text-foreground">{participant.title}</h3>
-                            <p className="text-sm text-muted-foreground/80 leading-relaxed">{participant.desc}</p>
+                            <p className="text-sm text-muted-foreground leading-relaxed break-words">{participant.desc}</p>
                           </div>
                         </div>
                       </CardContent>
@@ -288,7 +288,7 @@ const HowItWorks = () => {
       </section>
 
       {/* Section 4: Program Outcomes */}
-      <section className="py-20 px-4">
+      <section className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -300,7 +300,7 @@ const HowItWorks = () => {
             <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4">
               Program Outcomes
             </h2>
-            <p className="text-muted-foreground/80 text-lg max-w-2xl mx-auto font-light tracking-wide">
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Measurable progress in every dimension of English proficiency
             </p>
           </motion.div>
@@ -332,7 +332,7 @@ const HowItWorks = () => {
                 <Line type="monotone" dataKey="confidence" stroke="hsl(var(--accent))" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} name="Confidence" />
               </LineChart>
             </ResponsiveContainer>
-            <p className="text-sm text-muted-foreground/70 text-center mt-4 italic">
+            <p className="text-sm text-muted-foreground text-center mt-4 italic">
               Steady progress across all areas shows that regular one-on-one learning leads to clear, consistent growth.
             </p>
           </motion.div>
@@ -358,7 +358,7 @@ const HowItWorks = () => {
                       <outcome.icon className="w-8 h-8 text-primary" />
                     </div>
                     <h3 className="text-lg font-semibold mb-3 text-foreground">{outcome.title}</h3>
-                    <p className="text-sm text-muted-foreground/80 leading-relaxed">{outcome.desc}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{outcome.desc}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -368,7 +368,7 @@ const HowItWorks = () => {
       </section>
 
       {/* Section 5: Enrollment Flow */}
-      <section className="py-20 px-4 relative">
+      <section className="py-16 px-4 relative">
         <GridBackground className="bg-gradient-to-br from-primary/5 via-accent/5 to-background">
           <div className="max-w-5xl mx-auto">
             <motion.div
@@ -381,7 +381,7 @@ const HowItWorks = () => {
               <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4">
                 Enrollment Flow
               </h2>
-              <p className="text-muted-foreground/80 text-lg max-w-2xl mx-auto font-light tracking-wide">
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Your journey to barrier-free English learning in three simple steps
               </p>
             </motion.div>
@@ -428,8 +428,8 @@ const HowItWorks = () => {
                         <div className="w-20 h-20 mx-auto mb-6 mt-4 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl flex items-center justify-center">
                           <step.icon className="w-10 h-10 text-primary" />
                         </div>
-                        <h3 className="text-xl font-semibold mb-4 text-foreground">{step.title}</h3>
-                        <p className="text-sm text-muted-foreground/80 leading-relaxed">{step.desc}</p>
+                        <h3 className="text-xl font-semibold mb-4 text-foreground break-words">{step.title}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed break-words">{step.desc}</p>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -441,7 +441,7 @@ const HowItWorks = () => {
       </section>
 
       {/* Section 6: Call to Action */}
-      <section className="py-24 px-4">
+      <section className="py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -453,7 +453,7 @@ const HowItWorks = () => {
             <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent">
               Begin Your Barrier-Free English Learning Journey
             </h2>
-            <p className="text-xl text-muted-foreground/80 max-w-2xl mx-auto font-light tracking-wide leading-relaxed">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Join iHear to open new doors in language learning. Together, we make English learning accessible for everyone — clear, confident, and full of opportunity.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
