@@ -28,14 +28,6 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
   const [currentOrbitIndex, setCurrentOrbitIndex] = useState(1);
   const [isSwapping, setIsSwapping] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [centerPosition, setCenterPosition] = useState({ x: 0, y: 0, scale: 1 });
-  const [orbitPosition, setOrbitPosition] = useState(() => {
-    const orbitRadius = 280;
-    const orbitAngle = Math.PI / 2;
-    const orbitCardX = Math.cos(orbitAngle) * orbitRadius;
-    const orbitCardY = Math.sin(orbitAngle) * orbitRadius;
-    return { x: orbitCardX - 144, y: orbitCardY - 120, scale: 0.7 };
-  });
   const isMobile = useIsMobile();
   const navigate = useNavigate();
   const orbitRotation = useMotionValue(0);
@@ -47,6 +39,7 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
     console.log('See All button clicked!');
     e.preventDefault();
     e.stopPropagation();
+    
     if (onSeeAllClick) {
       console.log('Calling onSeeAllClick prop');
       onSeeAllClick();
@@ -56,7 +49,11 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
     }
   };
 
-  const handleSwapClick = () => {
+  const handleSwapClick = (e: React.MouseEvent) => {
+    console.log('Swap button clicked!');
+    e.preventDefault();
+    e.stopPropagation();
+    
     if (isSwapping) return;
     
     setIsSwapping(true);
@@ -96,6 +93,14 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
 
   return (
     <div className="relative w-full min-h-[600px] flex flex-col items-center justify-center px-6">
+      {/* TEST BUTTON - Remove this after testing */}
+      <button 
+        onClick={() => alert('Basic button works!')}
+        className="bg-blue-500 text-white px-4 py-2 rounded mb-4 z-50 relative"
+      >
+        Test Button (Remove After Testing)
+      </button>
+
       {/* Section Title */}
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4">
@@ -111,12 +116,12 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
         className="relative w-full max-w-5xl h-[500px] flex items-center justify-center orbit-container"
       >
         {/* Glowing Gradient Circle Orbit */}
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <svg 
             width="620" 
             height="620" 
             viewBox="0 0 620 620" 
-            className="absolute overflow-visible orbit-line"
+            className="absolute overflow-visible orbit-line pointer-events-none"
           >
             <defs>
               <linearGradient id="orbitGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -217,7 +222,8 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
             opacity: 1
           }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="relative z-10 w-80 md:w-96 bg-card border border-border rounded-xl p-6 shadow-lg overflow-hidden"
+          className="relative z-20 w-80 md:w-96 bg-card border border-border rounded-xl p-6 shadow-lg overflow-hidden"
+          style={{ pointerEvents: 'auto' }}
         >
           <div className="mb-4">
             <h3 className="font-bold text-lg text-card-foreground">
@@ -234,17 +240,26 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
             {/* Gradient fade overlay */}
             <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-card to-transparent pointer-events-none" />
             
-            {/* See All button - Glass bubble effect */}
+            {/* See All button - Fixed with better z-index and pointer events */}
             <button
               onClick={handleSeeAllClick}
-              className="absolute bottom-4 right-4 px-4 py-2 text-sm bg-white/10 hover:bg-white/20 text-foreground backdrop-blur-md rounded-full border border-white/20 hover:border-white/30 transition-all duration-300 hover:scale-105 font-medium shadow-lg z-50 cursor-pointer"
+              onMouseDown={(e) => {
+                console.log('See All mousedown event');
+                e.stopPropagation();
+              }}
+              className="absolute bottom-4 right-4 px-4 py-2 text-sm bg-white/10 hover:bg-white/20 text-foreground backdrop-blur-md rounded-full border border-white/20 hover:border-white/30 transition-all duration-300 hover:scale-105 font-medium shadow-lg cursor-pointer"
+              style={{ 
+                zIndex: 100,
+                pointerEvents: 'auto',
+                position: 'relative'
+              }}
             >
               See All
             </button>
           </div>
         </motion.div>
 
-        {/* Orbiting Card Container - Continuous rotation */}
+        {/* Orbiting Card Container - Fixed pointer events */}
         <motion.div
           className="absolute pointer-events-none"
           style={{
@@ -257,10 +272,10 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
             willChange: 'transform'
           }}
         >
-          {/* Orbiting Card - Counter-rotating to stay upright */}
+          {/* Orbiting Card - Fixed click handling */}
           <motion.div
             key={`orbit-${currentOrbitIndex}`}
-            className="absolute w-64 md:w-72 bg-card/90 border border-border rounded-xl p-5 shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200 z-40 pointer-events-auto"
+            className="absolute w-64 md:w-72 bg-card/90 border border-border rounded-xl p-5 shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200 z-30"
             animate={{
               scale: 0.7,
             }}
@@ -270,9 +285,14 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
               transformOrigin: 'center',
               left: orbitCardX - 144,
               top: orbitCardY - 120,
-              willChange: 'transform'
+              willChange: 'transform',
+              pointerEvents: 'auto'
             }}
             onClick={handleSwapClick}
+            onMouseDown={(e) => {
+              console.log('Orbit card mousedown event');
+              e.stopPropagation();
+            }}
           >
             <div className="mb-3">
               <h3 className="font-bold text-base text-card-foreground">
@@ -289,7 +309,7 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
               {/* Gradient fade overlay */}
               <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-card/90 to-transparent pointer-events-none" />
               
-              {/* Click to swap indicator - Glass bubble effect */}
+              {/* Click to swap indicator */}
               <div className="absolute bottom-3 right-3 px-3 py-1.5 text-xs bg-white/10 text-foreground backdrop-blur-md rounded-full border border-white/20 font-medium shadow-lg pointer-events-none">
                 Click to swap
               </div>
@@ -297,6 +317,8 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Mobile version - Fixed click handling */}
       <div className="md:hidden w-full max-w-sm mx-auto mt-8">
         <motion.div
           key={`mobile-${currentCenterIndex}`}
@@ -326,15 +348,17 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
             {/* Gradient fade overlay */}
             <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-card to-transparent pointer-events-none" />
             
-            {/* See All button - Glass bubble effect */}
+            {/* Mobile See All button - Fixed */}
             <button
               onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
                 console.log('Mobile See All button clicked!');
                 handleSeeAllClick(e);
               }}
-              className="absolute bottom-4 right-4 px-3 py-1.5 text-xs bg-white/10 hover:bg-white/20 text-foreground backdrop-blur-md rounded-full border border-white/20 hover:border-white/30 transition-all duration-300 font-medium shadow-lg z-10"
+              className="absolute bottom-4 right-4 px-3 py-1.5 text-xs bg-white/10 hover:bg-white/20 text-foreground backdrop-blur-md rounded-full border border-white/20 hover:border-white/30 transition-all duration-300 font-medium shadow-lg cursor-pointer"
+              style={{ 
+                zIndex: 100,
+                pointerEvents: 'auto'
+              }}
             >
               See All
             </button>
