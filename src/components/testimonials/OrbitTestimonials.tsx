@@ -247,11 +247,16 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
                 console.log('See All mousedown event');
                 e.stopPropagation();
               }}
+              onTouchStart={handleSeeAllClick}
               className="absolute bottom-4 right-4 px-4 py-2 text-sm bg-white/10 hover:bg-white/20 text-foreground backdrop-blur-md rounded-full border border-white/20 hover:border-white/30 transition-all duration-300 hover:scale-105 font-medium shadow-lg cursor-pointer"
               style={{ 
                 zIndex: 100,
                 pointerEvents: 'auto',
-                position: 'relative'
+                position: 'relative',
+                isolation: 'isolate',
+                transform: 'translateZ(0)',
+                WebkitBackdropFilter: 'blur(12px)',
+                willChange: 'auto'
               }}
             >
               See All
@@ -354,10 +359,18 @@ const OrbitTestimonials = ({ onSeeAllClick }: OrbitTestimonialsProps) => {
                 console.log('Mobile See All button clicked!');
                 handleSeeAllClick(e);
               }}
+              onTouchStart={(e) => {
+                console.log('Mobile See All touchstart!');
+                handleSeeAllClick(e);
+              }}
               className="absolute bottom-4 right-4 px-3 py-1.5 text-xs bg-white/10 hover:bg-white/20 text-foreground backdrop-blur-md rounded-full border border-white/20 hover:border-white/30 transition-all duration-300 font-medium shadow-lg cursor-pointer"
               style={{ 
                 zIndex: 100,
-                pointerEvents: 'auto'
+                pointerEvents: 'auto',
+                isolation: 'isolate',
+                transform: 'translateZ(0)',
+                WebkitBackdropFilter: 'blur(12px)',
+                willChange: 'auto'
               }}
             >
               See All
