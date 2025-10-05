@@ -69,18 +69,6 @@ export function NavBar({ items, className }: NavBarProps) {
               <span className="md:hidden">
                 <Icon size={18} strokeWidth={2.5} />
               </span>
-              {isActive && (
-                <motion.div
-                  layoutId="lamp"
-                  className="absolute inset-0 w-full bg-primary/5 rounded-full -z-10 pointer-events-none"
-                  initial={false}
-                  transition={{
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 30,
-                  }}
-                />
-              )}
             </RouterLink>
           )
         })}
