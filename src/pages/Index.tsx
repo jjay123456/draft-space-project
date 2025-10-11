@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Users, BookOpen, Accessibility, ArrowRight, Star, Volume2, VolumeX, Maximize, Minimize } from "lucide-react";
 import { Heart, Target, Zap, Clock } from "lucide-react";
+import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
 import { Button } from "@/components/ui/button";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import PublicNavbar from "@/components/layout/PublicNavbar";
@@ -18,6 +19,16 @@ import FeatureShowcase from "@/components/home/FeatureShowcase";
 import FinalCallToAction from "@/components/home/FinalCallToAction";
 import { CarouselDemo } from "@/components/ui/carousel-demo";
 import heroDemo from "@/assets/hero-demo.jpg";
+
+const programFeaturesData = [
+  { feature: 'Scientific', value: 95 },
+  { feature: 'Personalization', value: 98 },
+  { feature: 'Comprehensive', value: 92 },
+  { feature: 'AI Integration', value: 96 },
+  { feature: 'Dual Instructors', value: 94 },
+  { feature: 'Device Optimization', value: 97 }
+];
+
 const Index = () => {
   const navigate = useNavigate();
   const {
@@ -161,11 +172,51 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Program Features Graph Section - Blended with Hero */}
+      <section className="relative -mt-16 py-16 px-4 bg-gradient-to-br from-primary/5 via-accent/5 to-background z-30">
+        <div className="container mx-auto max-w-5xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4">
+              Our Program Excellence
+            </h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Balanced excellence across all dimensions of language learning
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="bg-card/30 backdrop-blur-sm rounded-3xl p-8 border border-primary/10 shadow-xl"
+          >
+            <ResponsiveContainer width="100%" height={400}>
+              <RadarChart data={programFeaturesData}>
+                <PolarGrid stroke="hsl(var(--primary) / 0.2)" />
+                <PolarAngleAxis dataKey="feature" tick={{ fill: 'hsl(var(--foreground))', fontSize: 12 }} />
+                <PolarRadiusAxis angle={90} domain={[0, 100]} tick={{ fill: 'hsl(var(--muted-foreground))' }} />
+                <Radar name="Strength" dataKey="value" stroke="hsl(var(--primary))" fill="hsl(var(--primary) / 0.3)" strokeWidth={2} />
+              </RadarChart>
+            </ResponsiveContainer>
+            <p className="text-sm text-muted-foreground text-center mt-6 italic">
+              The balanced shape shows iHear excels equally across all areas — combining technology, science, and caring teachers.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
       {/* iHEAR Initiative Carousel Section */}
       <section className="py-20 px-4 bg-background">
         <div className="container mx-auto text-center">
           <motion.h2 
-            className="text-3xl md:text-4xl font-bold text-foreground mb-4"
+            className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
