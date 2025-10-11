@@ -123,7 +123,7 @@ const Index = () => {
 
       {/* Video Demo Section with Grid Background */}
       <GridBackground className="bg-gradient-to-br from-primary/5 via-accent/5 to-background">
-        <section className="relative -mt-32 py-8 px-4 z-40">
+        <section className="relative pt-8 py-8 px-4 z-40">
           <div className="container mx-auto">
             <ContainerScroll titleComponent={<div className="text-center mb-8">
                   
