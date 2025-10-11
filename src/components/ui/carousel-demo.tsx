@@ -1,73 +1,34 @@
 "use client";
 
-import { InteractiveCarousel } from "@/components/ui/interactive-carousel";
+import { Carousel } from "@/components/ui/carousel";
+
 
 export function CarouselDemo() {
   const slideData = [
     {
-      title: "Change Lives with English",
-      button: "Start Teaching",
-      type: "growth" as const,
-      description: "Make a difference in the lives of students with hearing loss around the world.",
-      highlights: [
-        "Support students with hearing loss around the world",
-        "Help them gain confidence in speaking and listening",
-        "Break down communication barriers",
-        "Experience the joy of seeing progress first-hand"
-      ]
+      title: "Mystic Mountains",
+      button: "Explore Component",
+      src: "https://images.unsplash.com/photo-1494806812796-244fe51b774d?q=80&w=3534&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
-      title: "Grow as a Leader",
-      button: "Build Your Future",
-      type: "opportunity" as const,
-      description: "Develop valuable skills while making an impact.",
-      highlights: [
-        "Earn SSL/community service hours",
-        "Strengthen leadership & communication skills",
-        "Gain real tutoring & mentoring experience",
-        "Stand out on college and scholarship applications"
-      ]
+      title: "Urban Dreams",
+      button: "Explore Component",
+      src: "https://images.unsplash.com/photo-1518710843675-2540dd79065c?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
-      title: "Support at Every Step",
-      button: "Get Training",
-      type: "support" as const,
-      description: "We provide everything you need to succeed as a tutor.",
-      highlights: [
-        "Orientation training before you start",
-        "Curriculum designed by speech-language pathologists",
-        "Ongoing mentorship & feedback",
-        "You'll never be left on your own"
-      ]
+      title: "Neon Nights",
+      button: "Explore Component",
+      src: "https://images.unsplash.com/photo-1590041794748-2d8eb73a571c?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
-      title: "Simple & Smart",
-      button: "Learn More",
-      type: "technology" as const,
-      description: "Teaching made easy with modern technology and support.",
-      highlights: [
-        "Sessions via Zoom/Google Meet, accessible anywhere",
-        "AI captions & visual tools for clarity",
-        "Easy scheduling (1-2 hrs/week)",
-        "Minimal prep — we provide resources"
-      ]
-    },
-    {
-      title: "Be Part of Something Bigger",
-      button: "Join Community",
-      type: "community" as const,
-      description: "Connect with passionate tutors making a global impact.",
-      highlights: [
-        "Connect with other compassionate tutors",
-        "Share tips, stories, and encouragement",
-        "See your student's world open up",
-        "Know your work creates ripple effects worldwide"
-      ]
+      title: "Desert Whispers",
+      button: "Explore Component",
+      src: "https://images.unsplash.com/photo-1679420437432-80cfbf88986c?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
   ];
   return (
     <div className="relative overflow-hidden w-full h-full py-20">
-      <InteractiveCarousel slides={slideData} />
+      <Carousel slides={slideData} />
     </div>
   );
 }
