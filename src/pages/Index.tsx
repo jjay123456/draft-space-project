@@ -177,32 +177,32 @@ const Index = () => {
             </motion.div>
           </div>
         </section>
-      </GridBackground>
 
-      {/* iHEAR Initiative Carousel Section */}
-      <section className="py-20 px-4 bg-background">
-        <div className="container mx-auto text-center">
-          <motion.h2 
-            className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            Discover iHEAR Initiative
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            Explore our mission, team, and how you can make a difference in accessible education
-          </motion.p>
-          <CarouselDemo />
-        </div>
-      </section>
+        {/* iHEAR Initiative Carousel Section */}
+        <section className="py-20 px-4">
+          <div className="container mx-auto text-center">
+            <motion.h2 
+              className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              Discover iHEAR Initiative
+            </motion.h2>
+            <motion.p 
+              className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+            >
+              Explore our mission, team, and how you can make a difference in accessible education
+            </motion.p>
+            <CarouselDemo />
+          </div>
+        </section>
+      </GridBackground>
     </div>;
 };
 export default Index;
