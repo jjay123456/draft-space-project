@@ -125,11 +125,7 @@ const HowItWorks = () => {
           }} transition={{
             duration: 0.6
           }} className="space-y-6">
-              <div className="inline-block px-6 py-2 bg-primary/10 rounded-full mb-4">
-                <p className="text-sm font-semibold text-primary">
-                  Program Features | Scientific • Personalized • Comprehensive
-                </p>
-              </div>
+              
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-6 tracking-tight">
                 How iHear Works
               </h1>
