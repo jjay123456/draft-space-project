@@ -118,7 +118,7 @@ const Team = () => {
       {/* Hero Section */}
       <div className="bg-gradient-to-b from-transparent to-secondary/20 py-16 sm:py-20 relative z-10">
         <div className="max-w-4xl mx-auto text-center px-6">
-          <h1 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-6">
             Meet Our Tutors
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
