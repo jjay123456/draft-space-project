@@ -12,21 +12,25 @@ export function CarouselDemo() {
       title: "Meet Our Team",
       button: "View Team",
       src: carouselTeam,
+      route: "/team",
     },
     {
       title: "How It Works",
       button: "Learn More",
       src: carouselHowItWorks,
+      route: "/how-it-works",
     },
     {
       title: "Student Success Stories",
       button: "Read Testimonials",
       src: carouselTestimonials,
+      route: "/testimonials",
     },
     {
       title: "Get Started Today",
       button: "Contact Us",
       src: carouselContact,
+      route: "/contact",
     },
   ];
   return (
