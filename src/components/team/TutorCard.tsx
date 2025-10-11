@@ -16,22 +16,22 @@ const TutorCard = ({ tutor }: TutorCardProps) => {
 
   return (
     <div 
-      className="group perspective-1000 h-64 cursor-pointer"
+      className="perspective-1000 h-64"
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
     >
       <div 
         className={`
-          relative w-full h-full transition-transform duration-300 transform-style-preserve-3d
-          ${isFlipped ? 'rotate-y-180' : ''}
-          md:hover:scale-105 hover:shadow-lg
+          relative w-full h-full transition-transform duration-700 ease-out
+          ${isFlipped ? '[transform:rotateY(180deg)]' : '[transform:rotateY(0deg)]'}
         `}
+        style={{ transformStyle: 'preserve-3d' }}
       >
         {/* Front Side */}
-        <Card className={`
-          absolute inset-0 backface-hidden rounded-2xl border border-border/20 bg-card 
-          shadow-sm hover:shadow-md transition-all duration-200 p-6 flex flex-col items-center justify-center
-        `}>
+        <Card 
+          className="absolute inset-0 rounded-2xl border border-border/20 bg-card shadow-sm hover:shadow-md transition-all duration-200 p-6 flex flex-col items-center justify-center"
+          style={{ backfaceVisibility: 'hidden' }}
+        >
           <Avatar className="w-20 h-20 mb-4 ring-2 ring-border/10">
             <AvatarImage src={tutor.avatar} alt={tutor.name} />
             <AvatarFallback className="text-lg font-medium bg-muted text-muted-foreground">
@@ -47,12 +47,13 @@ const TutorCard = ({ tutor }: TutorCardProps) => {
         </Card>
 
         {/* Back Side - Desktop Only */}
-        <Card className={`
-          absolute inset-0 backface-hidden rotate-y-180 rounded-2xl border border-primary/30 
-          bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5
-          shadow-md p-6 flex flex-col justify-center items-center text-center
-          hidden md:flex
-        `}>
+        <Card 
+          className="absolute inset-0 rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5 shadow-md p-6 flex flex-col justify-center items-center text-center hidden md:flex"
+          style={{ 
+            backfaceVisibility: 'hidden',
+            transform: 'rotateY(180deg)'
+          }}
+        >
           <h3 className="text-lg font-semibold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-3">
             {tutor.name}
           </h3>
