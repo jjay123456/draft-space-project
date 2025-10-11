@@ -48,19 +48,20 @@ const TutorCard = ({ tutor }: TutorCardProps) => {
 
         {/* Back Side - Desktop Only */}
         <Card className={`
-          absolute inset-0 backface-hidden rotate-y-180 rounded-2xl border border-border/20 bg-card 
-          shadow-sm p-6 flex flex-col justify-center items-center text-center
+          absolute inset-0 backface-hidden rotate-y-180 rounded-2xl border border-primary/30 
+          bg-gradient-to-br from-primary/5 via-accent/5 to-secondary/5
+          shadow-md p-6 flex flex-col justify-center items-center text-center
           hidden md:flex
         `}>
-          <h3 className="text-lg font-semibold text-foreground mb-4">
+          <h3 className="text-lg font-semibold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent mb-3">
             {tutor.name}
           </h3>
-          <div className="text-sm text-muted-foreground space-y-2">
-            <p>
-              "Passionate educator dedicated to creating inclusive learning environments 
-              where every student can thrive and reach their full potential."
+          <div className="text-sm text-foreground/80 space-y-3">
+            <p className="leading-relaxed">
+              Passionate educator dedicated to creating inclusive learning environments 
+              where every student can thrive and reach their full potential.
             </p>
-            <p>
+            <p className="text-xs text-muted-foreground">
               Specializing in personalized teaching approaches and adaptive communication methods.
             </p>
           </div>
