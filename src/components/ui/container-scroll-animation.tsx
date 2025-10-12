@@ -13,7 +13,7 @@ export const ContainerScroll = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.9", "end 0.3"]
+    offset: ["start 0.9", "end 0.3"],
   });
   const [isMobile, setIsMobile] = React.useState(false);
 
@@ -29,12 +29,12 @@ export const ContainerScroll = ({
   }, []);
 
   const scaleDimensions = () => {
-    return isMobile ? [0.8, 1.05] : [0.85, 1.1];
+    return isMobile ? [0.85, 1] : [0.9, 1];
   };
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [15, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 1], [50, -20]);
+  const translate = useTransform(scrollYProgress, [0, 1], [30, -10]);
 
   return (
     <div
@@ -90,7 +90,8 @@ export const Card = ({
         background: 'radial-gradient(120% 120% at 50% 0%, rgba(0,0,0,.25), transparent 60%), #0b0b0b',
         boxShadow: "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
       }}
-      className="max-w-6xl mx-auto w-full relative overflow-hidden video-card"
+      transition={{ type: "spring", stiffness: 100, damping: 30 }}
+      className="max-w-6xl mx-auto w-full relative overflow-hidden video-card will-change-transform"
     >
       <div 
         className="absolute inset-0 pointer-events-none video-blend"
