@@ -114,27 +114,7 @@ const HowItWorks = () => {
       
       {/* Hero Section */}
       <GridBackground className="bg-gradient-to-br from-primary/5 via-accent/5 to-background">
-        <section className="pt-32 pb-12 px-4 relative">
-          <div className="max-w-6xl mx-auto text-center">
-            <motion.div initial={{
-            opacity: 0,
-            y: 20
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.6
-          }} className="space-y-6">
-              
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-6 tracking-tight">
-                How iHear Works
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-                iHear is an English learning program made for students with hearing differences and anyone who wants a more customized, science-based way to learn.
-              </p>
-            </motion.div>
-          </div>
-        </section>
+        
       </GridBackground>
 
       {/* Section 1: Program Features */}
@@ -152,16 +132,18 @@ const HowItWorks = () => {
           }} viewport={{
             once: true
           }} className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-4">
+              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4">
                 Program Features
               </h2>
-              <p className="text-foreground/90 text-lg max-w-2xl mx-auto">
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Balanced excellence across all dimensions of language learning
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {[{
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Feature Cards */}
+              <div className="grid gap-6">
+                {[{
                 icon: Brain,
                 title: "Customized Learning Plans",
                 desc: "Each student gets a personal learning plan based on how they hear, their current English level, and what they want to achieve."
@@ -179,28 +161,64 @@ const HowItWorks = () => {
                 desc: "AI tools and visual learning methods make each class interactive and fun through sight, touch, and hearing."
               }].map((feature, index) => <motion.div key={feature.title} initial={{
                 opacity: 0,
-                y: 20
+                x: -20
               }} whileInView={{
                 opacity: 1,
-                y: 0
+                x: 0
               }} transition={{
                 duration: 0.5,
                 delay: index * 0.1
               }} viewport={{
                 once: true
               }} whileHover={{
-                y: -8
+                scale: 1.02
               }}>
-                    <Card className="h-full border-primary/20 bg-card/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 group">
-                      <CardContent className="p-6 text-center">
-                        <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <feature.icon className="w-8 h-8 text-primary" />
+                    <Card className="border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4">
+                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0">
+                            <feature.icon className="w-6 h-6 text-primary" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-lg font-semibold mb-2 text-foreground">{feature.title}</h3>
+                            <p className="text-sm text-muted-foreground leading-relaxed break-words">{feature.desc}</p>
+                          </div>
                         </div>
-                        <h3 className="text-lg font-semibold mb-3 text-foreground">{feature.title}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{feature.desc}</p>
                       </CardContent>
                     </Card>
                   </motion.div>)}
+              </div>
+
+              {/* Radar Chart */}
+              <motion.div initial={{
+              opacity: 0,
+              scale: 0.9
+            }} whileInView={{
+              opacity: 1,
+              scale: 1
+            }} transition={{
+              duration: 0.6
+            }} viewport={{
+              once: true
+            }} className="bg-card/30 backdrop-blur-sm rounded-2xl p-8 border border-primary/10">
+                <h3 className="text-xl font-semibold text-center mb-6 text-foreground">Program Strength Balance</h3>
+                <ResponsiveContainer width="100%" height={400}>
+                  <RadarChart data={programFeaturesData}>
+                    <PolarGrid stroke="hsl(var(--primary) / 0.2)" />
+                    <PolarAngleAxis dataKey="feature" tick={{
+                    fill: 'hsl(var(--foreground))',
+                    fontSize: 12
+                  }} />
+                    <PolarRadiusAxis angle={90} domain={[0, 100]} tick={{
+                    fill: 'hsl(var(--muted-foreground))'
+                  }} />
+                    <Radar name="Strength" dataKey="value" stroke="hsl(var(--primary))" fill="hsl(var(--primary) / 0.3)" strokeWidth={2} />
+                  </RadarChart>
+                </ResponsiveContainer>
+                <p className="text-sm text-muted-foreground text-center mt-4 italic">
+                  The balanced shape shows iHear excels equally across all areas — combining technology, science, and caring teachers.
+                </p>
+              </motion.div>
             </div>
           </div>
         </GridBackground>
@@ -220,10 +238,10 @@ const HowItWorks = () => {
         }} viewport={{
           once: true
         }} className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-4">
+            <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4">
               Program Highlights
             </h2>
-            <p className="text-foreground/90 text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Comprehensive support at every stage of your learning journey
             </p>
           </motion.div>
@@ -288,16 +306,53 @@ const HowItWorks = () => {
           }} viewport={{
             once: true
           }} className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-4">
+              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4">
                 Target Participants
               </h2>
-              <p className="text-foreground/90 text-lg max-w-2xl mx-auto">
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Designed for diverse learners across all ages and backgrounds
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {[{
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Age Distribution Chart */}
+              <motion.div initial={{
+              opacity: 0,
+              scale: 0.9
+            }} whileInView={{
+              opacity: 1,
+              scale: 1
+            }} transition={{
+              duration: 0.6
+            }} viewport={{
+              once: true
+            }} className="bg-card/30 backdrop-blur-sm rounded-2xl p-8 border border-primary/10">
+                <h3 className="text-xl font-semibold text-center mb-6 text-foreground">Student Age Distribution</h3>
+                <ResponsiveContainer width="100%" height={350}>
+                  <BarChart data={ageDistributionData}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--primary) / 0.1)" />
+                    <XAxis dataKey="age" tick={{
+                    fill: 'hsl(var(--foreground))'
+                  }} />
+                    <YAxis tick={{
+                    fill: 'hsl(var(--muted-foreground))'
+                  }} />
+                    <Tooltip contentStyle={{
+                    backgroundColor: 'hsl(var(--card))',
+                    border: '1px solid hsl(var(--primary) / 0.2)',
+                    borderRadius: '8px'
+                  }} />
+                    <Bar dataKey="students" fill="hsl(var(--primary))" radius={[8, 8, 0, 0]} />
+                  </BarChart>
+                </ResponsiveContainer>
+                <p className="text-sm text-muted-foreground text-center mt-4 italic">
+                  Most learners are 13-15 years old, but iHear works well for all ages — kids, teens, and adults.
+                </p>
+              </motion.div>
+
+              {/* Participant Cards */}
+              <div className="grid gap-6">
+                {[{
                 icon: Calendar,
                 title: "Suitable Age",
                 desc: "Designed for learners aged 5 to 21, and also for adults who want to improve their English in a customized way."
@@ -315,28 +370,31 @@ const HowItWorks = () => {
                 desc: "Parents work together with teachers for younger students. Older students take more control while still getting family support."
               }].map((participant, index) => <motion.div key={participant.title} initial={{
                 opacity: 0,
-                y: 20
+                x: 20
               }} whileInView={{
                 opacity: 1,
-                y: 0
+                x: 0
               }} transition={{
                 duration: 0.5,
                 delay: index * 0.1
               }} viewport={{
                 once: true
-              }} whileHover={{
-                y: -8
               }}>
-                    <Card className="h-full border-primary/20 bg-card/80 backdrop-blur-sm hover:shadow-xl transition-all duration-300 group">
-                      <CardContent className="p-6 text-center">
-                        <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <participant.icon className="w-8 h-8 text-primary" />
+                    <Card className="border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-lg transition-all duration-300">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4">
+                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center flex-shrink-0">
+                            <participant.icon className="w-6 h-6 text-primary" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-lg font-semibold mb-2 text-foreground">{participant.title}</h3>
+                            <p className="text-sm text-muted-foreground leading-relaxed break-words">{participant.desc}</p>
+                          </div>
                         </div>
-                        <h3 className="text-lg font-semibold mb-3 text-foreground">{participant.title}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{participant.desc}</p>
                       </CardContent>
                     </Card>
                   </motion.div>)}
+              </div>
             </div>
           </div>
         </GridBackground>
@@ -357,10 +415,10 @@ const HowItWorks = () => {
           }} viewport={{
             once: true
           }} className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent mb-4">
+              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4">
                 Enrollment Flow
               </h2>
-              <p className="text-foreground/90 text-lg max-w-2xl mx-auto">
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Your journey to barrier-free English learning in three simple steps
               </p>
             </motion.div>
