@@ -123,7 +123,7 @@ const Index = () => {
 
       {/* Video Demo Section with Grid Background */}
       <GridBackground className="bg-gradient-to-br from-primary/5 via-accent/5 to-background">
-        <section className="relative pt-8 py-8 px-4 z-40">
+        <section className="relative pt-8 pb-4 px-4 z-40">
           <div className="container mx-auto">
             <ContainerScroll titleComponent={<div className="text-center mb-8">
                   
@@ -163,23 +163,8 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Extended Grid Background Section */}
-        <section className="relative py-20 px-4">
-          <div className="container mx-auto max-w-5xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="h-24"
-            >
-              {/* Decorative spacer with grid background */}
-            </motion.div>
-          </div>
-        </section>
-
         {/* iHEAR Initiative Carousel Section */}
-        <section className="py-20 px-4">
+        <section className="pt-8 pb-20 px-4">
           <div className="container mx-auto text-center">
             <motion.h2 
               className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4"
