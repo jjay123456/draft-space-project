@@ -37,9 +37,7 @@ const TutorCard = ({ tutor }: TutorCardProps) => {
           style={{ backfaceVisibility: 'hidden' }}
         >
           <Avatar className="w-20 h-20 mb-4 ring-2 ring-border/10">
-            {tutor.imageUrl ? (
-              <AvatarImage src={tutor.imageUrl} alt={tutor.name} />
-            ) : null}
+            <AvatarImage src={tutor.imageUrl} alt={tutor.name} />
             <AvatarFallback className="text-lg font-medium bg-muted text-muted-foreground">
               {tutor.name.split(' ').map(n => n[0]).join('')}
             </AvatarFallback>
