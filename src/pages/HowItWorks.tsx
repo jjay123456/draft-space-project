@@ -119,7 +119,8 @@ const HowItWorks = () => {
 
       {/* Section 1: Program Features */}
       <section className="py-16 px-4 relative">
-        <GridBackground className="bg-gradient-to-br from-primary/5 via-accent/5 to-background">
+        <GridBackground className="bg-gradient-to-br from-primary/5 via-accent/5 to-background absolute inset-0" />
+        <div className="relative">
           <div className="max-w-7xl mx-auto">
             <motion.div initial={{
             opacity: 0,
@@ -140,7 +141,7 @@ const HowItWorks = () => {
               </p>
             </motion.div>
 
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="grid lg:grid-cols-2 gap-12 items-center justify-items-center">
               {/* Feature Cards */}
               <div className="grid gap-6">
                 {[{
@@ -221,7 +222,7 @@ const HowItWorks = () => {
               </motion.div>
             </div>
           </div>
-        </GridBackground>
+        </div>
       </section>
 
       {/* Section 2: Program Highlights */}
