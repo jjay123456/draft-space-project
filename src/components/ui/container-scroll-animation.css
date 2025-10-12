@@ -1,3 +1,11 @@
+/* GPU acceleration and performance optimization */
+.video-card {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+  contain: layout style paint;
+}
+
 /* Video card fullscreen styles */
 .video-card:fullscreen,
 .video-card:-webkit-full-screen {
@@ -9,7 +17,7 @@
   background: radial-gradient(130% 80% at 50% 100%, rgba(0,0,0,.35), transparent 70%);
 }
 
-/* Video element styles */
+/* Video element styles with GPU acceleration */
 .video-el-wrapper video,
 .video-el-wrapper iframe,
 .video-el-wrapper > div {
@@ -18,4 +26,14 @@
   display: block;
   object-fit: cover;
   border-radius: inherit;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Force GPU compositing */
+.transform-gpu {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
