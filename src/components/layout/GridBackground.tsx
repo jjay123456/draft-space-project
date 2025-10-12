@@ -1,13 +1,13 @@
 import React from 'react';
-
 interface GridBackgroundProps {
   className?: string;
   children?: React.ReactNode;
 }
-
-const GridBackground: React.FC<GridBackgroundProps> = ({ className = "", children }) => {
-  return (
-    <div className={`relative ${className}`}>
+const GridBackground: React.FC<GridBackgroundProps> = ({
+  className = "",
+  children
+}) => {
+  return <div className={`relative ${className}`}>
       {/* Enhanced Floating Orbs with more gradients */}
       <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-primary/25 via-accent/20 to-primary/15 rounded-full blur-xl animate-pulse"></div>
       <div className="absolute top-40 right-20 w-24 h-24 bg-gradient-to-r from-accent/20 via-success/15 to-accent/10 rounded-full blur-lg animate-pulse delay-1000"></div>
@@ -22,15 +22,13 @@ const GridBackground: React.FC<GridBackgroundProps> = ({ className = "", childre
       </div>
       
       {/* Enhanced Gradient Overlays */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background via-background/90 to-transparent"></div>
+      
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background via-background/90 to-transparent"></div>
       <div className="absolute left-0 top-0 w-32 h-full bg-gradient-to-r from-background/80 to-transparent"></div>
       <div className="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-background/80 to-transparent"></div>
       
       {/* Content */}
       {children}
-    </div>
-  );
+    </div>;
 };
-
 export default GridBackground;
