@@ -6,7 +6,7 @@ interface TutorFiltersProps {
   searchQuery: string;
   onSearchChange: (query: string) => void;
   ageFilter: string;
-  onAgeFilterChange: (age: string) => void;
+  onAgeFilterChange: (filter: string) => void;
 }
 
 const TutorFilters = ({ 
@@ -29,17 +29,17 @@ const TutorFilters = ({
         />
       </div>
 
-      {/* Age Filter */}
+      {/* Grade Filter */}
       <Select value={ageFilter} onValueChange={onAgeFilterChange}>
         <SelectTrigger className="w-full sm:w-48 bg-background border-border/20 focus:border-primary/50">
-          <SelectValue placeholder="Filter by age" />
+          <SelectValue placeholder="Filter by grade" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Ages</SelectItem>
-          <SelectItem value="20-30">20-30 years</SelectItem>
-          <SelectItem value="31-40">31-40 years</SelectItem>
-          <SelectItem value="41-50">41-50 years</SelectItem>
-          <SelectItem value="51+">51+ years</SelectItem>
+          <SelectItem value="all">All Grades</SelectItem>
+          <SelectItem value="8th">8th Grade</SelectItem>
+          <SelectItem value="9th">9th Grade</SelectItem>
+          <SelectItem value="10th">10th Grade</SelectItem>
+          <SelectItem value="11th">11th Grade</SelectItem>
         </SelectContent>
       </Select>
     </div>

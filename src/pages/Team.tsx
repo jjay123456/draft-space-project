@@ -5,79 +5,116 @@ import TutorCard from '@/components/team/TutorCard';
 import TutorFilters from '@/components/team/TutorFilters';
 import TutorSkeleton from '@/components/team/TutorSkeleton';
 
-// Simplified tutor data
 const tutorsData = [
   {
-    id: "1",
-    name: "Dr. Sarah Chen", 
-    age: 34,
-    avatar: "/placeholder.svg"
+    id: 1,
+    name: "Howard M. Ren",
+    grade: "11th",
+    languages: "English + Chinese",
+    focus: "Specializes in pronunciation and conversation skills for high school students with strong foundations.",
+    style: "Breaks down complex concepts and annotates materials for easy understanding.",
+    hobbies: "Music lover and enjoys spending time with friends.",
+    imageUrl: "/images/tutors/howard-ren.png"
   },
   {
-    id: "2",
-    name: "Prof. Michael Torres",
-    age: 28,
-    avatar: "/placeholder.svg"
+    id: 2,
+    name: "Emily Ye",
+    grade: "10th",
+    languages: "English + Chinese",
+    focus: "Passionate about helping students learn and understand new concepts.",
+    style: "Uses bilingual approach to communicate thoroughly with students.",
+    hobbies: "Enjoys painting and drawing.",
+    imageUrl: "/images/tutors/emily-ye.jpg"
   },
   {
-    id: "3", 
-    name: "Dr. Emily Watson",
-    age: 42,
-    avatar: "/placeholder.svg"
+    id: 3,
+    name: "Zhixing Marcus Ke",
+    grade: "9th",
+    languages: "English + Mandarin",
+    focus: "Committed to making communication accessible for everyone.",
+    style: "Patient approach with focus on English pronunciation for Mandarin speakers, using phonetic comparisons.",
+    hobbies: "Soccer, math problems, and guitar. Can juggle a tennis ball 600+ times!",
+    imageUrl: "/images/tutors/zhixing-marcus-ke.jpg"
   },
   {
-    id: "4",
-    name: "Dr. Alex Rivera", 
-    age: 31,
-    avatar: "/placeholder.svg"
+    id: 4,
+    name: "Bryan Wang",
+    grade: "9th",
+    languages: "English + Chinese",
+    focus: "Helps students who need extra patience. Personal experience with hearing challenges drives motivation.",
+    style: "Uses positive reinforcement and checks for understanding after each lesson.",
+    hobbies: "Origami and piano.",
+    imageUrl: ""
   },
   {
-    id: "5",
-    name: "Dr. Jamie Foster",
-    age: 45,
-    avatar: "/placeholder.svg"
+    id: 5,
+    name: "Danniel Wang",
+    grade: "8th",
+    languages: "English + Chinese",
+    focus: "Helps students build confidence and improve conversation skills.",
+    style: "Very patient with step-by-step explanations for quick learning.",
+    hobbies: "Volleyball and ping pong enthusiast.",
+    imageUrl: ""
   },
   {
-    id: "6",
-    name: "Dr. Taylor Brooks",
-    age: 29,
-    avatar: "/placeholder.svg"
+    id: 6,
+    name: "Ella Wen",
+    grade: "10th",
+    languages: "English + Chinese",
+    focus: "Helps students express themselves and seize opportunities through better English skills.",
+    style: "Patient and clear explanations. Creates supportive environment for questions and growth.",
+    hobbies: "Cooking, dancing, and drawing.",
+    imageUrl: ""
   },
   {
-    id: "7",
-    name: "Dr. Maria Gonzalez",
-    age: 38,
-    avatar: "/placeholder.svg"
+    id: 7,
+    name: "Sadie Wang",
+    grade: "8th",
+    languages: "English + Chinese",
+    focus: "Helps kids learn English and express themselves effectively.",
+    style: "Uses visual tools and conversational approach to connect with students.",
+    hobbies: "Drawing and violin.",
+    imageUrl: "/images/tutors/sadie-wang.jpg"
   },
   {
-    id: "8",
-    name: "Prof. David Kim",
-    age: 52,
-    avatar: "/placeholder.svg"
+    id: 8,
+    name: "Sophia Wang",
+    grade: "10th",
+    languages: "English + Chinese",
+    focus: "Dedicated to providing equal educational opportunities for all students.",
+    style: "Emphasizes clear communication and repetition. Values patience above all.",
+    hobbies: "Tennis, F1, JDM cars, and sneaker culture.",
+    imageUrl: ""
   },
   {
-    id: "9",
-    name: "Dr. Lisa Park",
-    age: 27,
-    avatar: "/placeholder.svg"
+    id: 9,
+    name: "Cali Chan",
+    grade: "9th",
+    languages: "English + Chinese",
+    focus: "Specializes in pronunciation and speaking skills for confident communication.",
+    style: "Provides in-depth descriptions and multiple examples to ensure full understanding.",
+    hobbies: "Competitive rhythmic gymnastics and traveling.",
+    imageUrl: ""
   },
   {
-    id: "10",
-    name: "Dr. James Miller",
-    age: 41,
-    avatar: "/placeholder.svg"
+    id: 10,
+    name: "Charlene Chen",
+    grade: "10th",
+    languages: "English + Chinese",
+    focus: "Fosters communication inclusivity by developing confident communication skills for all ages.",
+    style: "Patient and adaptive. Uses multimedia and real-life scenarios to make learning engaging.",
+    hobbies: "Documentaries, reading, piano, and music. Cross-domain explorer.",
+    imageUrl: "/images/tutors/charlene-chen.jpeg"
   },
   {
-    id: "11",
-    name: "Prof. Anna Thompson",
-    age: 35,
-    avatar: "/placeholder.svg"
-  },
-  {
-    id: "12",
-    name: "Dr. Robert Lee",
-    age: 49,
-    avatar: "/placeholder.svg"
+    id: 11,
+    name: "Amber Lin",
+    grade: "10th",
+    languages: "English + Chinese + Spanish",
+    focus: "As a cochlear implant user, provides understanding and support to help students build communication confidence.",
+    style: "Emphasizes clear communication and individualized support with patience.",
+    hobbies: "Rock climbing and sports. Has an unusually long tongue!",
+    imageUrl: ""
   }
 ];
 
@@ -89,26 +126,26 @@ const Team = () => {
   const filteredTutors = tutorsData.filter(tutor => {
     const matchesSearch = tutor.name.toLowerCase().includes(searchQuery.toLowerCase());
     
-    let matchesAge = true;
+    let matchesGrade = true;
     if (ageFilter !== 'all') {
-      const age = tutor.age;
+      const gradeNum = parseInt(tutor.grade);
       switch (ageFilter) {
-        case '20-30':
-          matchesAge = age >= 20 && age <= 30;
+        case '8th':
+          matchesGrade = gradeNum === 8;
           break;
-        case '31-40':
-          matchesAge = age >= 31 && age <= 40;
+        case '9th':
+          matchesGrade = gradeNum === 9;
           break;
-        case '41-50':
-          matchesAge = age >= 41 && age <= 50;
+        case '10th':
+          matchesGrade = gradeNum === 10;
           break;
-        case '51+':
-          matchesAge = age >= 51;
+        case '11th':
+          matchesGrade = gradeNum === 11;
           break;
       }
     }
     
-    return matchesSearch && matchesAge;
+    return matchesSearch && matchesGrade;
   });
 
   return (
