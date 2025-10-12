@@ -13,7 +13,7 @@ export const ContainerScroll = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.9", "end 0.3"],
+    offset: ["start end", "end start"],
   });
   const [isMobile, setIsMobile] = React.useState(false);
 
@@ -29,12 +29,12 @@ export const ContainerScroll = ({
   }, []);
 
   const scaleDimensions = () => {
-    return isMobile ? [0.92, 1] : [0.95, 1];
+    return isMobile ? [0.7, 1] : [0.9, 1];
   };
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [8, 0]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [20, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 1], [20, 0]);
+  const translate = useTransform(scrollYProgress, [0, 1], [0, -30]);
 
   return (
     <div
@@ -62,7 +62,7 @@ export const Header = ({ translate, titleComponent }: any) => {
       style={{
         translateY: translate,
       }}
-      className="div max-w-5xl mx-auto text-center will-change-transform"
+      className="div max-w-5xl mx-auto text-center"
     >
       {titleComponent}
     </motion.div>
@@ -89,11 +89,8 @@ export const Card = ({
         padding: 'clamp(10px, 1.5vw, 18px)',
         background: 'radial-gradient(120% 120% at 50% 0%, rgba(0,0,0,.25), transparent 60%), #0b0b0b',
         boxShadow: "0 0 #0000004d, 0 9px 20px #0000004a, 0 37px 37px #00000042, 0 84px 50px #00000026, 0 149px 60px #0000000a, 0 233px 65px #00000003",
-        transformStyle: 'preserve-3d',
-        backfaceVisibility: 'hidden',
       }}
-      transition={{ type: "tween", ease: "easeOut", duration: 0.3 }}
-      className="max-w-6xl mx-auto w-full relative overflow-hidden video-card will-change-transform"
+      className="max-w-6xl mx-auto w-full relative overflow-hidden video-card"
     >
       <div 
         className="absolute inset-0 pointer-events-none video-blend"
@@ -103,7 +100,7 @@ export const Card = ({
           background: 'radial-gradient(120% 120% at 50% 100%, rgba(0,0,0,.35), rgba(0,0,0,0) 70%)'
         }}
       />
-      <div className="h-full w-full video-el-wrapper transform-gpu" style={{ borderRadius: 'inherit' }}>
+      <div className="h-full w-full video-el-wrapper" style={{ borderRadius: 'inherit' }}>
         <div className="h-full w-full overflow-hidden" style={{ borderRadius: 'inherit' }}>
           {children}
         </div>
