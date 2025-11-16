@@ -23,7 +23,7 @@ import { TuteeManagement } from "./pages/admin/TuteeManagement";
 import { TutorDirectory } from "./pages/admin/TutorDirectory";
 import { CourseTemplateCreator } from "./pages/admin/CourseTemplateCreator";
 import Team from "./pages/Team";
-import HowItWorks from "./pages/HowItWorks";
+import OurStory from "./pages/OurStory";
 import Testimonials from "./pages/Testimonials";
 import Contact from "./pages/Contact";
 
@@ -41,7 +41,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/team" element={<Team />} />
-            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/our-story" element={<OurStory />} />
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/dashboard" element={
