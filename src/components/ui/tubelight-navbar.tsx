@@ -47,7 +47,7 @@ export function NavBar({ items, className }: NavBarProps) {
         className,
       )}
     >
-      <div className="flex items-center gap-3 bg-background/5 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg pointer-events-auto">
+      <nav className="relative flex items-center gap-3 bg-background/5 border border-border backdrop-blur-lg py-1 px-1 rounded-full shadow-lg pointer-events-auto">
         {items.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.name;
@@ -69,16 +69,13 @@ export function NavBar({ items, className }: NavBarProps) {
               {isActive && (
                 <motion.div
                   layoutId="lamp"
-                  layout
                   className="absolute inset-0 w-full bg-primary/5 rounded-full -z-10 pointer-events-none"
                   initial={false}
                   transition={{
                     type: "spring",
-                    stiffness: 400,
-                    damping: 35,
-                    mass: 0.8,
+                    stiffness: 500,
+                    damping: 40,
                   }}
-                  style={{ willChange: "transform" }}
                 >
                   <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-primary rounded-t-full pointer-events-none">
                     <div className="absolute w-12 h-6 bg-primary/20 rounded-full blur-md -top-2 -left-2 pointer-events-none" />
@@ -90,7 +87,7 @@ export function NavBar({ items, className }: NavBarProps) {
             </RouterLink>
           );
         })}
-      </div>
+      </nav>
     </div>
   );
 }
