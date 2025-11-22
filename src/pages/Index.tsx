@@ -98,72 +98,82 @@ const Index = () => {
   return <div className="min-h-screen bg-background">
       <PublicNavbar />
       
-      {/* Hero Section with Shader Background */}
+      {/* Hero Section with Shader Background - Blended with Video */}
       <section className="relative">
         <ShaderShowcase />
         
-        {/* Floating Particles Transition */}
-        <div className="absolute -bottom-1 left-0 w-full h-20 z-30 overflow-hidden">
-          {[...Array(12)].map((_, i) => <motion.div key={i} className="absolute w-1 h-1 bg-cyan-400/60 rounded-full" style={{
-          left: `${i * 8 + 4}%`,
-          top: `${Math.random() * 60 + 20}%`
-        }} animate={{
-          y: [-5, -15, -5],
-          x: [0, Math.random() * 10 - 5, 0],
-          opacity: [0.3, 0.8, 0.3],
-          scale: [0.5, 1, 0.5]
-        }} transition={{
-          duration: 3 + Math.random() * 2,
-          repeat: Number.POSITIVE_INFINITY,
-          delay: i * 0.1,
-          ease: "easeInOut"
-        }} />)}
+        {/* Seamless Video Integration */}
+        <div className="relative -mt-32 z-30">
+          <GridBackground className="bg-gradient-to-b from-transparent via-background/50 to-background pt-32">
+            <div className="container mx-auto px-4 pb-4">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="relative overflow-hidden rounded-3xl max-w-6xl mx-auto shadow-2xl"
+              >
+                <video 
+                  ref={videoRef} 
+                  autoPlay 
+                  muted={isMuted} 
+                  loop 
+                  playsInline 
+                  controls={false} 
+                  disablePictureInPicture 
+                  preload="metadata" 
+                  poster={heroDemo} 
+                  className="w-full h-full object-cover transition-all duration-700 ease-in-out" 
+                  aria-label="iHear accessible learning platform demo video"
+                  onError={e => {
+                    console.error('Video failed to load:', e);
+                    console.error('Video error details:', e.currentTarget.error);
+                    if (e.currentTarget.error) {
+                      console.error('Error code:', e.currentTarget.error.code);
+                      console.error('Error message:', e.currentTarget.error.message);
+                    }
+                  }}
+                  onLoadStart={() => console.log('Video loading started')}
+                  onLoadedData={() => console.log('Video loaded successfully')}
+                  onCanPlay={() => console.log('Video can play')}
+                  onLoadedMetadata={() => console.log('Video metadata loaded')}
+                >
+                  <source src="/ihear-demo-video.mp4" type="video/mp4" />
+                  <source src="/ihear-demo-video.webm" type="video/webm" />
+                  <img src={heroDemo} alt="iHear accessible learning platform interface with captions and educational features" className="w-full h-full object-cover rounded-xl" />
+                  Your browser does not support the video tag.
+                </video>
+                
+                {/* Video Controls */}
+                <div className="absolute bottom-6 right-6 flex gap-2">
+                  <Button 
+                    variant="secondary" 
+                    size="sm" 
+                    onClick={toggleMute} 
+                    className="bg-black/50 hover:bg-black/70 text-white border-white/20 backdrop-blur-sm transition-all duration-300" 
+                    aria-label={isMuted ? "Unmute video" : "Mute video"}
+                  >
+                    {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+                  </Button>
+
+                  <Button 
+                    variant="secondary" 
+                    size="sm" 
+                    onClick={toggleFullscreen} 
+                    className="bg-black/50 hover:bg-black/70 text-white border-white/20 backdrop-blur-sm transition-all duration-300" 
+                    aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
+                  >
+                    {isFullscreen ? <Minimize className="h-4 w-4" /> : <Maximize className="h-4 w-4" />}
+                  </Button>
+                </div>
+              </motion.div>
+            </div>
+          </GridBackground>
         </div>
       </section>
 
-      {/* Video Demo Section with Grid Background */}
+      {/* Carousel Section */}
       <GridBackground className="bg-gradient-to-br from-primary/5 via-accent/5 to-background">
-        <section className="relative pt-8 pb-4 px-4 z-40">
-          <div className="container mx-auto">
-            <ContainerScroll titleComponent={<div className="text-center mb-8">
-                  
-                  
-                </div>}>
-              <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/5 to-accent/3 max-w-6xl mx-auto">
-                <div className="relative overflow-hidden rounded-3xl">
-                  <video ref={videoRef} autoPlay muted={isMuted} loop playsInline controls={false} disablePictureInPicture preload="metadata" poster={heroDemo} className="w-full h-full object-cover transition-all duration-700 ease-in-out" aria-label="iHear accessible learning platform demo video" onError={e => {
-                  console.error('Video failed to load:', e);
-                  console.error('Video error details:', e.currentTarget.error);
-                  if (e.currentTarget.error) {
-                    console.error('Error code:', e.currentTarget.error.code);
-                    console.error('Error message:', e.currentTarget.error.message);
-                  }
-                }} onLoadStart={() => console.log('Video loading started')} onLoadedData={() => console.log('Video loaded successfully')} onCanPlay={() => console.log('Video can play')} onLoadedMetadata={() => console.log('Video metadata loaded')}>
-                    <source src="/ihear-demo-video.mp4" type="video/mp4" />
-                    <source src="/ihear-demo-video.webm" type="video/webm" />
-                    <img src={heroDemo} alt="iHear accessible learning platform interface with captions and educational features" className="w-full h-full object-cover rounded-xl" />
-                    Your browser does not support the video tag.
-                  </video>
-                  
-                  {/* Video Controls */}
-                  <div className="absolute bottom-6 right-6 flex gap-2">
-                    {/* Mute/Unmute Button */}
-                    <Button variant="secondary" size="sm" onClick={toggleMute} className="bg-black/50 hover:bg-black/70 text-white border-white/20 backdrop-blur-sm transition-all duration-300" aria-label={isMuted ? "Unmute video" : "Mute video"}>
-                      {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-                    </Button>
 
-                    {/* Fullscreen Button */}
-                    <Button variant="secondary" size="sm" onClick={toggleFullscreen} className="bg-black/50 hover:bg-black/70 text-white border-white/20 backdrop-blur-sm transition-all duration-300" aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}>
-                      {isFullscreen ? <Minimize className="h-4 w-4" /> : <Maximize className="h-4 w-4" />}
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </ContainerScroll>
-          </div>
-        </section>
-
-        {/* iHEAR Initiative Carousel Section */}
         <section className="pt-8 pb-20 px-4">
           <div className="container mx-auto text-center">
             <motion.h2 
