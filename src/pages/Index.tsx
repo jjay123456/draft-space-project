@@ -103,21 +103,31 @@ const Index = () => {
         <ShaderShowcase />
         
         {/* Floating Particles Transition */}
-        <div className="absolute -bottom-1 left-0 w-full h-20 z-30 overflow-hidden">
-          {[...Array(12)].map((_, i) => <motion.div key={i} className="absolute w-1 h-1 bg-cyan-400/60 rounded-full" style={{
-          left: `${i * 8 + 4}%`,
-          top: `${Math.random() * 60 + 20}%`
+        <div className="absolute -bottom-1 left-0 w-full h-32 z-30 overflow-hidden">
+          {/* Gradient overlay for smooth transition */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-background/50 backdrop-blur-sm" />
+          
+          {/* Animated particles */}
+          {[...Array(20)].map((_, i) => <motion.div key={i} className={`absolute rounded-full ${i % 4 === 0 ? "w-2 h-2" : i % 4 === 1 ? "w-1.5 h-1.5" : "w-1 h-1"}`} style={{
+          left: `${i * 5 + 2}%`,
+          top: `${Math.random() * 80}%`,
+          background: i % 3 === 0 ? 'radial-gradient(circle, rgba(6, 182, 212, 0.6) 0%, transparent 70%)' : i % 3 === 1 ? 'radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%)' : 'radial-gradient(circle, rgba(34, 211, 238, 0.5) 0%, transparent 70%)'
         }} animate={{
-          y: [-5, -15, -5],
-          x: [0, Math.random() * 10 - 5, 0],
-          opacity: [0.3, 0.8, 0.3],
-          scale: [0.5, 1, 0.5]
+          y: [-10, -30, -10],
+          x: [0, Math.random() * 20 - 10, 0],
+          opacity: [0.3, 1, 0.3],
+          scale: [0.5, 1.2, 0.5]
         }} transition={{
-          duration: 3 + Math.random() * 2,
+          duration: 4 + Math.random() * 3,
           repeat: Number.POSITIVE_INFINITY,
-          delay: i * 0.1,
+          delay: i * 0.15,
           ease: "easeInOut"
         }} />)}
+          
+          {/* Connecting vertical lines */}
+          <motion.div className="absolute left-1/4 top-0 w-px h-full bg-gradient-to-b from-cyan-400/30 to-transparent" initial={{ scaleY: 0, originY: 0 }} animate={{ scaleY: 1 }} transition={{ duration: 2, ease: "easeOut" }} />
+          <motion.div className="absolute left-1/2 top-0 w-px h-full bg-gradient-to-b from-purple-400/40 to-transparent" initial={{ scaleY: 0, originY: 0 }} animate={{ scaleY: 1 }} transition={{ duration: 2.5, ease: "easeOut", delay: 0.2 }} />
+          <motion.div className="absolute left-3/4 top-0 w-px h-full bg-gradient-to-b from-cyan-300/30 to-transparent" initial={{ scaleY: 0, originY: 0 }} animate={{ scaleY: 1 }} transition={{ duration: 2.2, ease: "easeOut", delay: 0.1 }} />
         </div>
       </section>
 
@@ -164,7 +174,7 @@ const Index = () => {
         </section>
 
         {/* iHEAR Initiative Carousel Section */}
-        <section className="pt-8 pb-20 px-4">
+        <section className="relative pt-8 pb-20 px-4">
           <div className="container mx-auto text-center">
             <motion.h2 
               className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-primary/90 via-secondary/85 to-accent/90 bg-clip-text text-transparent mb-4"
@@ -186,6 +196,35 @@ const Index = () => {
             </motion.p>
             <CarouselDemo />
           </div>
+
+          {/* Connecting Line Decoration */}
+          <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-primary/40 to-transparent" />
+        </section>
+
+        {/* Feature Showcase Section */}
+        <section className="relative py-20 px-4">
+          <FeatureShowcase />
+          
+          {/* Connecting Line Decoration */}
+          <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-accent/40 to-transparent" />
+        </section>
+
+        {/* Bento Grid Section */}
+        <section className="relative py-20 px-4">
+          <BentoSection />
+          
+          {/* Connecting Line Decoration */}
+          <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-primary/40 to-transparent" />
+        </section>
+
+        {/* Timeline Section */}
+        <section className="relative py-20 px-4">
+          <TimelineSection />
+        </section>
+
+        {/* Final CTA Section */}
+        <section className="relative py-20 px-4">
+          <FinalCallToAction />
         </section>
       </GridBackground>
     </div>;
