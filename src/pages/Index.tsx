@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Users, BookOpen, Accessibility, ArrowRight, Star, Volume2, VolumeX, Maximize, Minimize } from "lucide-react";
 import { Heart, Target, Zap, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,6 +28,18 @@ const Index = () => {
   const [isMuted, setIsMuted] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Parallax scroll animations
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+  
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
+  const videoScale = useTransform(scrollYProgress, [0, 0.3], [0.95, 1]);
   const toggleMute = () => {
     if (videoRef.current) {
       videoRef.current.muted = !isMuted;
@@ -99,17 +111,23 @@ const Index = () => {
       <PublicNavbar />
       
       {/* Hero Section with Shader Background - Blended with Video */}
-      <section className="relative">
-        <ShaderShowcase />
+      <div ref={containerRef}>
+        <motion.section 
+          className="relative"
+          style={{ y: heroY, opacity: heroOpacity }}
+        >
+          <ShaderShowcase />
+        </motion.section>
         
-        {/* Seamless Video Integration */}
-        <div className="relative -mt-32 z-30">
+        {/* Seamless Video Integration with Parallax */}
+        <motion.div 
+          className="relative -mt-32 z-30"
+          style={{ y: videoY }}
+        >
           <GridBackground className="bg-gradient-to-b from-transparent via-background/50 to-background pt-32">
             <div className="container mx-auto px-4 pb-4">
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
+                style={{ scale: videoScale }}
                 className="relative overflow-hidden rounded-3xl max-w-6xl mx-auto shadow-2xl"
               >
                 <video 
@@ -168,8 +186,8 @@ const Index = () => {
               </motion.div>
             </div>
           </GridBackground>
-        </div>
-      </section>
+        </motion.div>
+      </div>
 
       {/* Carousel Section */}
       <GridBackground className="bg-gradient-to-br from-primary/5 via-accent/5 to-background">
