@@ -6,7 +6,7 @@ const PublicNavbar = () => {
   const navItems = [
     { name: 'Home', url: '/', icon: Home },
     { name: 'Team', url: '/team', icon: Users },
-    { name: 'Mission', url: '/how-it-works', icon: HelpCircle },
+    { name: 'Our Mission', url: '/how-it-works', icon: HelpCircle },
     { name: 'Testimonials', url: '/testimonials', icon: MessageSquare },
     { name: 'Contact', url: '/contact', icon: Phone }
   ];
