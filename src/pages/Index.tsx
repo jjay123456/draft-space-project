@@ -133,9 +133,9 @@ const Index = () => {
 
       {/* Video Demo Section with Grid Background */}
       <div className="relative bg-background">
-        {/* Subtle grid overlay that fades in */}
-        <GridBackground className="opacity-30">
-          <div className="bg-gradient-to-br from-primary/3 via-accent/3 to-background">
+        {/* Very subtle grid overlay that fades in */}
+        <GridBackground className="opacity-10">
+          <div className="bg-gradient-to-br from-primary/2 via-accent/2 to-background">
             <section className="relative pt-8 pb-4 px-4 z-40">
               <div className="container mx-auto">
                 <ContainerScroll titleComponent={<div className="text-center mb-8">
