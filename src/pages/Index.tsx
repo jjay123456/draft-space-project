@@ -196,35 +196,6 @@ const Index = () => {
             </motion.p>
             <CarouselDemo />
           </div>
-
-          {/* Connecting Line Decoration */}
-          <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-primary/40 to-transparent" />
-        </section>
-
-        {/* Feature Showcase Section */}
-        <section className="relative py-20 px-4">
-          <FeatureShowcase />
-          
-          {/* Connecting Line Decoration */}
-          <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-accent/40 to-transparent" />
-        </section>
-
-        {/* Bento Grid Section */}
-        <section className="relative py-20 px-4">
-          <BentoSection />
-          
-          {/* Connecting Line Decoration */}
-          <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-px h-20 bg-gradient-to-b from-primary/40 to-transparent" />
-        </section>
-
-        {/* Timeline Section */}
-        <section className="relative py-20 px-4">
-          <TimelineSection />
-        </section>
-
-        {/* Final CTA Section */}
-        <section className="relative py-20 px-4">
-          <FinalCallToAction />
         </section>
       </GridBackground>
     </div>;
