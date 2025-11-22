@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Users, BookOpen, Accessibility, ArrowRight, Star, Volume2, VolumeX, Maximize, Minimize } from "lucide-react";
 import { Heart, Target, Zap, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,15 +28,7 @@ const Index = () => {
   const [isMuted, setIsMuted] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const heroRef = useRef<HTMLDivElement>(null);
   
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
-  
-  const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.5, 0]);
   const toggleMute = () => {
     if (videoRef.current) {
       videoRef.current.muted = !isMuted;
@@ -108,15 +100,8 @@ const Index = () => {
       <PublicNavbar />
       
       {/* Hero Section with Shader Background */}
-      <section className="relative" ref={heroRef}>
-        <motion.div
-          style={{
-            y: heroY,
-            opacity: heroOpacity
-          }}
-        >
-          <ShaderShowcase />
-        </motion.div>
+      <section className="relative">
+        <ShaderShowcase />
         
         {/* Floating Particles Transition */}
         <div className="absolute -bottom-1 left-0 w-full h-20 z-30 overflow-hidden">
