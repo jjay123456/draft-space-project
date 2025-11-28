@@ -1,9 +1,8 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import PublicNavbar from "@/components/layout/PublicNavbar";
-import GridBackground from "@/components/layout/GridBackground";
-import { Card, CardContent } from "@/components/ui/card";
-import { RainbowButton } from "@/components/ui/rainbow-button";
+import { motion } from 'framer-motion';
+import PublicNavbar from '@/components/layout/PublicNavbar';
+import GridBackground from '@/components/layout/GridBackground';
+import { Card } from '@/components/ui/card';
+import { RainbowButton } from '@/components/ui/rainbow-button';
 import { 
   Settings, 
   Headphones, 
@@ -16,36 +15,17 @@ import {
   Globe, 
   Brain, 
   Mic 
-} from "lucide-react";
+} from 'lucide-react';
 
 const HowItWorks = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
-  
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0
-    }
-  };
+  // Impact tiles data
+  const impactTiles = [
+    { number: "1000+", label: "Students Empowered", span: "col-span-2 row-span-2" },
+    { number: "95%", label: "Progress Rate", span: "col-span-1" },
+    { number: "50+", label: "Expert Tutors", span: "col-span-1" },
+    { number: "24/7", label: "Support Access", span: "col-span-1 row-span-2" },
+    { number: "∞", label: "Possibilities", span: "col-span-2" },
+  ];
 
   const features = [
     {
@@ -70,483 +50,339 @@ const HowItWorks = () => {
     }
   ];
 
-  const highlights = [
-    {
-      icon: Heart,
-      title: "Dedicated Teaching Team",
-      description: "One-on-one sessions led by compassionate native English-speaking high school tutors known for patience and empathy."
-    },
-    {
-      icon: GraduationCap,
-      title: "Expert Support",
-      description: "Speech-language pathologists guide curriculum development and supervise instruction."
-    },
-    {
-      icon: Target,
-      title: "Personalized Instruction",
-      description: "Lessons are crafted to match each learner's hearing profile and evolving abilities."
-    },
-    {
-      icon: Sparkles,
-      title: "Comprehensive Care",
-      description: "We nurture confidence, resilience, curiosity, and pride in language growth."
-    }
-  ];
-
   const whoWeServe = [
     {
       icon: UserCircle,
-      title: "Suitable Age",
-      description: "Ages 5–21, plus adults with targeted English-learning goals."
+      title: "Ages 5–21",
+      description: "Plus adults with targeted English-learning goals"
     },
     {
       icon: Headphones,
-      title: "Hearing Status",
-      description: "Serves cochlear implant users, hearing-aid users, and learners without hearing impairments."
+      title: "All Hearing Profiles",
+      description: "Cochlear implant users, hearing-aid users, and learners without hearing impairments"
     },
     {
       icon: Globe,
-      title: "Geographic Reach",
-      description: "Worldwide instruction through Zoom or Google Meet."
-    },
-    {
-      icon: Heart,
-      title: "Family Support",
-      description: "Parents join for younger students; older learners develop independent study habits."
+      title: "Worldwide Access",
+      description: "Remote instruction through Zoom or Google Meet"
     }
   ];
 
   const outcomes = [
     {
       icon: Brain,
-      title: "Develop English Thinking Habits",
-      description: "Immersive experiences help learners think and express ideas naturally in English without translation."
+      title: "English Thinking Habits",
+      description: "Think and express naturally in English"
     },
     {
       icon: Mic,
-      title: "Enhance Auditory & Speaking Abilities",
-      description: "Structured exposure strengthens listening, pronunciation, and expressive confidence."
+      title: "Auditory & Speaking",
+      description: "Strengthen listening and pronunciation"
     },
     {
       icon: Target,
-      title: "Build Communication Confidence",
-      description: "Learners gain stable skills for real-world English interaction and self-expression."
-    }
-  ];
-
-  const journeySteps = [
-    {
-      icon: UserCircle,
-      title: "Join iHear",
-      description: "Register, complete a consultation, and begin with an initial learning assessment."
-    },
-    {
-      icon: Target,
-      title: "Receive a Tailored Pathway",
-      description: "A fully personalized plan crafted by instructors and specialists."
-    },
-    {
-      icon: GraduationCap,
-      title: "Master English & Global Context",
-      description: "Consistent one-on-one sessions build proficiency and cultural awareness."
+      title: "Communication Confidence",
+      description: "Real-world English interaction skills"
     }
   ];
 
   return (
-    <GridBackground>
+    <div className="min-h-screen bg-background">
       <PublicNavbar />
-      
-      {/* SECTION 1: Hero */}
-      <section 
-        ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      >
-        <motion.div
-          style={{ y: heroY }}
-          className="absolute inset-0 z-0"
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/60 to-background z-10" />
-          <img 
-            src="/lovable-uploads/4d60d879-18d8-4416-91cf-c8a7734a9d03.png"
-            alt="iHear English Learning Program - Students learning together"
-            className="w-full h-full object-cover"
-          />
-        </motion.div>
-        
-        <motion.div 
-          style={{ opacity: heroOpacity }}
-          className="relative z-20 max-w-5xl mx-auto px-8 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <h1 className="text-6xl md:text-7xl font-bold mb-6 text-foreground">
-            iHear English Learning Program
-          </h1>
-          <h2 className="text-2xl md:text-3xl font-light mb-4 text-foreground/90">
-            Building Language Bridges for Students with Hearing Loss
-          </h2>
-          <p className="text-lg italic text-muted-foreground mb-12">
-            Language opens access.
-          </p>
-          <RainbowButton 
-            className="text-lg px-12 py-6 rounded-full"
-            onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSe77zVB0lEabj5X4RMu4h40teNzhMHomjXObz9oShkMcpNRYQ/viewform', '_blank')}
-          >
-            Discover Our Mission
-          </RainbowButton>
-        </motion.div>
-      </section>
-
-      {/* SECTION 2: Origin + Purpose */}
-      <section className="max-w-7xl mx-auto py-32 px-8">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+      <GridBackground>
+        {/* ZONE 1: Hero - Full width */}
+        <section className="min-h-[70vh] flex items-center justify-start container mx-auto px-6 pt-32 pb-16">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative"
+            className="max-w-3xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <img 
-              src="/lovable-uploads/4d60d879-18d8-4416-91cf-c8a7734a9d03.png"
-              alt="Tutoring interaction with assistive listening setup"
-              className="rounded-3xl shadow-2xl w-full hover:scale-[1.02] transition-transform duration-500"
+            <motion.h1 
+              className="text-6xl md:text-7xl font-bold text-foreground mb-6 leading-tight"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              iHear English Learning
+            </motion.h1>
+            <motion.div 
+              className="w-32 h-1 bg-primary mb-8"
+              initial={{ width: 0 }}
+              animate={{ width: 128 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
             />
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="relative pl-8"
-          >
-            <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />
-            <p className="text-2xl font-light leading-relaxed mb-6 text-foreground">
-              In today's AI-driven educational landscape, the iHear Initiative provides uniquely accessible English learning opportunities for students with hearing loss who are learning English as a second language.
+            <p className="text-2xl text-muted-foreground mb-12 leading-relaxed">
+              Building Language Bridges for Students with Hearing Loss
             </p>
-            <p className="text-lg leading-relaxed text-muted-foreground" style={{ lineHeight: '1.8' }}>
-              We believe hearing differences should never block language acquisition. Through individualized tutoring and AI-enhanced tools, iHear creates immersive learning experiences that empower students to overcome communication barriers, build confidence in both academic and daily English, and achieve inclusive communication.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SECTION 3: Program Features */}
-      <section className="max-w-7xl mx-auto py-24 px-8">
-        <motion.h2 
-          className="text-5xl font-bold text-center mb-16 text-foreground"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          Program Features
-        </motion.h2>
-        
-        <motion.div 
-          className="grid md:grid-cols-2 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ staggerChildren: 0.1, delayChildren: 0.2 }}
-        >
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            return (
-              <motion.div key={index} variants={itemVariants}>
-                <Card className="rounded-2xl border border-border/50 bg-card/30 backdrop-blur-sm p-8 hover:scale-[1.02] hover:shadow-xl transition-all duration-300 h-full">
-                  <CardContent className="p-0">
-                    <Icon className="w-12 h-12 text-primary mb-4" />
-                    <h3 className="text-2xl font-semibold mb-3 text-foreground">
-                      {feature.title}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed">
-                      {feature.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-      </section>
-
-      {/* SECTION 4: Program Highlights */}
-      <section className="relative py-32">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/80 to-background/95 z-10" />
-          <img 
-            src="/lovable-uploads/4d60d879-18d8-4416-91cf-c8a7734a9d03.png"
-            alt="Educational environment with natural lighting"
-            className="w-full h-full object-cover opacity-30"
-          />
-        </div>
-        
-        <div className="relative z-20 max-w-4xl mx-auto px-8">
-          <motion.h2 
-            className="text-5xl font-bold mb-16 text-center text-foreground"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            Program Highlights
-          </motion.h2>
-          
-          <motion.div 
-            className="grid md:grid-cols-2 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ staggerChildren: 0.1, delayChildren: 0.2 }}
-          >
-            {highlights.map((highlight, index) => {
-              const Icon = highlight.icon;
-              return (
-                <motion.div key={index} variants={itemVariants}>
-                  <Card className="rounded-2xl bg-card/60 backdrop-blur-md p-6 border-border/50">
-                    <CardContent className="p-0">
-                      <Icon className="w-10 h-10 text-primary mb-3" />
-                      <h3 className="text-xl font-semibold mb-2 text-foreground">
-                        {highlight.title}
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {highlight.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SECTION 5: Who We Serve */}
-      <section className="max-w-6xl mx-auto py-24 px-8">
-        <motion.h2 
-          className="text-5xl font-bold text-center mb-16 text-foreground"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          Who We Serve
-        </motion.h2>
-        
-        <div className="space-y-6">
-          {whoWeServe.map((service, index) => {
-            const Icon = service.icon;
-            const isEven = index % 2 === 0;
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: isEven ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }}
-              >
-                <Card className={`rounded-2xl p-8 flex items-start gap-6 ${
-                  isEven ? 'bg-muted/30' : 'bg-card/50'
-                } border-border/50`}>
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Icon className="w-8 h-8 text-primary" />
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-semibold mb-2 text-foreground">
-                      {service.title}
-                    </h3>
-                    <p className="text-lg text-muted-foreground leading-relaxed">
-                      {service.description}
-                    </p>
-                  </div>
-                </Card>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* SECTION 6: Program Outcomes */}
-      <section className="bg-gradient-to-br from-primary/10 via-accent/5 to-success/10 py-32">
-        <div className="max-w-7xl mx-auto px-8">
-          <motion.h2 
-            className="text-5xl font-bold text-center mb-20 text-foreground"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            Program Outcomes
-          </motion.h2>
-          
-          <motion.div 
-            className="grid md:grid-cols-3 gap-12"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ staggerChildren: 0.15, delayChildren: 0.2 }}
-          >
-            {outcomes.map((outcome, index) => {
-              const Icon = outcome.icon;
-              return (
-                <motion.div 
-                  key={index} 
-                  variants={itemVariants}
-                  className="text-center"
-                >
-                  <div className="mb-6 flex justify-center">
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                      <Icon className="w-12 h-12 text-primary" />
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-semibold mb-4 text-foreground">
-                    {outcome.title}
-                  </h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    {outcome.description}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SECTION 7: Journey/Process Timeline */}
-      <section className="max-w-5xl mx-auto py-24 px-8">
-        <motion.h2 
-          className="text-5xl font-bold text-center mb-20 text-foreground"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          Your Journey with iHear
-        </motion.h2>
-        
-        <div className="relative">
-          {/* Timeline line */}
-          <motion.div 
-            className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-accent to-success -translate-x-1/2 hidden md:block"
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            style={{ transformOrigin: 'top' }}
-          />
-          
-          <div className="space-y-16">
-            {journeySteps.map((step, index) => {
-              const Icon = step.icon;
-              const isLeft = index % 2 === 0;
-              
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.2 }}
-                  className={`relative flex items-center ${
-                    isLeft ? 'md:justify-start' : 'md:justify-end'
-                  } justify-center`}
-                >
-                  {/* Timeline node */}
-                  <div className="absolute left-1/2 -translate-x-1/2 w-16 h-16 rounded-full bg-background border-4 border-primary flex items-center justify-center z-10 hidden md:flex">
-                    <Icon className="w-8 h-8 text-primary" />
-                  </div>
-                  
-                  {/* Content card */}
-                  <Card className={`rounded-2xl border shadow-lg p-6 max-w-md ${
-                    isLeft ? 'md:mr-auto md:pr-16' : 'md:ml-auto md:pl-16'
-                  } w-full md:w-[calc(50%-3rem)]`}>
-                    <CardContent className="p-0">
-                      <div className="flex items-center gap-3 mb-3 md:hidden">
-                        <Icon className="w-8 h-8 text-primary" />
-                        <h3 className="text-2xl font-semibold text-foreground">
-                          {step.title}
-                        </h3>
-                      </div>
-                      <h3 className="text-2xl font-semibold mb-3 text-foreground hidden md:block">
-                        {step.title}
-                      </h3>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {step.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 8: Final CTA */}
-      <section className="relative bg-gradient-to-br from-success/20 via-primary/10 to-accent/20 py-32 overflow-hidden">
-        {/* Decorative floating orbs */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <motion.div
-            className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-primary/10 blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-success/10 blur-3xl"
-            animate={{
-              scale: [1.2, 1, 1.2],
-              opacity: [0.5, 0.3, 0.5],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-        </div>
-        
-        <motion.div 
-          className="relative z-10 max-w-4xl mx-auto px-8 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <h2 className="text-5xl md:text-6xl font-bold mb-8 text-foreground">
-            Join iHear to Create Accessible English-Learning Pathways
-          </h2>
-          <p className="text-xl text-muted-foreground mb-12 leading-relaxed max-w-3xl mx-auto">
-            For students with hearing loss—unlocking new possibilities and transforming their language experience.
-          </p>
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
             <RainbowButton 
               className="text-lg px-12 py-6 rounded-full"
               onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSe77zVB0lEabj5X4RMu4h40teNzhMHomjXObz9oShkMcpNRYQ/viewform', '_blank')}
             >
-              Start Your Learning Journey
+              Discover Our Mission
             </RainbowButton>
           </motion.div>
+        </section>
+
+        {/* Staggered block - Left aligned, 70% width */}
+        <div className="container mx-auto px-6 py-20">
+          <motion.div 
+            className="max-w-4xl"
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="relative pl-8">
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />
+              <p className="text-2xl font-light leading-relaxed mb-6 text-foreground">
+                In today's AI-driven educational landscape, the iHear Initiative provides uniquely accessible English learning opportunities for students with hearing loss who are learning English as a second language.
+              </p>
+              <p className="text-lg leading-relaxed text-muted-foreground" style={{ lineHeight: '1.8' }}>
+                We believe hearing differences should never block language acquisition. Through individualized tutoring and AI-enhanced tools, iHear creates immersive learning experiences that empower students to overcome communication barriers.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Visual breaker - thin line */}
+        <motion.div 
+          className="container mx-auto px-6 my-16"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="h-px bg-border/50" />
         </motion.div>
-      </section>
-    </GridBackground>
+
+        {/* ZONE 2: Features - Right aligned with floating sidebar */}
+        <div className="container mx-auto px-6 py-20 relative">
+          {/* Floating sidebar */}
+          <motion.div
+            className="absolute left-6 top-1/2 -translate-y-1/2 hidden lg:block"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            <div className="w-1 h-32 bg-primary/20 ml-4 relative">
+              <span className="absolute top-1/2 -translate-y-1/2 left-6 text-sm font-semibold text-primary uppercase tracking-widest whitespace-nowrap">
+                Features
+              </span>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            className="max-w-5xl ml-auto"
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-5xl font-bold text-foreground mb-12">
+              Program Features
+            </h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {features.map((feature, index) => {
+                const Icon = feature.icon;
+                return (
+                  <motion.div
+                    key={feature.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                  >
+                    <Card className="h-full p-6 bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-colors">
+                      <Icon className="w-10 h-10 text-primary mb-4" />
+                      <h3 className="text-xl font-semibold mb-3 text-foreground">
+                        {feature.title}
+                      </h3>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </Card>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Blank space */}
+        <div className="h-24" />
+
+        {/* ZONE 3: Who We Serve - Asymmetric 40/60 with tiles */}
+        <div className="container mx-auto px-6 py-20">
+          <motion.div
+            className="max-w-3xl"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl font-bold text-foreground mb-12">
+              Who We Serve
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {whoWeServe.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <motion.div
+                    key={item.title}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                  >
+                    <Card className="h-full p-6 bg-card/30 backdrop-blur-sm border-border/50 hover:scale-105 transition-transform">
+                      <Icon className="w-8 h-8 text-primary mb-3" />
+                      <h3 className="text-lg font-semibold text-foreground mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        {item.description}
+                      </p>
+                    </Card>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Visual breaker - gradient */}
+        <motion.div 
+          className="w-full h-2 bg-gradient-to-r from-transparent via-primary/30 to-transparent my-20"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        />
+
+        {/* ZONE 4: Impact Tiles - Full width modular grid */}
+        <div className="container mx-auto px-6 py-20">
+          <motion.h2 
+            className="text-5xl font-bold text-foreground text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            Measurable Impact
+          </motion.h2>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[180px]">
+            {impactTiles.map((impact, index) => (
+              <motion.div
+                key={impact.label}
+                className={impact.span}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+              >
+                <Card className="h-full flex flex-col items-center justify-center p-6 bg-card/50 backdrop-blur-sm border-border/50 hover:border-primary/50 transition-colors">
+                  <div className="text-4xl md:text-5xl font-bold text-primary mb-3">
+                    {impact.number}
+                  </div>
+                  <div className="text-sm md:text-base text-muted-foreground text-center">
+                    {impact.label}
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* ZONE 5: Outcomes - Offset panels, right-aligned */}
+        <div className="container mx-auto px-6 py-20">
+          <div className="max-w-5xl ml-auto">
+            <motion.h2
+              className="text-5xl font-bold text-foreground mb-12"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
+              Program Outcomes
+            </motion.h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {outcomes.map((outcome, index) => {
+                const Icon = outcome.icon;
+                return (
+                  <motion.div
+                    key={outcome.title}
+                    className="text-center"
+                    initial={{ opacity: 0, y: 30 + (index * 10) }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15, duration: 0.5 }}
+                  >
+                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
+                      <Icon className="w-10 h-10 text-primary" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                      {outcome.title}
+                    </h3>
+                    <p className="text-muted-foreground">
+                      {outcome.description}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Blank space */}
+        <div className="h-32" />
+
+        {/* ZONE 6: Future Vision - Centered for emphasis */}
+        <div className="container mx-auto px-6 py-32">
+          <motion.div 
+            className="max-w-4xl mx-auto text-center"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Floating sidebar - right */}
+            <motion.div
+              className="absolute right-6 top-1/2 -translate-y-1/2 hidden lg:block"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              <div className="w-1 h-32 bg-primary/20 mr-4 relative">
+                <span className="absolute top-1/2 -translate-y-1/2 right-6 text-sm font-semibold text-primary uppercase tracking-widest whitespace-nowrap text-right">
+                  Tomorrow
+                </span>
+              </div>
+            </motion.div>
+
+            <h2 className="text-5xl md:text-6xl font-bold text-foreground mb-8">
+              The Future We're Building
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-12">
+              A world where language barriers dissolve, where hearing differences 
+              become strengths, and where every learner has the tools to succeed.
+            </p>
+            <motion.div 
+              className="inline-block px-8 py-4 bg-primary/10 rounded-full cursor-pointer"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
+              <span className="text-primary font-semibold">
+                Join us on this journey
+              </span>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Final blank space */}
+        <div className="h-48" />
+      </GridBackground>
+    </div>
   );
 };
 
